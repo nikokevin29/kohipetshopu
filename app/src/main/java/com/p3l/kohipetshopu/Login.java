@@ -6,21 +6,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.android.material.textview.MaterialTextView;
 
-public class MainActivity extends AppCompatActivity {
+public class Login extends AppCompatActivity {
     private TextInputLayout etUsername,etPassword;
     private Button btnLogin, btnAbout,btnPrice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         etUsername = findViewById(R.id.username_text_input);
         etPassword = findViewById(R.id.password_text_input);
@@ -31,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i =  new Intent(MainActivity.this,MainView.class);
+                Intent i =  new Intent(Login.this,MainView.class);
                 startActivity(i);
                 finish();
                 //Toast.makeText(MainActivity.this, "Something Clicked", Toast.LENGTH_SHORT).show();
@@ -40,14 +37,14 @@ public class MainActivity extends AppCompatActivity {
         btnAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i =  new Intent(MainActivity.this,About.class);
+                Intent i =  new Intent(Login.this,About.class);
                 startActivity(i);
             }
         });
         btnPrice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i =  new Intent(MainActivity.this,PriceList.class);
+                Intent i =  new Intent(Login.this,PriceList.class);
                 startActivity(i);
             }
         });
