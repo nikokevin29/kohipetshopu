@@ -21,6 +21,6 @@
         android:layout_alignParentBottom="true"
         app:itemIconTint="@drawable/color_state"
         android:background="#4A9586"
-        app:menu="@menu/menu" />
+        app:menu="@menu/menu"/>
 
 </RelativeLayout>

@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Fragment_CS.AkunCSFragment"></activity>
+        <activity android:name=".Pengelolaan.ViewJenisHewan"></activity>
+        <activity android:name=".AdapterJenisHewan" />
+        <activity android:name=".Fragment_CS.AkunCSFragment" />
         <activity android:name=".Fragment_CS.TransaksiPenjualanFragment" />
         <activity android:name=".MainViewCS" />
         <activity android:name=".Fragment_Owner.AkunFragment" />
