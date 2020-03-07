@@ -26,9 +26,17 @@ public class Login extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i =  new Intent(Login.this,MainView.class);
-                startActivity(i);
-                finish();
+                if(etUsername.getEditText().getText().toString().equalsIgnoreCase("admin")){
+                    Intent i =  new Intent(Login.this,MainView.class);
+                    startActivity(i);
+                    finish();
+                }else if(etUsername.getEditText().getText().toString().equalsIgnoreCase("cs")){
+                    Intent i =  new Intent(Login.this,MainViewCS.class);
+                    startActivity(i);
+                    finish();
+                }else{
+                    Toast.makeText(Login.this, "見つかりませんでした", Toast.LENGTH_SHORT).show();
+                }
                 //Toast.makeText(MainActivity.this, "Something Clicked", Toast.LENGTH_SHORT).show();
             }
         });

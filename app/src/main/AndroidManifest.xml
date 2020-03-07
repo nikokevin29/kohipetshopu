@@ -9,9 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Fragment.AkunFragment"></activity>
-        <activity android:name=".Fragment.KelolaFragment" />
-        <activity android:name=".Fragment.TransaksiFragment" />
+        <activity android:name=".Fragment_CS.AkunCSFragment"></activity>
+        <activity android:name=".Fragment_CS.TransaksiPenjualanFragment" />
+        <activity android:name=".MainViewCS" />
+        <activity android:name=".Fragment_Owner.AkunFragment" />
+        <activity android:name=".Fragment_Owner.KelolaFragment" />
+        <activity android:name=".Fragment_Owner.TransaksiPemesananFragment" />
         <activity android:name=".PriceList" />
         <activity android:name=".Landing_About">
             <intent-filter>

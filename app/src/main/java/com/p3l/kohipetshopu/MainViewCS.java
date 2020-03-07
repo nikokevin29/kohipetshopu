@@ -5,70 +5,51 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.p3l.kohipetshopu.Fragment_CS.AkunCSFragment;
+import com.p3l.kohipetshopu.Fragment_CS.TransaksiPenjualanFragment;
 import com.p3l.kohipetshopu.Fragment_Owner.AkunFragment;
 import com.p3l.kohipetshopu.Fragment_Owner.KelolaFragment;
 import com.p3l.kohipetshopu.Fragment_Owner.TransaksiPemesananFragment;
 
-public class MainView extends AppCompatActivity {
-    private boolean doubleTapParam;
+public class MainViewCS extends AppCompatActivity {
+
     private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_view);
+        setContentView(R.layout.main_view_cs);
 
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation_view);
-        loadFragment(new KelolaFragment());
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation_view_cs);
+        loadFragment(new AkunCSFragment());
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 Fragment fragment = null;
                 switch (menuItem.getItemId()) {
-                    case R.id.menu_kelola:
-                        fragment = new KelolaFragment();
+                    case R.id.menu_transaksi_penjualan:
+                        fragment = new TransaksiPenjualanFragment();
                         break;
-                    case R.id.menu_transaksi_pemesanan:
-                        fragment = new TransaksiPemesananFragment();
-                        break;
-                    case R.id.menu_akun:
-                        fragment = new AkunFragment();
+                    case R.id.menu_akun_cs:
+                        fragment = new AkunCSFragment();
                         break;
                 }
                 return loadFragment(fragment);
             }
         });
-
     }
 
     private boolean loadFragment(Fragment fragment) {
         if (fragment != null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fl_container, fragment)
+                    .replace(R.id.fl_container_cs, fragment)
                     .commit();
             return true;
         }
         return false;
-    }
-    @Override
-    public void onBackPressed() { //2x Tap Untuk Keluar
-        if (doubleTapParam) {
-            super.onBackPressed();
-            return ;
-        }
-        this.doubleTapParam = true;
-        Toast.makeText(this, "Tap sekali lagi untuk keluar", Toast.LENGTH_SHORT).show();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                doubleTapParam = false;
-            }
-        }, 2000);
     }
 }
