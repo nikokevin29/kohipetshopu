@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_kelola"
+        android:title="Kelola"
+        android:icon="@drawable/ic_kelola"/>
+    <item
+        android:id="@+id/menu_transaksi"
+        android:title="Transaksi"
+        android:icon="@drawable/ic_transaksi"/>
+    <item
+        android:id="@+id/menu_akun"
+        android:title="Akun"
+        android:icon="@drawable/ic_akun"/>
+</menu>

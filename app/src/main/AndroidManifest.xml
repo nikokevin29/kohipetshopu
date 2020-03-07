@@ -9,9 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PriceList"></activity>
+        <activity android:name=".Fragment.AkunFragment"></activity>
+        <activity android:name=".Fragment.KelolaFragment" />
+        <activity android:name=".Fragment.TransaksiFragment" />
+        <activity android:name=".PriceList" />
         <activity android:name=".Landing_About">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,8 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainView" />
-        <activity android:name=".Login">
-        </activity>
+        <activity android:name=".Login" />
     </application>
 
 </manifest>

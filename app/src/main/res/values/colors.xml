@@ -144,4 +144,7 @@
     <color name="DarkBlue">#00008B</color>
     <color name="Navy">#000080</color>
     <color name="Black">#000000</color>
+
+    <color name="shrine_pink_100">#FEDBD0</color>
+    <color name="shrine_pink_900">#442C2E</color>
 </resources>
