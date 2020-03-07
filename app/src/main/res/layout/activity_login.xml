@@ -16,26 +16,6 @@
         android:orientation="vertical"
         android:padding="24dp"
         android:paddingTop="16dp">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/btn_about"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:text="About"
-                style="@style/TextAppearance.MaterialComponents.Body1">
-            </Button>
-            <Button
-                android:id="@+id/btn_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="Show Price"
-                style="@style/TextAppearance.MaterialComponents.Body1">
-            </Button>
-        </RelativeLayout>
         <ImageView
             android:layout_width="242dp"
             android:layout_height="132dp"

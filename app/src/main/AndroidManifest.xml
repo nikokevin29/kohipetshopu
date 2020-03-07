@@ -10,14 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".PriceList"></activity>
-        <activity android:name=".About" />
-        <activity android:name=".MainView" />
-        <activity android:name=".Login">
+        <activity android:name=".Landing_About">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".MainView" />
+        <activity android:name=".Login">
         </activity>
     </application>
 

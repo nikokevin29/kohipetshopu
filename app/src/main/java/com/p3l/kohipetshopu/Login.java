@@ -12,7 +12,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class Login extends AppCompatActivity {
     private TextInputLayout etUsername,etPassword;
-    private Button btnLogin, btnAbout,btnPrice;
+    private Button btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +22,6 @@ public class Login extends AppCompatActivity {
         etUsername = findViewById(R.id.username_text_input);
         etPassword = findViewById(R.id.password_text_input);
         btnLogin = findViewById(R.id.btn_login);
-        btnAbout = findViewById(R.id.btn_about);
-        btnPrice = findViewById(R.id.btn_price);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,20 +30,6 @@ public class Login extends AppCompatActivity {
                 startActivity(i);
                 finish();
                 //Toast.makeText(MainActivity.this, "Something Clicked", Toast.LENGTH_SHORT).show();
-            }
-        });
-        btnAbout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i =  new Intent(Login.this,About.class);
-                startActivity(i);
-            }
-        });
-        btnPrice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i =  new Intent(Login.this,PriceList.class);
-                startActivity(i);
             }
         });
     }

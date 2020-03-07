@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#4A9586"
+    tools:context=".Landing_About">
+
+
+    <ImageView
+        android:id="@+id/gambar_kopisop"
+        android:layout_width="232dp"
+        android:layout_height="192dp"
+        app:srcCompat="@drawable/kohis"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+    <TextView
+        android:id="@+id/alamat_about"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/gambar_kopisop"
+        android:text="Jl. Moses Gatotkaca No.22 Yogyakarta 55281\nTelp.(0274) 357735\nhttp://www.ilovedoge.com"/>
+    <TextView
+        android:id="@+id/titleFilosofi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/alamat_about"
+        android:textColor="@color/Black"
+        android:textSize="16dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Filosofi Kouvee Pet Shop"/>
+    <TextView
+        android:id="@+id/isinya"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleFilosofi"
+        android:textColor="@color/Black"
+        android:justificationMode="inter_word"
+        android:paddingHorizontal="20dp"
+        android:textSize="12dp"
+        android:text="Kouvee Pet Shop Terinspirasi dari Francise kedai kopi yang ada di Yogyakarta
+saya senditi tertarik membuat francise sendiri untuk pet shop saya, jadi saya membuka banyak cabang untuk menyaingi nilai Penjualannya"
+        />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:layout_below="@+id/isinya">
+
+            <Button
+                android:id="@+id/pricelist_landing"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="Daftar Harga"/>
+            <Button
+                android:id="@+id/btn_login_landing"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="Login Page" />
+
+        </LinearLayout>
+</RelativeLayout>
