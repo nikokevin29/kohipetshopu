@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".AdapterJenisHewan">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="0dp"
+    app:cardCornerRadius="1dp"
+    app:cardElevation="1dp"
+    app:cardBackgroundColor="@color/cardview_shadow_end_color"
+    android:id="@+id/ParentJenisHewan"
+    tools:ignore="PrivateResource">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/head"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:orientation="vertical"
+        android:layout_margin="10dp">
 
-        <androidx.core.widget.NestedScrollView
+        <TextView
+            android:id="@+id/tvNamaJenisHewan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:text="Nama Jenis Hewan"
+            android:textSize="14dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/tvCreated_at"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="created_at"
+            android:textSize="7dp"/>
+        <TextView
+            android:id="@+id/tvUpdated_at"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="updated_at"
+            android:textSize="7dp"/>
+        <TextView
+            android:id="@+id/tvDeleted_at"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="deleted_at"
+            android:textSize="7dp"/>
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp">
+        <TextView
+            android:id="@+id/tvAksi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aksi"
+            android:textSize="13dp"
+            android:layout_marginTop="10dp"/>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp">
+        <TextView
+            android:id="@+id/tvAktor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aktor"
+            android:textSize="12dp"
+            android:layout_marginTop="3dp"/>
+    </LinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/viewHeader"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tvNamaJenis"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Jenis Hewan"
-                            android:textSize="17dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tvTanggal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="tanggal"
-                            android:textSize="15dp" />
-                    </LinearLayout>
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-
-
-        </androidx.core.widget.NestedScrollView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</RelativeLayout>
+</androidx.cardview.widget.CardView>

@@ -1,4 +1,4 @@
-package com.p3l.kohipetshopu.UserData;
+package com.p3l.kohipetshopu.JenisHewan;
 
 public class JenisHewanDAO {
     String nama,created_at,updated_at,deleted_at,aksi;
