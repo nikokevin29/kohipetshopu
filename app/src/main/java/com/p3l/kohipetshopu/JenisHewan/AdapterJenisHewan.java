@@ -155,13 +155,11 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.My
         jenisDAOCall.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Toast.makeText(context, "Success Deleting ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Success Deleting", Toast.LENGTH_SHORT).show();
             }
-
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-
-                Toast.makeText(context, "Fail Deleteing ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Failed Deleteing", Toast.LENGTH_SHORT).show();
                 System.out.println("TRACE ERROR "+t.getMessage());
             }
         });
