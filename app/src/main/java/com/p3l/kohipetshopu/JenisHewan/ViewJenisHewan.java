@@ -1,5 +1,6 @@
 package com.p3l.kohipetshopu.JenisHewan;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -50,19 +51,18 @@ public class ViewJenisHewan extends AppCompatActivity {
     public void setRecycleJenis(){
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<List<JenisHewanDAO>> jenisDAOCall = apiService.getAllJenis();
-
         jenisDAOCall.enqueue(new Callback<List<JenisHewanDAO>>() {
             @Override
-            public void onResponse(Call<List<JenisHewanDAO>> call, Response<List<JenisHewanDAO>> response) {
+            public void onResponse(Call<List<JenisHewanDAO>> call,Response<List<JenisHewanDAO>> response) {
                 System.out.println(response.body().get(0).getNama());
                 ListJenis.addAll(response.body());
                 adapterJenisHewan.notifyDataSetChanged();
                 Toast.makeText(ViewJenisHewan.this, "Welcome", Toast.LENGTH_SHORT).show();
             }
-
             @Override
             public void onFailure(Call<List<JenisHewanDAO>> call, Throwable t) {
                 Toast.makeText(ViewJenisHewan.this, "Kesalahan Jaringan",Toast.LENGTH_SHORT).show();
+                System.out.println(t.getMessage());
             }
         });
 

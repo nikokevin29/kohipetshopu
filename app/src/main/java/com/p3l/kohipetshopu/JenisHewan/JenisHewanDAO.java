@@ -1,12 +1,26 @@
 package com.p3l.kohipetshopu.JenisHewan;
 
-public class JenisHewanDAO {
-    String nama,created_at,updated_at,deleted_at,aksi;
-    int idjenis,aktor;
+import com.google.gson.annotations.SerializedName;
+
+public class JenisHewanDAO{
+    @SerializedName("nama")
+    String nama;
+    @SerializedName("created_at")
+    String created_at;
+    @SerializedName("updated_at")
+    String updated_at;
+    @SerializedName("deleted_at")
+    String deleted_at;
+    @SerializedName("aksi")
+    String aksi;
+    @SerializedName("idjenis")
+    String idjenis;
+    @SerializedName("aktor")
+    String aktor;
 
     public JenisHewanDAO(){}
 
-    public JenisHewanDAO(int idjenis,String nama,String created_at,String updated_at, String deleted_at,int aktor,String aksi){
+    public JenisHewanDAO(String idjenis,String nama,String created_at,String updated_at, String deleted_at,String aktor,String aksi){
         this.idjenis = idjenis;
         this.nama = nama;
         this.created_at = created_at;
@@ -56,19 +70,19 @@ public class JenisHewanDAO {
         this.aksi = aksi;
     }
 
-    public int getIdjenis() {
+    public String getIdjenis() {
         return idjenis;
     }
 
-    public void setIdjenis(int idjenis) {
+    public void setIdjenis(String idjenis) {
         this.idjenis = idjenis;
     }
 
-    public int getAktor() {
+    public String getAktor() {
         return aktor;
     }
 
-    public void setAktor(int aktor) {
+    public void setAktor(String aktor) {
         this.aktor = aktor;
     }
 }
