@@ -9,6 +9,33 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_jenis"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_jenis"/>
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_jenis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_jenis"
+        app:srcCompat="@drawable/ic_plus"
+        app:fabSize="auto"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/sort_jenis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/add_jenis"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        app:fabSize="auto"
+        app:srcCompat="@drawable/ic_sort" />
 
 </RelativeLayout>

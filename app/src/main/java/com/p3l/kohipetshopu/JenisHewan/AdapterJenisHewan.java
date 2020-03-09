@@ -1,6 +1,10 @@
 package com.p3l.kohipetshopu.JenisHewan;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +15,15 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.p3l.kohipetshopu.API.ApiClient;
+import com.p3l.kohipetshopu.API.ApiInterface;
 import com.p3l.kohipetshopu.R;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.MyViewHolder> {
     private Context context;
@@ -43,28 +53,27 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.My
         holder.aksi.setText(jenis.getAksi());
         holder.aktor.setText(jenis.getAktor());
 
-//        holder.parent.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Bundle data = new Bundle();
-//
-//                data.putString("username", tips.getUsername());
-//                data.putString("waktu", tips.getTime());
-//                data.putString("gambar", tips.getImg());
-//                data.putString("judul", tips.getTitle());
-//                data.putString("deskripsi", tips.getDescription());
-//
-//                fragment.setArguments(data);
-//                loadFragment(fragment);
-//            }
-//        });
-//        holder.parent.setOnLongClickListener(new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View view) {
-//                showDialog(tips);
-//                return false;
-//            }
-//        });
+        holder.parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle data = new Bundle();
+
+                data.putString("nama", jenis.getNama());
+                data.putString("created_at", jenis.getCreated_at());
+                data.putString("updated_at", jenis.getUpdated_at());
+                data.putString("deleted_at", jenis.getDeleted_at());
+                data.putString("aksi", jenis.getAksi());
+                data.putString("aktor", jenis.getAktor());
+
+            }
+        });
+        holder.parent.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                showDialog(jenis);
+                return false;
+            }
+        });
     }
     @Override
     public int getItemCount() {
@@ -91,69 +100,71 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.My
             Toast.makeText(context, "You Tach Mi !!", Toast.LENGTH_SHORT).show();
         }
     }
-//       private void startIntent(JenisHewanDAO hasil){
-//        Intent edit = new Intent(context, EditTips.class);
-//        edit.putExtra("id",hasil.getId());
-//        edit.putExtra("title", hasil.getTitle());
-//        edit.putExtra("description", hasil.getDescription());
-//        edit.putExtra("img", hasil.getImg());
-//        context.startActivity(edit);
-//    }
-//    private void showDialog(final JenisHewanDAO hasil){
-//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-//
-//        // set title dialog
-//        alertDialogBuilder.setTitle("What's next?");
-//
-//        // set pesan dari dialog
-//        alertDialogBuilder
-//                .setIcon(R.mipmap.ic_launcher)
-//                .setCancelable(false)
-//                .setPositiveButton("Edit",new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog,int id) {
-//                        // update report
-//                        startIntent(hasil);
-//
-//                    }
-//                })
-//                .setNegativeButton("Delete",new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int id) {
-//                        //delete report
-//                        deleteTips(hasil.getId());
-//
-//                    }
-//                })
-//                .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int i) {
-//                        dialog.cancel();
-//                    }
-//                });
-//
-//        // membuat alert dialog dari builder
-//        AlertDialog alertDialog = alertDialogBuilder.create();
-//
-//        // menampilkan alert dialog
-//        alertDialog.show();
-//    }
+       private void startIntent(JenisHewanDAO hasil){
+        Intent edit = new Intent(context, EditJenis.class);
+        edit.putExtra("idjenis",hasil.getIdjenis());
+        edit.putExtra("created_at", hasil.getCreated_at());
+        edit.putExtra("updated_at", hasil.getUpdated_at());
+        edit.putExtra("deleted_at", hasil.getDeleted_at());
+        edit.putExtra("aksi", hasil.getAksi());
+        edit.putExtra("aktor", hasil.getAktor());
+        context.startActivity(edit);
+    }
+    private void showDialog(final JenisHewanDAO hasil){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 
-//    private void deleteTips(String id){
-//        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-//        Call<Void> jenisDAOCall = apiService.deleteTips(id);
-//
-//        jenisDAOCall.enqueue(new Callback<Void>() {
-//            @Override
-//            public void onResponse(Call<Void> call, Response<Void> response) {
-//                Toast.makeText(context, "Success Deleting tips", Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Void> call, Throwable t) {
-//
-//                Toast.makeText(context, "Fail Deleteing tips", Toast.LENGTH_SHORT).show();
-//                System.out.println("PISANG "+t.getMessage());
-//            }
-//        });
-//    }
+        // set title dialog
+        alertDialogBuilder.setTitle("Aksi apa yang akan anda lakukan?");
+
+        // set pesan dari dialog
+        alertDialogBuilder
+                .setIcon(R.mipmap.ic_launcher)
+                .setCancelable(false)
+                .setPositiveButton("Edit",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // update
+                        startIntent(hasil);
+
+                    }
+                })
+                .setNegativeButton("Hapus",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //delete
+                        deleteJenis(hasil.getIdjenis());
+
+                    }
+                })
+                .setNeutralButton("Batal", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        dialog.cancel();
+                    }
+                });
+
+        // membuat alert dialog dari builder
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // menampilkan alert dialog
+        alertDialog.show();
+    }
+
+    private void deleteJenis(String idjenis){
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<Void> jenisDAOCall = apiService.deleteJenis(idjenis);
+
+        jenisDAOCall.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Toast.makeText(context, "Success Deleting ", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+                Toast.makeText(context, "Fail Deleteing ", Toast.LENGTH_SHORT).show();
+                System.out.println("TRACE ERROR "+t.getMessage());
+            }
+        });
+    }
 
 }

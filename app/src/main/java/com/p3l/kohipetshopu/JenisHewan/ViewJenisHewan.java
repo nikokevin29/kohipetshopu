@@ -7,11 +7,13 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.p3l.kohipetshopu.API.ApiClient;
 import com.p3l.kohipetshopu.API.ApiInterface;
 import com.p3l.kohipetshopu.R;
@@ -32,13 +34,15 @@ public class ViewJenisHewan extends AppCompatActivity {
     AdapterJenisHewan adapterJenisHewan;
     private RecyclerView recyclerJenis;
     private RecyclerView.LayoutManager mLayoutmanager;
+    private FloatingActionButton add_jenis;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_jenis_hewan);
         //init();
         recyclerJenis = findViewById(R.id.recycler_view_jenis);
-
+        add_jenis = findViewById(R.id.add_jenis);
 
         ListJenis = new ArrayList<>();
         adapterJenisHewan = new AdapterJenisHewan(this,ListJenis);
@@ -47,6 +51,15 @@ public class ViewJenisHewan extends AppCompatActivity {
         recyclerJenis.setItemAnimator(new DefaultItemAnimator());
         recyclerJenis.setAdapter(adapterJenisHewan);
         setRecycleJenis();
+
+        add_jenis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i  = new Intent(ViewJenisHewan.this,AddJenis.class);
+                i.putExtra("from","AddJenis");
+                startActivity(i);
+            }
+        });
     }
     public void setRecycleJenis(){
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
@@ -54,7 +67,7 @@ public class ViewJenisHewan extends AppCompatActivity {
         jenisDAOCall.enqueue(new Callback<List<JenisHewanDAO>>() {
             @Override
             public void onResponse(Call<List<JenisHewanDAO>> call,Response<List<JenisHewanDAO>> response) {
-                System.out.println(response.body().get(0).getNama());
+                //System.out.println(response.body().get(0).getNama());
                 ListJenis.addAll(response.body());
                 adapterJenisHewan.notifyDataSetChanged();
                 Toast.makeText(ViewJenisHewan.this, "Welcome", Toast.LENGTH_SHORT).show();
