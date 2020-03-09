@@ -45,7 +45,7 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.My
 
     @Override
     public void onBindViewHolder(@NonNull AdapterJenisHewan.MyViewHolder holder, int position) {
-        JenisHewanDAO jenis = result.get(position);
+        final JenisHewanDAO jenis = result.get(position);
         holder.nama.setText(jenis.getNama());
         holder.created_at.setText(jenis.getCreated_at());
         holder.updated_at.setText(jenis.getUpdated_at());
@@ -121,14 +121,14 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.My
                 .setIcon(R.mipmap.ic_launcher)
                 .setCancelable(false)
                 .setPositiveButton("Edit",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
+                    public void onClick(DialogInterface dialog,int idjenis) {
                         // update
                         startIntent(hasil);
 
                     }
                 })
                 .setNegativeButton("Hapus",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+                    public void onClick(DialogInterface dialog, int idjenis) {
                         //delete
                         deleteJenis(hasil.getIdjenis());
 
@@ -151,6 +151,7 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.My
     private void deleteJenis(String idjenis){
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<Void> jenisDAOCall = apiService.deleteJenis(idjenis);
+
 
         jenisDAOCall.enqueue(new Callback<Void>() {
             @Override

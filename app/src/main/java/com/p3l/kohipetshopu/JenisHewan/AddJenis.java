@@ -26,16 +26,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddJenis extends AppCompatActivity {
+public class    AddJenis extends AppCompatActivity {
     EditText etNamajenis;
     Button btn_Submit_add_jenis;
-    String nama;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_jenis);
-        etNamajenis=(EditText) findViewById(R.id.etNamaJenis);
-        btn_Submit_add_jenis= (Button) findViewById(R.id.btn_Submit_add_jenis);
+        etNamajenis = (EditText) findViewById(R.id.etNamaJenis);
+        btn_Submit_add_jenis = (Button) findViewById(R.id.btn_Submit_add_jenis);
 
         btn_Submit_add_jenis.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +55,9 @@ public class AddJenis extends AppCompatActivity {
                             public void onFailure(Call<JenisHewanDAO> call, Throwable t) {
                                 Toast.makeText(AddJenis.this, "Sukses Tambah, tapi...", Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(AddJenis.this, ViewJenisHewan.class);
+                                i.putExtra("from","jenis");
                                 startActivity(i);
+                                finish();
                             }
                         });
                     }

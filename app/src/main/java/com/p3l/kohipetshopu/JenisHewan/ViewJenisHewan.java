@@ -70,11 +70,11 @@ public class ViewJenisHewan extends AppCompatActivity {
                 //System.out.println(response.body().get(0).getNama());
                 ListJenis.addAll(response.body());
                 adapterJenisHewan.notifyDataSetChanged();
-                Toast.makeText(ViewJenisHewan.this, "Welcome", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewJenisHewan.this, "Tekan yang Lama untuk Melakukan Aksi", Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onFailure(Call<List<JenisHewanDAO>> call, Throwable t) {
-                Toast.makeText(ViewJenisHewan.this, "Kesalahan Jaringan",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewJenisHewan.this, "Internet Anda Ampas",Toast.LENGTH_SHORT).show();
                 System.out.println(t.getMessage());
             }
         });
@@ -89,14 +89,5 @@ public class ViewJenisHewan extends AppCompatActivity {
         aktor = (TextView) findViewById(R.id.tvAktor);
     }
 
-//    private void setField(){
-//
-//
-//        nama.setText(data.getString("nama"));
-//        created_at.setText(data.getString("created_at"));
-//        updated_at.setText(data.getString("updated_at"));
-//        deleted_at.setText(data.getString("deleted_at"));
-//        aksi.setText(data.getString("aksi"));
-//        aktor.setText(data.getString("aktor"));
-//    }
+
 }
