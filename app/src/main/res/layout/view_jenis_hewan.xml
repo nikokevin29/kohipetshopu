@@ -11,11 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/search_jenis"/>
-    <androidx.appcompat.widget.SearchView
+    <EditText
         android:id="@+id/search_jenis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Cari"
+        android:inputType="text"
+        android:maxLines="1"
         android:layout_margin="10dp"/>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_jenis"
         app:srcCompat="@drawable/ic_plus"

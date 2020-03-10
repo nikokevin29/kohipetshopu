@@ -26,55 +26,20 @@ public class Login extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(etUsername.getEditText().getText().toString().equalsIgnoreCase("admin")){
+                if(etUsername.getEditText().getText().toString().equalsIgnoreCase("a" ) &&
+                        etPassword.getEditText().getText().toString().equalsIgnoreCase("a" ) ){
                     Intent i =  new Intent(Login.this,MainView.class);
                     startActivity(i);
                     finish();
-                }else if(etUsername.getEditText().getText().toString().equalsIgnoreCase("cs")){
+                }else if(etUsername.getEditText().getText().toString().equalsIgnoreCase("cs" )&&
+                        etPassword.getEditText().getText().toString().equalsIgnoreCase("cs" )){
                     Intent i =  new Intent(Login.this,MainViewCS.class);
                     startActivity(i);
                     finish();
                 }else{
-                    Toast.makeText(Login.this, "見つかりませんでした", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Tidak Valid", Toast.LENGTH_SHORT).show();
                 }
-                //Toast.makeText(MainActivity.this, "Something Clicked", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    private boolean validateUsername() {
-        String usernameInput = etUsername.getEditText().getText().toString().trim();
-
-        if (usernameInput.isEmpty()) {
-            etUsername.setError("Field can't be empty");
-            return false;
-        } else if (usernameInput.length() > 15) {
-            etUsername.setError("Username too long, Max is 15");
-            return false;
-        } else {
-            etUsername.setError(null);
-            return true;
-        }
-    }
-    private boolean validatePassword() {
-        String passwordInput = etPassword.getEditText().getText().toString().trim();
-
-        if (passwordInput.isEmpty()) {
-            etPassword.setError("Field can't be empty");
-            return false;
-        } else {
-            etPassword.setError(null);
-            return true;
-        }
-    }
-    public void confirmInput(View v) {
-        if (!validateUsername() | !validatePassword()) {
-            return;
-        }
-        String input = "Username: " + etUsername.getEditText().getText().toString();
-        input += "\n";
-        input += "Password: " + etPassword.getEditText().getText().toString();
-
-        Toast.makeText(this, input, Toast.LENGTH_SHORT).show();
     }
 }

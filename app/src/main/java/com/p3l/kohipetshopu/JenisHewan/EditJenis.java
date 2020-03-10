@@ -2,6 +2,7 @@ package com.p3l.kohipetshopu.JenisHewan;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,8 @@ import com.p3l.kohipetshopu.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Headers;
+
 
 public class EditJenis extends AppCompatActivity {
     EditText etNamaJenis_update;
@@ -28,6 +31,7 @@ public class EditJenis extends AppCompatActivity {
         btn_Submit_update_jenis = findViewById(R.id.btn_Submit_update_jenis);
         setField();
 
+        ProgressDialog progress = new ProgressDialog(this);
 
         btn_Submit_update_jenis.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,7 +39,7 @@ public class EditJenis extends AppCompatActivity {
                 ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
                 Call<JenisHewanDAO> tipsDAOCall = apiService.editJenis(getIntent().getStringExtra("idjenis"),
                         etNamaJenis_update.getText().toString());
-                    System.out.println(getIntent().getStringExtra("idjenis")+" "+etNamaJenis_update.getText().toString());
+                System.out.println(getIntent().getStringExtra("idjenis")+" "+etNamaJenis_update.getText().toString());
                 tipsDAOCall.enqueue(new Callback<JenisHewanDAO>() {
                     @Override
                     public void onResponse(Call<JenisHewanDAO> call, Response<JenisHewanDAO> response) {
@@ -45,8 +49,9 @@ public class EditJenis extends AppCompatActivity {
                     }
                     @Override
                     public void onFailure(Call<JenisHewanDAO> call, Throwable t) {
-                        Toast.makeText(EditJenis.this, "Edit Failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditJenis.this, "Edit Success.", Toast.LENGTH_SHORT).show();
                         System.out.println(t.getMessage());
+                        startIntent();
                     }
                 });
             }
@@ -57,17 +62,8 @@ public class EditJenis extends AppCompatActivity {
     }
     public void startIntent(){
         Intent acc = new Intent(EditJenis.this, ViewJenisHewan.class);
-        acc.putExtra("from", "tips");
+        acc.putExtra("from", "jenis");
         startActivity(acc);
+        finish();
     }
-    //    private void setField(){
-//
-//
-//        nama.setText(data.getString("nama"));
-//        created_at.setText(data.getString("created_at"));
-//        updated_at.setText(data.getString("updated_at"));
-//        deleted_at.setText(data.getString("deleted_at"));
-//        aksi.setText(data.getString("aksi"));
-//        aktor.setText(data.getString("aktor"));
-//    }
 }

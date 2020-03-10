@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -100,14 +101,10 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.My
             Toast.makeText(context, "You Tach Mi !!", Toast.LENGTH_SHORT).show();
         }
     }
-       private void startIntent(JenisHewanDAO hasil){
+    private void startIntent(JenisHewanDAO hasil){
         Intent edit = new Intent(context, EditJenis.class);
         edit.putExtra("idjenis",hasil.getIdjenis());
-        edit.putExtra("created_at", hasil.getCreated_at());
-        edit.putExtra("updated_at", hasil.getUpdated_at());
-        edit.putExtra("deleted_at", hasil.getDeleted_at());
-        edit.putExtra("aksi", hasil.getAksi());
-        edit.putExtra("aktor", hasil.getAktor());
+        edit.putExtra("nama",hasil.getNama());
         context.startActivity(edit);
     }
     private void showDialog(final JenisHewanDAO hasil){

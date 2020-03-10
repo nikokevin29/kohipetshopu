@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,12 +37,18 @@ public class    AddJenis extends AppCompatActivity {
         setContentView(R.layout.activity_add_jenis);
         etNamajenis = (EditText) findViewById(R.id.etNamaJenis);
         btn_Submit_add_jenis = (Button) findViewById(R.id.btn_Submit_add_jenis);
-
+        ProgressDialog progress = new ProgressDialog(this);
         btn_Submit_add_jenis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
                 Call<List<JenisHewanDAO>> jenisDAOCall = apiService.getAllJenis();
+
+                progress.setMessage("Memproses data . . . ");
+                progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progress.setCancelable(false);
+                progress.show();
+
                 jenisDAOCall.enqueue(new Callback<List<JenisHewanDAO>>() {
                     @Override
                     public void onResponse(Call<List<JenisHewanDAO>> call, Response<List<JenisHewanDAO>> response) {
@@ -50,12 +58,15 @@ public class    AddJenis extends AppCompatActivity {
                             @Override
                             public void onResponse(Call<JenisHewanDAO> call, Response<JenisHewanDAO> response) {
                                 Toast.makeText(AddJenis.this, "Sukses Tambah", Toast.LENGTH_SHORT).show();
+                                progress.dismiss();
                             }
                             @Override
                             public void onFailure(Call<JenisHewanDAO> call, Throwable t) {
                                 Toast.makeText(AddJenis.this, "Sukses Tambah, tapi...", Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(AddJenis.this, ViewJenisHewan.class);
                                 i.putExtra("from","jenis");
+                                System.out.println(t.getMessage());
+                                progress.dismiss();
                                 startActivity(i);
                                 finish();
                             }
