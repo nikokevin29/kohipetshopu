@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="@color/cardview_shadow_end_color"
+    android:id="@+id/ParentUkuranHewan"
+    tools:ignore="PrivateResource">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/tvNamaUkuranHewan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nama Ukuran Hewan"
+            android:textSize="14dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/tvCreated_at"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="created_at"
+            android:textSize="7dp"/>
+        <TextView
+            android:id="@+id/tvUpdated_at"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="updated_at"
+            android:textSize="7dp"/>
+        <TextView
+            android:id="@+id/tvDeleted_at"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="deleted_at"
+            android:textSize="7dp"/>
+
+        <TextView
+            android:id="@+id/tvAksi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Aksi Terakhir Dilakukan :"
+            android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/tvAktor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aktor"
+            android:textSize="12dp"
+            android:layout_marginTop="3dp"/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

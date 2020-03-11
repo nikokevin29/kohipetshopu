@@ -1,4 +1,4 @@
-package com.p3l.kohipetshopu.JenisHewan;
+package com.p3l.kohipetshopu.UkuranHewan;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -11,19 +11,20 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.p3l.kohipetshopu.API.ApiClient;
 import com.p3l.kohipetshopu.API.ApiInterface;
+import com.p3l.kohipetshopu.JenisHewan.AddJenis;
+import com.p3l.kohipetshopu.JenisHewan.JenisHewanDAO;
+import com.p3l.kohipetshopu.UkuranHewan.AdapterUkuranHewan;
+import com.p3l.kohipetshopu.UkuranHewan.AddUkuran;
+import com.p3l.kohipetshopu.UkuranHewan.UkuranHewanDAO;
+import com.p3l.kohipetshopu.UkuranHewan.ViewUkuranHewan;
 import com.p3l.kohipetshopu.R;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,29 +32,30 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ViewJenisHewan extends AppCompatActivity {
-    private List<JenisHewanDAO> ListJenis;
-    AdapterJenisHewan adapterJenisHewan;
-    private RecyclerView recyclerJenis;
+public class ViewUkuranHewan extends AppCompatActivity {
+
+    private List<UkuranHewanDAO> ListUkuran;
+    AdapterUkuranHewan adapterUkuranHewan;
+    private RecyclerView recyclerUkuran;
     private RecyclerView.LayoutManager mLayoutmanager;
-    private FloatingActionButton add_jenis;
+    private FloatingActionButton add_ukuran;
     EditText search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.view_jenis_hewan);
+        setContentView(R.layout.view_ukuran_hewan);
 
-        recyclerJenis = findViewById(R.id.recycler_view_jenis);
-        add_jenis = findViewById(R.id.add_jenis);
-        search = (EditText) findViewById(R.id.search_jenis);
+        recyclerUkuran = findViewById(R.id.recycler_view_ukuran);
+        add_ukuran = findViewById(R.id.add_ukuran);
+        search = (EditText) findViewById(R.id.search_ukuran);
 
-        ListJenis = new ArrayList<>();
-        adapterJenisHewan = new AdapterJenisHewan(this, ListJenis);
+        ListUkuran = new ArrayList<>();
+        adapterUkuranHewan = new AdapterUkuranHewan(this, ListUkuran);
         mLayoutmanager = new LinearLayoutManager(getApplicationContext());
-        recyclerJenis.setLayoutManager(mLayoutmanager);
-        recyclerJenis.setItemAnimator(new DefaultItemAnimator());
-        recyclerJenis.setAdapter(adapterJenisHewan);
+        recyclerUkuran.setLayoutManager(mLayoutmanager);
+        recyclerUkuran.setItemAnimator(new DefaultItemAnimator());
+        recyclerUkuran.setAdapter(adapterUkuranHewan);
 
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -73,20 +75,20 @@ public class ViewJenisHewan extends AppCompatActivity {
         });
 
         loadData();
-        add_jenis.setOnClickListener(new View.OnClickListener() {
+        add_ukuran.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i  = new Intent(ViewJenisHewan.this,AddJenis.class);
-                i.putExtra("from","AddJenis");
+                Intent i  = new Intent(ViewUkuranHewan.this, AddUkuran.class);
+                i.putExtra("from","AddUkuran");
                 startActivity(i);
             }
         });
+    }//End Of On Create
 
 
-    }
     public void loadData(){
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<List<JenisHewanDAO>> jenisDAOCall = apiService.getAllJenis();
+        Call<List<UkuranHewanDAO>> ukuranDAOCall = apiService.getAllUkuran();
 
         ProgressDialog progress = new ProgressDialog(this);
         progress.setMessage("Fetching data");
@@ -94,24 +96,22 @@ public class ViewJenisHewan extends AppCompatActivity {
         progress.setCancelable(false);
         progress.show();
 
-        jenisDAOCall.enqueue(new Callback<List<JenisHewanDAO>>() {
+        ukuranDAOCall.enqueue(new Callback<List<UkuranHewanDAO>>() {
             @Override
-            public void onResponse(Call<List<JenisHewanDAO>> call,Response<List<JenisHewanDAO>> response) {
+            public void onResponse(Call<List<UkuranHewanDAO>> call, Response<List<UkuranHewanDAO>> response) {
                 //System.out.println(response.body().get(0).getNama());
-                ListJenis.addAll(response.body());
-                adapterJenisHewan.notifyDataSetChanged();
+                ListUkuran.addAll(response.body());
+                adapterUkuranHewan.notifyDataSetChanged();
                 progress.dismiss();
-                Toast.makeText(ViewJenisHewan.this, "Tekan yang Lama untuk Melakukan Aksi", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewUkuranHewan.this, "Tekan yang Lama untuk Melakukan Aksi", Toast.LENGTH_SHORT).show();
             }
             @Override
-            public void onFailure(Call<List<JenisHewanDAO>> call, Throwable t) {
+            public void onFailure(Call<List<UkuranHewanDAO>> call, Throwable t) {
                 progress.dismiss();
-                Toast.makeText(ViewJenisHewan.this, "Internet Anda Ampas",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewUkuranHewan.this, "Internet Anda Ampas",Toast.LENGTH_SHORT).show();
                 System.out.println(t.getMessage());
             }
         });
     }
-
-
 
 }

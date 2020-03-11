@@ -28,7 +28,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class    AddJenis extends AppCompatActivity {
+public class AddJenis extends AppCompatActivity {
     EditText etNamajenis;
     Button btn_Submit_add_jenis;
     @Override

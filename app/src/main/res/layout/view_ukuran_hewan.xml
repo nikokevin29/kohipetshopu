@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UkuranHewan.ViewUkuranHewan">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_ukuran"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search_ukuran"/>
+
+    <EditText
+        android:id="@+id/search_ukuran"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/cari"
+        android:inputType="text"
+        android:maxLines="1"
+        android:layout_margin="10dp"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_ukuran"
+        app:srcCompat="@drawable/ic_plus"
+        app:fabSize="auto"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/sort_ukuran"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/add_ukuran"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        app:fabSize="auto"
+        app:srcCompat="@drawable/ic_sort" />
+
+</RelativeLayout>
