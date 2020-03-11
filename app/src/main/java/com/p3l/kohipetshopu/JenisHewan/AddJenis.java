@@ -41,45 +41,52 @@ public class AddJenis extends AppCompatActivity {
         btn_Submit_add_jenis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-                Call<List<JenisHewanDAO>> jenisDAOCall = apiService.getAllJenis();
+                if(etNamajenis.getText().length() == 0){
+                    Toast.makeText(AddJenis.this, "Masih Kosong", Toast.LENGTH_SHORT).show();
+                }else{
+                    ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+                    Call<List<JenisHewanDAO>> jenisDAOCall = apiService.getAllJenis();
 
-                progress.setMessage("Memproses data . . . ");
-                progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                progress.setCancelable(false);
-                progress.show();
+                    progress.setMessage("Memproses data . . . ");
+                    progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progress.setCancelable(false);
+                    progress.show();
 
-                jenisDAOCall.enqueue(new Callback<List<JenisHewanDAO>>() {
-                    @Override
-                    public void onResponse(Call<List<JenisHewanDAO>> call, Response<List<JenisHewanDAO>> response) {
-                        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-                        Call<JenisHewanDAO> JenisHewanDAO = apiService.createJenis(etNamajenis.getText().toString());
-                        JenisHewanDAO.enqueue(new Callback<JenisHewanDAO>() {
-                            @Override
-                            public void onResponse(Call<JenisHewanDAO> call, Response<JenisHewanDAO> response) {
-                                Toast.makeText(AddJenis.this, "Sukses Tambah", Toast.LENGTH_SHORT).show();
-                                progress.dismiss();
-                            }
-                            @Override
-                            public void onFailure(Call<JenisHewanDAO> call, Throwable t) {
-                                Toast.makeText(AddJenis.this, "Sukses Tambah, tapi...", Toast.LENGTH_SHORT).show();
-                                Intent i = new Intent(AddJenis.this, ViewJenisHewan.class);
-                                i.putExtra("from","jenis");
-                                System.out.println(t.getMessage());
-                                progress.dismiss();
-                                startActivity(i);
-                                finish();
-                            }
-                        });
-                    }
-                    @Override
-                    public void onFailure(Call<List<JenisHewanDAO>> call, Throwable t) {
-                        System.out.println("gagal");
-                    }
-                });
-
+                    jenisDAOCall.enqueue(new Callback<List<JenisHewanDAO>>() {
+                        @Override
+                        public void onResponse(Call<List<JenisHewanDAO>> call, Response<List<JenisHewanDAO>> response) {
+                            ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+                            Call<JenisHewanDAO> JenisHewanDAO = apiService.createJenis(etNamajenis.getText().toString());
+                            JenisHewanDAO.enqueue(new Callback<JenisHewanDAO>() {
+                                @Override
+                                public void onResponse(Call<JenisHewanDAO> call, Response<JenisHewanDAO> response) {
+                                    Toast.makeText(AddJenis.this, "Sukses Tambah", Toast.LENGTH_SHORT).show();
+                                    progress.dismiss();
+                                }
+                                @Override
+                                public void onFailure(Call<JenisHewanDAO> call, Throwable t) {
+                                    Toast.makeText(AddJenis.this, "Sukses Tambah, tapi...", Toast.LENGTH_SHORT).show();
+                                    Intent i = new Intent(AddJenis.this, ViewJenisHewan.class);
+                                    i.putExtra("from","jenis");
+                                    System.out.println(t.getMessage());
+                                    progress.dismiss();
+                                    startActivity(i);
+                                    finish();
+                                }
+                            });
+                        }
+                        @Override
+                        public void onFailure(Call<List<JenisHewanDAO>> call, Throwable t) {
+                            System.out.println("gagal");
+                        }
+                    });
+                }
             }
         });
+    }
+
+    public void isEmpty(){
+
     }
 
 

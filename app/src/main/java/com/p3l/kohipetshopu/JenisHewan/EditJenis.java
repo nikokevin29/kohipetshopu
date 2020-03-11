@@ -36,27 +36,32 @@ public class EditJenis extends AppCompatActivity {
         btn_Submit_update_jenis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-                Call<JenisHewanDAO> tipsDAOCall = apiService.editJenis(getIntent().getStringExtra("idjenis"),
-                        etNamaJenis_update.getText().toString());
-                System.out.println(getIntent().getStringExtra("idjenis")+" "+etNamaJenis_update.getText().toString());
-                tipsDAOCall.enqueue(new Callback<JenisHewanDAO>() {
-                    @Override
-                    public void onResponse(Call<JenisHewanDAO> call, Response<JenisHewanDAO> response) {
-                        Toast.makeText(EditJenis.this, "Edit Success", Toast.LENGTH_SHORT).show();
-                        startIntent();
-                        finish();
-                    }
-                    @Override
-                    public void onFailure(Call<JenisHewanDAO> call, Throwable t) {
-                        Toast.makeText(EditJenis.this, "Edit Success.", Toast.LENGTH_SHORT).show();
-                        System.out.println(t.getMessage());
-                        startIntent();
-                    }
-                });
+                if(etNamaJenis_update.getText().length() != 0){
+                    ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+                    Call<JenisHewanDAO> tipsDAOCall = apiService.editJenis(getIntent().getStringExtra("idjenis"),
+                            etNamaJenis_update.getText().toString());
+                    System.out.println(getIntent().getStringExtra("idjenis")+" "+etNamaJenis_update.getText().toString());
+                    tipsDAOCall.enqueue(new Callback<JenisHewanDAO>() {
+                        @Override
+                        public void onResponse(Call<JenisHewanDAO> call, Response<JenisHewanDAO> response) {
+                            Toast.makeText(EditJenis.this, "Edit Success", Toast.LENGTH_SHORT).show();
+                            startIntent();
+                            finish();
+                        }
+                        @Override
+                        public void onFailure(Call<JenisHewanDAO> call, Throwable t) {
+                            Toast.makeText(EditJenis.this, "Edit Success.", Toast.LENGTH_SHORT).show();
+                            System.out.println(t.getMessage());
+                            startIntent();
+                        }
+                    });
+                }else{
+                    Toast.makeText(EditJenis.this, "Masih Kosong", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
+
     public void setField(){
         etNamaJenis_update.setText(getIntent().getStringExtra("nama"));
     }

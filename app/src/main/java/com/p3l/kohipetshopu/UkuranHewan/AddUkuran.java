@@ -31,42 +31,47 @@ public class AddUkuran extends AppCompatActivity {
         btn_Submit_add_ukuran.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-                Call<List<UkuranHewanDAO>> ukuranDAOCall = apiService.getAllUkuran();
+                if(etNamaukuran.getText().length() == 0){
+                    Toast.makeText(AddUkuran.this, "Masih Kosong", Toast.LENGTH_SHORT).show();
+                }else{
+                    ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+                    Call<List<UkuranHewanDAO>> ukuranDAOCall = apiService.getAllUkuran();
 
-                progress.setMessage("Memproses data . . . ");
-                progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                progress.setCancelable(false);
-                progress.show();
+                    progress.setMessage("Memproses data . . . ");
+                    progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progress.setCancelable(false);
+                    progress.show();
 
-                ukuranDAOCall.enqueue(new Callback<List<UkuranHewanDAO>>() {
-                    @Override
-                    public void onResponse(Call<List<UkuranHewanDAO>> call, Response<List<UkuranHewanDAO>> response) {
-                        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-                        Call<UkuranHewanDAO> UkuranHewanDAO = apiService.createUkuran(etNamaukuran.getText().toString());
-                        UkuranHewanDAO.enqueue(new Callback<UkuranHewanDAO>() {
-                            @Override
-                            public void onResponse(Call<UkuranHewanDAO> call, Response<UkuranHewanDAO> response) {
-                                Toast.makeText(AddUkuran.this, "Sukses Tambah", Toast.LENGTH_SHORT).show();
-                                progress.dismiss();
-                            }
-                            @Override
-                            public void onFailure(Call<UkuranHewanDAO> call, Throwable t) {
-                                Toast.makeText(AddUkuran.this, "Sukses Tambah.", Toast.LENGTH_SHORT).show();
-                                Intent i = new Intent(AddUkuran.this, ViewUkuranHewan.class);
-                                i.putExtra("from","ukuran");
-                                System.out.println(t.getMessage());
-                                progress.dismiss();
-                                startActivity(i);
-                                finish();
-                            }
-                        });
-                    }
-                    @Override
-                    public void onFailure(Call<List<UkuranHewanDAO>> call, Throwable t) {
-                        System.out.println("gagal");
-                    }
-                });
+                    ukuranDAOCall.enqueue(new Callback<List<UkuranHewanDAO>>() {
+                        @Override
+                        public void onResponse(Call<List<UkuranHewanDAO>> call, Response<List<UkuranHewanDAO>> response) {
+                            ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+                            Call<UkuranHewanDAO> UkuranHewanDAO = apiService.createUkuran(etNamaukuran.getText().toString());
+                            UkuranHewanDAO.enqueue(new Callback<UkuranHewanDAO>() {
+                                @Override
+                                public void onResponse(Call<UkuranHewanDAO> call, Response<UkuranHewanDAO> response) {
+                                    Toast.makeText(AddUkuran.this, "Sukses Tambah", Toast.LENGTH_SHORT).show();
+                                    progress.dismiss();
+                                }
+                                @Override
+                                public void onFailure(Call<UkuranHewanDAO> call, Throwable t) {
+                                    Toast.makeText(AddUkuran.this, "Sukses Tambah.", Toast.LENGTH_SHORT).show();
+                                    Intent i = new Intent(AddUkuran.this, ViewUkuranHewan.class);
+                                    i.putExtra("from","ukuran");
+                                    System.out.println(t.getMessage());
+                                    progress.dismiss();
+                                    startActivity(i);
+                                    finish();
+                                }
+                            });
+                        }
+                        @Override
+                        public void onFailure(Call<List<UkuranHewanDAO>> call, Throwable t) {
+                            System.out.println("gagal");
+                        }
+                    });
+                }
+
 
             }
         });

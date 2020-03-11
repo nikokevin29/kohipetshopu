@@ -35,33 +35,38 @@ public class EditUkuran extends AppCompatActivity {
         btn_Submit_update_ukuran.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-                Call<UkuranHewanDAO> tipsDAOCall = apiService.editUkuran(getIntent().getStringExtra("idukuran"),etNamaUkuran_update.getText().toString());
+                if(etNamaUkuran_update.getText().length() == 0){
+                    Toast.makeText(EditUkuran.this, "Masih Kosong", Toast.LENGTH_SHORT).show();
+                }else{
+                    ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+                    Call<UkuranHewanDAO> tipsDAOCall = apiService.editUkuran(getIntent().getStringExtra("idukuran"),etNamaUkuran_update.getText().toString());
 
-                System.out.println(getIntent().getStringExtra("idukuran")+" "+etNamaUkuran_update.getText().toString());
+                    System.out.println(getIntent().getStringExtra("idukuran")+" "+etNamaUkuran_update.getText().toString());
 
-                progress.setMessage("Memproses data . . . ");
-                progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                progress.setCancelable(false);
-                progress.show();
+                    progress.setMessage("Memproses data . . . ");
+                    progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progress.setCancelable(false);
+                    progress.show();
 
-                tipsDAOCall.enqueue(new Callback<UkuranHewanDAO>() {
-                    @Override
-                    public void onResponse(Call<UkuranHewanDAO> call, Response<UkuranHewanDAO> response) {
-                        Toast.makeText(EditUkuran.this, "Edit Success", Toast.LENGTH_SHORT).show();
-                        progress.dismiss();
-                        startIntent();
-                        finish();
-                    }
-                    @Override
-                    public void onFailure(Call<UkuranHewanDAO> call, Throwable t) {
-                        Toast.makeText(EditUkuran.this, "Edit Success.", Toast.LENGTH_SHORT).show();
-                        System.out.println(t.getMessage());
-                        progress.dismiss();
-                        startIntent();
-                        finish();
-                    }
-                });
+                    tipsDAOCall.enqueue(new Callback<UkuranHewanDAO>() {
+                        @Override
+                        public void onResponse(Call<UkuranHewanDAO> call, Response<UkuranHewanDAO> response) {
+                            Toast.makeText(EditUkuran.this, "Edit Success", Toast.LENGTH_SHORT).show();
+                            progress.dismiss();
+                            startIntent();
+                            finish();
+                        }
+                        @Override
+                        public void onFailure(Call<UkuranHewanDAO> call, Throwable t) {
+                            Toast.makeText(EditUkuran.this, "Edit Success.", Toast.LENGTH_SHORT).show();
+                            System.out.println(t.getMessage());
+                            progress.dismiss();
+                            startIntent();
+                            finish();
+                        }
+                    });
+                }
+
             }
         });
     }
