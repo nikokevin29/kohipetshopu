@@ -19,7 +19,8 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".UkuranHewan.EditUkuran"></activity>
         <activity android:name=".UkuranHewan.AddUkuran" />
-        <activity android:name=".UkuranHewan.ViewUkuranHewan" />
+        <activity android:name=".UkuranHewan.ViewUkuranHewan"
+                  android:theme="@style/ActionBar"/>
         <activity android:name=".UkuranHewan.AdapterUkuranHewan" />
         <activity android:name=".JenisHewan.AddJenis" />
         <activity android:name=".JenisHewan.EditJenis" />

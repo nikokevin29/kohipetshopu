@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,19 +22,24 @@ import com.p3l.kohipetshopu.API.ApiClient;
 import com.p3l.kohipetshopu.API.ApiInterface;
 import com.p3l.kohipetshopu.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.MyViewHolder> {
+public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.MyViewHolder> implements Filterable {
     private Context context;
     private List<UkuranHewanDAO> result;
+    private List<UkuranHewanDAO> resultFiltered;
+    private UkuranAdapterListener listener;
 
-    public AdapterUkuranHewan(Context context, List<UkuranHewanDAO> result){
+    public AdapterUkuranHewan(Context context, List<UkuranHewanDAO> result,UkuranAdapterListener listener){
         this.context = context;
         this.result = result;
+        this.resultFiltered = result;
+        this.listener = listener;
     }
 
     @NonNull
@@ -78,10 +85,45 @@ public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.
     }
     @Override
     public int getItemCount() {
-        return result.size();
+        return resultFiltered.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                List<UkuranHewanDAO> filteredList = new ArrayList<>();
+
+                if (constraint == null || constraint.length() == 0) {
+                    //resultFiltered = result;
+                    filteredList.addAll(resultFiltered);
+                } else {
+                    String fillPattern = constraint.toString().toLowerCase().trim();
+                    //List<UkuranHewanDAO> filteredList = new ArrayList<>();
+                    for (UkuranHewanDAO row : resultFiltered) {
+                        // name match condition. this might differ depending on your requirement
+                        // here we are looking for name or phone number match
+                        if (row.getNama().toLowerCase().contains(fillPattern)) {
+                            filteredList.add(row);
+                        }
+                    }
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filteredList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                resultFiltered.clear();
+                resultFiltered.addAll((List) filterResults.values);
+                notifyDataSetChanged();
+            }
+        };
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView nama, created_at, updated_at, deleted_at, aksi, aktor;
         private CardView parent;
 
@@ -95,10 +137,13 @@ public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.
             aksi = itemView.findViewById(R.id.tvAksi);
             aktor = itemView.findViewById(R.id.tvAktor);
             parent =  itemView.findViewById(R.id.ParentUkuranHewan);
-        }
-        public void onClick(View view)
-        {
-            Toast.makeText(context, "You Tach Mi !!", Toast.LENGTH_SHORT).show();
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onUkuranSelected(resultFiltered.get(getAdapterPosition()));
+                }
+            });
         }
     }
     private void startIntent(UkuranHewanDAO hasil){
@@ -160,6 +205,9 @@ public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.
                 System.out.println("TRACE ERROR "+t.getMessage());
             }
         });
+    }
+    public interface UkuranAdapterListener {
+        void onUkuranSelected(UkuranHewanDAO ukuranHewanDAO);
     }
 
 }

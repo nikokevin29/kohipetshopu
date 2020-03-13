@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">kohipetshopu</string>
     <string name="cari">Cari</string>
+    <string name="action_search" />
 </resources>
