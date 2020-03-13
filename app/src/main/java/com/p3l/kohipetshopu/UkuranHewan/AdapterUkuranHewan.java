@@ -28,16 +28,14 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+//btw UI nya jelek :'v
 public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.MyViewHolder> implements Filterable {
     private Context context;
-    private List<UkuranHewanDAO> result;
     private List<UkuranHewanDAO> resultFiltered;
     private UkuranAdapterListener listener;
 
     public AdapterUkuranHewan(Context context, List<UkuranHewanDAO> result,UkuranAdapterListener listener){
         this.context = context;
-        this.result = result;
         this.resultFiltered = result;
         this.listener = listener;
     }
@@ -53,7 +51,7 @@ public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.
 
     @Override
     public void onBindViewHolder(@NonNull AdapterUkuranHewan.MyViewHolder holder, int position) {
-        final UkuranHewanDAO jenis = result.get(position);
+        final UkuranHewanDAO jenis = resultFiltered.get(position);
         holder.nama.setText(jenis.getNama());
         holder.created_at.setText(jenis.getCreated_at());
         holder.updated_at.setText(jenis.getUpdated_at());
@@ -118,11 +116,13 @@ public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                 resultFiltered.clear();
                 resultFiltered.addAll((List) filterResults.values);
+
                 notifyDataSetChanged();
+
+
             }
         };
     }
-
     public class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView nama, created_at, updated_at, deleted_at, aksi, aktor;
         private CardView parent;
