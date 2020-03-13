@@ -9,16 +9,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_jenis"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/search_jenis"/>
-    <EditText
-        android:id="@+id/search_jenis"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Cari"
-        android:inputType="text"
-        android:maxLines="1"
-        android:layout_margin="10dp"/>
+        android:layout_height="wrap_content"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_jenis"
@@ -41,5 +32,15 @@
         android:layout_marginBottom="10dp"
         app:fabSize="auto"
         app:srcCompat="@drawable/ic_sort" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/refresh_data_jenis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/sort_jenis"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        app:fabSize="auto"
+        app:srcCompat="@drawable/ic_refresh" />
 
 </RelativeLayout>

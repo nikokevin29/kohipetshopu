@@ -28,7 +28,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-//btw UI nya jelek :'v
+
 public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.MyViewHolder> implements Filterable {
     private Context context;
     private List<UkuranHewanDAO> resultFiltered;
@@ -118,7 +118,6 @@ public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.
                 resultFiltered.addAll((List) filterResults.values);
 
                 notifyDataSetChanged();
-
 
             }
         };
