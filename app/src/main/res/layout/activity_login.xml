@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4A9586"
     tools:context=".Login">
 
     <LinearLayout
@@ -66,7 +65,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:text="Login"
-                android:onClick="confirmInput">
+                android:textColor="@color/White"
+                android:background="@drawable/roundedbutton">
             </Button>
         </RelativeLayout>
     </LinearLayout>

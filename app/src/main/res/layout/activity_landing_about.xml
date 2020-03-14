@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4A9586"
     tools:context=".Landing_About">
-
 
     <ImageView
         android:id="@+id/gambar_kopisop"
@@ -58,7 +56,8 @@ saya senditi tertarik membuat francise sendiri untuk pet shop saya, jadi saya me
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                style="@style/AppTheme"
+                android:background="@drawable/roundedbutton"
+                android:textColor="@color/White"
                 android:text="Daftar Harga"/>
 
             <Button
@@ -66,7 +65,8 @@ saya senditi tertarik membuat francise sendiri untuk pet shop saya, jadi saya me
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                style="@style/AppTheme"
+                android:background="@drawable/roundedbutton"
+                android:textColor="@color/White"
                 android:text="Halaman Login" />
 
         </LinearLayout>

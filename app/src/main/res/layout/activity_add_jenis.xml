@@ -30,7 +30,8 @@
         android:layout_below="@+id/etNamaJenis"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:textColor="@color/SteelBlue"
+        android:textColor="@color/WhiteSmoke"
+        android:background="@drawable/roundedbutton"
         android:text="Submit"/>
 
 </RelativeLayout>

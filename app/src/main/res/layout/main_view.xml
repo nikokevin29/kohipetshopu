@@ -20,7 +20,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:itemIconTint="@drawable/color_state"
-        android:background="#4A9586"
+        android:background="@color/CadetBlue"
+        app:itemTextColor="@color/WhiteSmoke"
         app:menu="@menu/menu"/>
 
 </RelativeLayout>
