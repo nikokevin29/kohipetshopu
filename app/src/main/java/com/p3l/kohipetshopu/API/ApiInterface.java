@@ -1,6 +1,7 @@
 package com.p3l.kohipetshopu.API;
 
 import com.p3l.kohipetshopu.JenisHewan.JenisHewanDAO;
+import com.p3l.kohipetshopu.Layanan.LayananDAO;
 import com.p3l.kohipetshopu.UkuranHewan.UkuranHewanDAO;
 
 import java.util.List;
@@ -46,4 +47,25 @@ public interface ApiInterface {
 
     @DELETE("/api/ukuran_hewan/{idukuran}")
     Call<Void> deleteUkuran(@Path("idukuran") String idukuran);
+
+    //Layanan
+    @GET("/api/layanan")
+    Call<List<LayananDAO>> getAllLayanan();
+
+    @GET("/api/layanan/search/{nama}")
+    Call<LayananDAO> searchNama(@Path("nama") String nama);
+
+    @POST("/api/layanan")
+    @FormUrlEncoded
+    Call<LayananDAO> createLayanan (@Field("nama")String nama,
+                                    @Field("harga") String harga);
+
+    @PUT("/api/layanan/{idukuran}")
+    @FormUrlEncoded
+    Call<LayananDAO> editLayanan(@Path("idlayanan") String idlayanan,
+                                    @Field("nama") String nama,
+                                    @Field("harga") String harga);
+
+    @DELETE("/api/layanan/{idlayanan}")
+    Call<Void> deleteLayanan(@Path("idlayanan") String idlayanan);
 }

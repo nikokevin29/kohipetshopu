@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Layanan.AddLayanan">
+
+    <TextView
+        android:id="@+id/tambahLayananTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/Black"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:textSize="20dp"
+        android:text="Tambah Layanan" />
+
+    <EditText
+        android:id="@+id/etNamaLayanan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tambahLayananTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="Nama Layanan" />
+    <EditText
+        android:id="@+id/etHargaLayanan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etNamaLayanan"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:inputType="number"
+        android:hint="Harga" />
+    <Button
+        android:id="@+id/btn_Submit_add_layanan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sumbit"
+        android:textColor="@color/WhiteSmoke"
+        android:layout_below="@id/etHargaLayanan"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/roundedbutton"/>
+
+</RelativeLayout>

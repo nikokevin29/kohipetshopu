@@ -17,15 +17,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".UkuranHewan.EditUkuran"></activity>
-        <activity android:name=".UkuranHewan.AddUkuran" />
-        <activity android:name=".UkuranHewan.ViewUkuranHewan"
+        <activity android:name=".Layanan.ViewLayanan"
                   android:theme="@style/ActionBar"/>
-        <activity android:name=".UkuranHewan.AdapterUkuranHewan"/>
+        <activity android:name=".Layanan.EditLayanan" />
+        <activity android:name=".Layanan.AddLayanan" />
+        <activity android:name=".Layanan.AdapterLayanan" />
+        <activity android:name=".UkuranHewan.EditUkuran" />
+        <activity android:name=".UkuranHewan.AddUkuran" />
+        <activity
+            android:name=".UkuranHewan.ViewUkuranHewan"
+            android:theme="@style/ActionBar" />
+        <activity android:name=".UkuranHewan.AdapterUkuranHewan" />
         <activity android:name=".JenisHewan.AddJenis" />
         <activity android:name=".JenisHewan.EditJenis" />
-        <activity android:name=".JenisHewan.ViewJenisHewan"
-                  android:theme="@style/ActionBar"/>
+        <activity
+            android:name=".JenisHewan.ViewJenisHewan"
+            android:theme="@style/ActionBar" />
         <activity android:name=".Fragment_CS.AkunCSFragment" />
         <activity android:name=".Fragment_CS.TransaksiPenjualanFragment" />
         <activity android:name=".MainViewCS" />

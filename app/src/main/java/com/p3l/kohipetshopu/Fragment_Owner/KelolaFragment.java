@@ -13,12 +13,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.p3l.kohipetshopu.JenisHewan.ViewJenisHewan;
+import com.p3l.kohipetshopu.Layanan.ViewLayanan;
 import com.p3l.kohipetshopu.R;
 import com.p3l.kohipetshopu.UkuranHewan.ViewUkuranHewan;
 
 public class KelolaFragment extends Fragment {
     Button jenis;
     Button ukuran;
+    Button layanan;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_kelola, container, false);
@@ -46,6 +48,13 @@ public class KelolaFragment extends Fragment {
                 startActivity(i);
             }
         });
-
+        layanan = view.findViewById(R.id.kelola_layanan);
+        layanan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), ViewLayanan.class);
+                startActivity(i);
+            }
+        });
     }
 }
