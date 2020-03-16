@@ -60,7 +60,7 @@ public interface ApiInterface {
     Call<LayananDAO> createLayanan (@Field("nama")String nama,
                                     @Field("harga") String harga);
 
-    @PUT("/api/layanan/{idukuran}")
+    @PUT("/api/layanan/{idlayanan}")
     @FormUrlEncoded
     Call<LayananDAO> editLayanan(@Path("idlayanan") String idlayanan,
                                     @Field("nama") String nama,

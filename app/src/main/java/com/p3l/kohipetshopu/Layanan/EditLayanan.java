@@ -73,7 +73,7 @@ public class EditLayanan extends AppCompatActivity {
     }
     public void setField(){
         etNama.setText(getIntent().getStringExtra("nama"));
-        etHarga.setText(getIntent().getStringExtra("nama"));
+        etHarga.setText(getIntent().getStringExtra("harga"));
     }
     public void startIntent(){
         Intent acc = new Intent(EditLayanan.this, ViewLayanan.class);

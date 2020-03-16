@@ -165,7 +165,7 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.My
                     public void onClick(DialogInterface dialog, int idjenis) {
                         //delete
                         deleteJenis(hasil.getIdjenis());
-
+                        notifyItemRemoved(idjenis);
                     }
                 })
                 .setNeutralButton("Batal", new DialogInterface.OnClickListener() {

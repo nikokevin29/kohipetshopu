@@ -171,6 +171,8 @@ public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.
                     public void onClick(DialogInterface dialog, int idukuran) {
                         //delete
                         deleteUkuran(hasil.getIdukuran());
+
+                        notifyItemRemoved(idukuran);
                     }
                 })
                 .setNeutralButton("Batal", new DialogInterface.OnClickListener() {

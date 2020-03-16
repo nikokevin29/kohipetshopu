@@ -153,6 +153,7 @@ public class AdapterLayanan extends RecyclerView.Adapter<AdapterLayanan.MyViewHo
         Intent edit = new Intent(context, EditLayanan.class);
         edit.putExtra("idlayanan",hasil.getIdlayanan());
         edit.putExtra("nama",hasil.getNama());
+        edit.putExtra("harga",hasil.getHarga());
         context.startActivity(edit);
     }
     private void showDialog(final LayananDAO hasil){
@@ -175,6 +176,7 @@ public class AdapterLayanan extends RecyclerView.Adapter<AdapterLayanan.MyViewHo
                     public void onClick(DialogInterface dialog, int idlayanan) {
                         //delete
                         deleteLayanan(hasil.getIdlayanan());
+                        notifyItemRemoved(idlayanan);
                     }
                 })
                 .setNeutralButton("Batal", new DialogInterface.OnClickListener() {
