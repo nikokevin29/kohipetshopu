@@ -1,9 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragment_CS.TransaksiPenjualanFragment">
+    <TextView
+        android:id="@+id/JudulPenjualan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Transaksi Penjualan"
+        android:textColor="@color/Black"
+        android:textSize="25dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+    <LinearLayout
+        android:id="@+id/LinearPenjualan"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:weightSum="2">
+        <Button
+            android:id="@+id/btn_inputHewan"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="layanan"
+            android:textColor="@color/White"
+            android:background="@drawable/roundedbutton"
+            android:paddingHorizontal="10dp"/>
+        <Button
+            android:id="@+id/btn_inputCustomer"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Produk"
+            android:textColor="@color/White"
+            android:background="@drawable/roundedbutton"
+            android:paddingHorizontal="10dp"/>
+    </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

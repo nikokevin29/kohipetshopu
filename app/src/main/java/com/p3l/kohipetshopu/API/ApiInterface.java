@@ -6,10 +6,17 @@ import com.p3l.kohipetshopu.UkuranHewan.UkuranHewanDAO;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.*;
 
 public interface ApiInterface {
+
+    @FormUrlEncoded
+    @POST("/api/pegawai/login")
+    Call<ResponseBody> loginRequest(@Field("username") String username,
+                                    @Field("password") String password);
+
     //JenisHewan
     @GET("/api/jenis_hewan")
     Call<List<JenisHewanDAO>> getAllJenis();

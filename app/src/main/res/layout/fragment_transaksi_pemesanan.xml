@@ -5,12 +5,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragment_Owner.TransaksiPemesananFragment">
-
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/JudulPemesanan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Transaksi" />
+        android:text="Transaksi Pemesanan"
+        android:textColor="@color/Black"
+        android:textSize="25dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <Spinner
+        android:id="@+id/SpinSupplier"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/JudulPemesanan"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:autofillHints="Supplier" />
+    <LinearLayout
+        android:id="@+id/LinearPenjualan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:layout_alignParentBottom="true"
+        android:weightSum="2">
+        <Button
+            android:id="@+id/btn_inputHewan"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="INPUT HEWAN"
+            android:textColor="@color/White"
+            android:background="@drawable/roundedbutton"
+            android:paddingHorizontal="10dp"/>
+        <Button
+            android:id="@+id/btn_inputSupplier"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="INPUT Supplier"
+            android:textColor="@color/White"
+            android:background="@drawable/roundedbutton"
+            android:paddingHorizontal="10dp"/>
+    </LinearLayout>
+
 
 </RelativeLayout>
