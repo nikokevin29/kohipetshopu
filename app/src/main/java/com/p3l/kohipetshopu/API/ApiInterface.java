@@ -2,6 +2,7 @@ package com.p3l.kohipetshopu.API;
 
 import com.p3l.kohipetshopu.JenisHewan.JenisHewanDAO;
 import com.p3l.kohipetshopu.Layanan.LayananDAO;
+import com.p3l.kohipetshopu.Produk.ProdukDAO;
 import com.p3l.kohipetshopu.UkuranHewan.UkuranHewanDAO;
 
 import java.util.List;
@@ -60,7 +61,7 @@ public interface ApiInterface {
     Call<List<LayananDAO>> getAllLayanan();
 
     @GET("/api/layanan/search/{nama}")
-    Call<LayananDAO> searchNama(@Path("nama") String nama);
+    Call<LayananDAO> searchNamaLayanan(@Path("nama") String nama);
 
     @POST("/api/layanan")
     @FormUrlEncoded
@@ -75,4 +76,28 @@ public interface ApiInterface {
 
     @DELETE("/api/layanan/{idlayanan}")
     Call<Void> deleteLayanan(@Path("idlayanan") String idlayanan);
+
+    //Produk
+    @GET("/api/produk")
+    Call<List<ProdukDAO>> getAllProduk();
+
+    @GET("/api/produk/search/{nama}")
+    Call<ProdukDAO> searchNamaProduk(@Path("nama") String nama);
+
+    @POST("/api/produk")
+    @FormUrlEncoded
+    Call<ProdukDAO> createProduk (@Field("nama")String nama,
+                                    @Field("harga") String harga,
+                                  @Field("stok")String stok,
+                                  @Field("stokminimum")String stokminimum,
+                                  @Field("gambar")String gambar);
+
+    @PUT("/api/produk/{idproduk}")
+    @FormUrlEncoded
+    Call<ProdukDAO> editProduk(@Path("idproduk") String idproduk,
+                                 @Field("nama") String nama,
+                                 @Field("harga") String harga);
+
+    @DELETE("/api/produk/{idproduk}")
+    Call<Void> deleteProduk(@Path("idproduk") String idproduk);
 }

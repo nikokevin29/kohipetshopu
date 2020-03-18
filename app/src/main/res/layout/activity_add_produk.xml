@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Produk.AddProduk">
+
+    <TextView
+        android:id="@+id/tambahProdukTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/Black"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:textSize="20dp"
+        android:text="Tambah Produk" />
+
+    <EditText
+        android:id="@+id/etNamaProduk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tambahProdukTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="Nama Produk" />
+    <EditText
+        android:id="@+id/etHargaProduk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etNamaProduk"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:inputType="number"
+        android:hint="Harga" />
+    <EditText
+        android:id="@+id/etStokProduk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etHargaProduk"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:inputType="number"
+        android:hint="Stok" />
+    <EditText
+        android:id="@+id/etStokMinimumProduk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etStokProduk"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:inputType="number"
+        android:hint="Stok Minimum" />
+    <Button
+        android:id="@+id/btn_add_gambar"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:text="Tambah Gambar"
+        android:textColor="@color/WhiteSmoke"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/etStokMinimumProduk"
+        android:background="@drawable/roundedbutton"/>
+    <Spinner
+        android:id="@+id/spinnerSupplierProduk"
+        android:layout_width="220dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btn_add_gambar"/>
+    <Button
+        android:id="@+id/btn_Submit_add_produk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sumbit"
+        android:textColor="@color/WhiteSmoke"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/spinnerSupplierProduk"
+        android:background="@drawable/roundedbutton"/>
+
+</RelativeLayout>

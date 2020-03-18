@@ -17,8 +17,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Layanan.ViewLayanan"
-                  android:theme="@style/ActionBar"/>
+        <activity android:name=".Produk.EditProduk"></activity>
+        <activity android:name=".Produk.AddProduk" />
+        <activity android:name=".Produk.AdapterProduk" />
+        <activity android:name=".Produk.ViewProduk" />
+        <activity
+            android:name=".Layanan.ViewLayanan"
+            android:theme="@style/ActionBar" />
         <activity android:name=".Layanan.EditLayanan" />
         <activity android:name=".Layanan.AddLayanan" />
         <activity android:name=".Layanan.AdapterLayanan" />
