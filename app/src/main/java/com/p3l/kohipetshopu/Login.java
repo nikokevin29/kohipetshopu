@@ -18,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -43,7 +44,9 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-                Call<ResponseBody> loginRequest = apiInterface.loginRequest(etUsername.getEditText().getText().toString(),etPassword.getEditText().getText().toString());
+                Call<ResponseBody> loginRequest = apiInterface.loginRequest(
+                        etUsername.getEditText().getText().toString(),
+                        etPassword.getEditText().getText().toString());
 
                 progress.setMessage("Memproses data . . . ");
                 progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -53,15 +56,23 @@ public class Login extends AppCompatActivity {
                 loginRequest.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        if(response.isSuccessful()){
+                        if(response.isSuccessful() && response.body()!=null){
                             progress.dismiss();
-                                    Toast.makeText(Login.this, "Login Sukses", Toast.LENGTH_SHORT).show();
-                                    Intent i =  new Intent(Login.this,MainView.class);
-                                    startActivity(i);
-                                    finish();
+
+                            try {
+                                System.out.println("TESLOGIN : "+response.body().string());
+                                Toast.makeText(Login.this, response.body().string(), Toast.LENGTH_SHORT).show();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            Toast.makeText(Login.this, "Login Owner Sukses", Toast.LENGTH_SHORT).show();
+                                Intent i =  new Intent(Login.this,MainView.class);
+                                //i.putExtra("UserData", (Serializable) response.body());
+                                startActivity(i);
+                                finish();
                         }else{
                             progress.dismiss();
-                            Toast.makeText(Login.this, "NANANA", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Login.this, "Username atau Password Salah!", Toast.LENGTH_LONG).show();
                         }
                     }
                     @Override
@@ -71,19 +82,6 @@ public class Login extends AppCompatActivity {
                         progress.dismiss();
                     }
                 });
-//                if(etUsername.getEditText().getText().toString().equalsIgnoreCase("a" ) &&
-//                        etPassword.getEditText().getText().toString().equalsIgnoreCase("a" ) ){
-//                    Intent i =  new Intent(Login.this,MainView.class);
-//                    startActivity(i);
-//                    finish();
-//                }else if(etUsername.getEditText().getText().toString().equalsIgnoreCase("cs" )&&
-//                        etPassword.getEditText().getText().toString().equalsIgnoreCase("cs" )){
-//                    Intent i =  new Intent(Login.this,MainViewCS.class);
-//                    startActivity(i);
-//                    finish();
-//                }else{
-//                    Toast.makeText(Login.this, "Tidak Valid", Toast.LENGTH_SHORT).show();
-//                }
             }
         });
     }
