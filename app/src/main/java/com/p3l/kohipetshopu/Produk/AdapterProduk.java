@@ -2,25 +2,27 @@ package com.p3l.kohipetshopu.Produk;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.p3l.kohipetshopu.API.ApiClient;
 import com.p3l.kohipetshopu.API.ApiInterface;
 import com.p3l.kohipetshopu.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +41,7 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.MyViewHold
         this.context = context;
         this.resultFiltered = result;
         this.listener = listener;
+
     }
 
     @NonNull
@@ -53,11 +56,15 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull AdapterProduk.MyViewHolder holder, int position) {
         final ProdukDAO produk = resultFiltered.get(position);
+
+
         holder.nama.setText(produk.getNama());
         holder.harga.setText(produk.getHarga());
         holder.stok.setText(produk.getStok());
         holder.stokminimum.setText(produk.getStokminimum());
-        holder.gambar.setText(produk.getGambar());
+
+        Picasso.with(context).load(produk.getGambar()).into(holder.gambar);
+
         holder.created_at.setText(produk.getCreated_at());
         holder.updated_at.setText(produk.getUpdated_at());
         holder.deleted_at.setText(produk.getDeleted_at());
@@ -134,8 +141,9 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.MyViewHold
         };
     }
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        private TextView nama,harga,stok,stokminimum,gambar, created_at, updated_at, deleted_at, aksi, aktor,idsupplier;
+        private TextView nama,harga,stok,stokminimum, created_at, updated_at, deleted_at, aksi, aktor,idsupplier;
         private CardView parent;
+        private ImageView gambar;
 
         public MyViewHolder(@NonNull View itemView)
         {
@@ -150,7 +158,7 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.MyViewHold
             aksi = itemView.findViewById(R.id.tvAksi);
             aktor = itemView.findViewById(R.id.tvAktor);
             idsupplier = itemView.findViewById(R.id.tvSupplierproduk);
-            gambar = itemView.findViewById(R.id.gambar_produk);
+            gambar = (ImageView) itemView.findViewById(R.id.gambar_produk);
             parent =  itemView.findViewById(R.id.ParentProduk);
 
             itemView.setOnClickListener(new View.OnClickListener() {

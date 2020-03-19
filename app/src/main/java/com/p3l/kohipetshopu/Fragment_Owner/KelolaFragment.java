@@ -23,6 +23,7 @@ public class KelolaFragment extends Fragment {
     Button ukuran;
     Button layanan;
     Button produk;
+    Button supplier;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_kelola, container, false);

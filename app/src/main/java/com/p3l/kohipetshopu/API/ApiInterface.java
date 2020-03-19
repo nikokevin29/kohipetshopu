@@ -2,6 +2,7 @@ package com.p3l.kohipetshopu.API;
 
 import com.p3l.kohipetshopu.JenisHewan.JenisHewanDAO;
 import com.p3l.kohipetshopu.Layanan.LayananDAO;
+import com.p3l.kohipetshopu.PegawaiDAO;
 import com.p3l.kohipetshopu.Produk.ProdukDAO;
 import com.p3l.kohipetshopu.UkuranHewan.UkuranHewanDAO;
 
@@ -15,8 +16,8 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("/api/pegawai/login")
-    Call<ResponseBody> loginRequest(@Field("username") String username,
-                                    @Field("password") String password);
+    Call<PegawaiDAO> loginRequest(@Field("username") String username,
+                                  @Field("password") String password);
 
     //JenisHewan
     @GET("/api/jenis_hewan")

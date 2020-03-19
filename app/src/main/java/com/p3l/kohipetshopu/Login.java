@@ -1,6 +1,9 @@
 package com.p3l.kohipetshopu;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -13,7 +16,10 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputLayout;
 import com.p3l.kohipetshopu.API.ApiClient;
 import com.p3l.kohipetshopu.API.ApiInterface;
+import com.p3l.kohipetshopu.Fragment_Owner.AkunFragment;
+import com.p3l.kohipetshopu.Fragment_Owner.KelolaFragment;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -28,7 +34,7 @@ import retrofit2.Response;
 public class Login extends AppCompatActivity {
     private TextInputLayout etUsername,etPassword;
     private Button btnLogin;
-
+    public static PegawaiDAO pegawaiDAO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +50,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-                Call<ResponseBody> loginRequest = apiInterface.loginRequest(
+                Call<PegawaiDAO> loginRequest = apiInterface.loginRequest(
                         etUsername.getEditText().getText().toString(),
                         etPassword.getEditText().getText().toString());
 
@@ -53,30 +59,38 @@ public class Login extends AppCompatActivity {
                 progress.setCancelable(false);
                 progress.show();
 
-                loginRequest.enqueue(new Callback<ResponseBody>() {
+                loginRequest.enqueue(new Callback<PegawaiDAO>() {
                     @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    public void onResponse(Call<PegawaiDAO> call, Response<PegawaiDAO> response) {
                         if(response.isSuccessful() && response.body()!=null){
                             progress.dismiss();
 
-                            try {
-                                System.out.println("TESLOGIN : "+response.body().string());
-                                Toast.makeText(Login.this, response.body().string(), Toast.LENGTH_SHORT).show();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            Toast.makeText(Login.this, "Login Owner Sukses", Toast.LENGTH_SHORT).show();
+                            String role = response.body().getRole().trim();
+                            String nama = response.body().getNama();
+                            System.out.println("Role : "+response.body().getRole()+
+                                    "Nama : "+response.body().getNama()+
+                                    "Username : "+response.body().getUsername());
+
+                            if("Owner".equals(role)){
+                                Toast.makeText(Login.this, "Halo "+role+" "+nama, Toast.LENGTH_SHORT).show();
                                 Intent i =  new Intent(Login.this,MainView.class);
-                                //i.putExtra("UserData", (Serializable) response.body());
                                 startActivity(i);
                                 finish();
+                            }else if("CS".equals(role)){
+                                Toast.makeText(Login.this, "Halo "+role+" "+nama, Toast.LENGTH_SHORT).show();
+                                Intent i =  new Intent(Login.this,MainViewCS.class);
+                                startActivity(i);
+                                finish();
+                            }else{
+                                Toast.makeText(Login.this, "Anda Bukan CS Maupun Owner", Toast.LENGTH_SHORT).show();
+                            }
                         }else{
                             progress.dismiss();
                             Toast.makeText(Login.this, "Username atau Password Salah!", Toast.LENGTH_LONG).show();
                         }
                     }
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    public void onFailure(Call<PegawaiDAO> call, Throwable t) {
                         Log.e("debug", "onFailure: ERROR > " + t.toString());
                         Toast.makeText(Login.this, "Login Gagal", Toast.LENGTH_SHORT).show();
                         progress.dismiss();

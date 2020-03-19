@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.p3l.kohipetshopu.API.ApiClient;
 import com.p3l.kohipetshopu.API.ApiInterface;
 import com.p3l.kohipetshopu.R;
@@ -145,13 +146,10 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.My
         context.startActivity(edit);
     }
     private void showDialog(final JenisHewanDAO hasil){
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-
-        // set title dialog
-        alertDialogBuilder.setTitle("Aksi apa yang akan anda lakukan?");
 
         // set pesan dari dialog
-        alertDialogBuilder
+        new MaterialAlertDialogBuilder(context)
+                .setTitle("Aksi apa yang akan anda lakukan?")
                 .setIcon(R.mipmap.ic_launcher)
                 .setCancelable(false)
                 .setPositiveButton("Edit",new DialogInterface.OnClickListener() {
@@ -173,13 +171,8 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.My
                     public void onClick(DialogInterface dialog, int i) {
                         dialog.cancel();
                     }
-                });
+                }).show();
 
-        // membuat alert dialog dari builder
-        AlertDialog alertDialog = alertDialogBuilder.create();
-
-        // menampilkan alert dialog
-        alertDialog.show();
     }
 
     private void deleteJenis(String idjenis){

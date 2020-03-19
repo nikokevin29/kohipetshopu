@@ -2,10 +2,12 @@
   <dictionary name="nikok">
     <words>
       <w>akun</w>
+      <w>alamat</w>
       <w>gambar</w>
       <w>harga</w>
       <w>hewan</w>
       <w>idlayanan</w>
+      <w>idpegawai</w>
       <w>idproduk</w>
       <w>idsupplier</w>
       <w>jenis</w>
@@ -13,10 +15,13 @@
       <w>kelola</w>
       <w>layanan</w>
       <w>namalayanan</w>
+      <w>pasrsing</w>
       <w>pegawai</w>
       <w>produk</w>
       <w>stok</w>
       <w>stokminimum</w>
+      <w>telp</w>
+      <w>tgllahir</w>
     </words>
   </dictionary>
 </component>

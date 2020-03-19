@@ -21,6 +21,9 @@ public class AkunFragment extends Fragment {
         nama = (TextView) view.findViewById(R.id.tvNamaOwner);
         username = (TextView) view.findViewById(R.id.tvUsernameOwner);
 
+
+
+
         return view;
     }
 }

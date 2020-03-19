@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,6 +19,7 @@ import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.p3l.kohipetshopu.API.ApiClient;
 import com.p3l.kohipetshopu.API.ApiInterface;
 import com.p3l.kohipetshopu.R;
@@ -156,41 +158,33 @@ public class AdapterLayanan extends RecyclerView.Adapter<AdapterLayanan.MyViewHo
         edit.putExtra("harga",hasil.getHarga());
         context.startActivity(edit);
     }
+    @SuppressLint("PrivateResource")
     private void showDialog(final LayananDAO hasil){
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+        //memunculkan Dialog Saat Long Press Adapter
 
-        // set title dialog
-        alertDialogBuilder.setTitle("Aksi apa yang akan anda lakukan?");
-
-        // set pesan dari dialog
-        alertDialogBuilder
-                .setIcon(R.mipmap.ic_launcher)
-                .setCancelable(false)
-                .setPositiveButton("Edit",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int idlayanan) {
-                        // update
-                        startIntent(hasil);
-                    }
-                })
-                .setNegativeButton("Hapus",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int idlayanan) {
-                        //delete
-                        deleteLayanan(hasil.getIdlayanan());
-                        notifyItemRemoved(idlayanan);
-                    }
-                })
-                .setNeutralButton("Batal", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int i) {
-                        dialog.cancel();
-                    }
-                });
-
-        // membuat alert dialog dari builder
-        AlertDialog alertDialog = alertDialogBuilder.create();
-
-        // menampilkan alert dialog
-        alertDialog.show();
+        new MaterialAlertDialogBuilder(context, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog)
+            .setTitle("Aksi apa yang akan anda lakukan?")
+            .setIcon(R.mipmap.ic_launcher)
+            .setCancelable(false)
+            .setPositiveButton("Edit",new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog,int idlayanan) {
+                    // update
+                    startIntent(hasil);
+                }
+            })
+            .setNegativeButton("Hapus",new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int idlayanan) {
+                    //delete
+                    deleteLayanan(hasil.getIdlayanan());
+                    notifyItemRemoved(idlayanan);
+                }
+            })
+            .setNeutralButton("Batal", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int i) {
+                    dialog.cancel();
+                }
+            }).show();
     }
 
     private void deleteLayanan(String idlayanan){
