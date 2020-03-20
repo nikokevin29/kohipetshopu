@@ -4,6 +4,7 @@ import com.p3l.kohipetshopu.JenisHewan.JenisHewanDAO;
 import com.p3l.kohipetshopu.Layanan.LayananDAO;
 import com.p3l.kohipetshopu.PegawaiDAO;
 import com.p3l.kohipetshopu.Produk.ProdukDAO;
+import com.p3l.kohipetshopu.Supplier.SupplierDAO;
 import com.p3l.kohipetshopu.UkuranHewan.UkuranHewanDAO;
 
 import java.util.List;
@@ -96,9 +97,34 @@ public interface ApiInterface {
     @PUT("/api/produk/{idproduk}")
     @FormUrlEncoded
     Call<ProdukDAO> editProduk(@Path("idproduk") String idproduk,
-                                 @Field("nama") String nama,
-                                 @Field("harga") String harga);
+                               @Field("nama") String nama,
+                               @Field("harga") String harga);
 
     @DELETE("/api/produk/{idproduk}")
     Call<Void> deleteProduk(@Path("idproduk") String idproduk);
+
+    //Supplier
+    @GET("/api/supplier")
+    Call<List<SupplierDAO>> getAllSupplier();
+
+    @GET("/api/supplier/search/{nama}")
+    Call<SupplierDAO> searchNamaSupplier(@Path("nama") String nama);
+
+    @POST("/api/supplier")
+    @FormUrlEncoded
+    Call<SupplierDAO> createSupplier (@Field("nama")String nama,
+                                      @Field("alamat") String alamat,
+                                      @Field("notelp")String notelp);
+
+    @PUT("/api/supplier/{idsupplier}")
+    @FormUrlEncoded
+    Call<SupplierDAO> editSupplier(@Path("idsupplier") String idsupplier,
+                                   @Field("nama") String nama,
+                                   @Field("alamat") String alamat,
+                                   @Field("notelp") String notelp);
+
+    @DELETE("/api/supplier/{idsupplier}")
+    Call<Void> deleteSupplier(@Path("idsupplier") String idsupplier);
+
+
 }

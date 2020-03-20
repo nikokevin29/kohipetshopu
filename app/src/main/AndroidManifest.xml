@@ -17,7 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Produk.EditProduk"></activity>
+        <activity android:name=".Supplier.EditSupplier"></activity>
+        <activity android:name=".Supplier.AddSupplier" />
+        <activity android:name=".Supplier.ViewSupplier" />
+        <activity android:name=".Supplier.AdapterSupplier" />
+        <activity android:name=".Produk.EditProduk" />
         <activity android:name=".Produk.AddProduk" />
         <activity android:name=".Produk.AdapterProduk" />
         <activity android:name=".Produk.ViewProduk" />

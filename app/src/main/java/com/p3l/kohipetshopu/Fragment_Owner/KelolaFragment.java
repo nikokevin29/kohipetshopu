@@ -16,6 +16,7 @@ import com.p3l.kohipetshopu.JenisHewan.ViewJenisHewan;
 import com.p3l.kohipetshopu.Layanan.ViewLayanan;
 import com.p3l.kohipetshopu.Produk.ViewProduk;
 import com.p3l.kohipetshopu.R;
+import com.p3l.kohipetshopu.Supplier.ViewSupplier;
 import com.p3l.kohipetshopu.UkuranHewan.ViewUkuranHewan;
 
 public class KelolaFragment extends Fragment {
@@ -64,6 +65,14 @@ public class KelolaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), ViewProduk.class);
+                startActivity(i);
+            }
+        });
+        supplier = view.findViewById(R.id.kelola_supplier);
+        supplier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), ViewSupplier.class);
                 startActivity(i);
             }
         });

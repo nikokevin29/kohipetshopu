@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Supplier.EditSupplier">
+
+    <TextView
+        android:id="@+id/editSupplierTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/Black"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:textSize="20dp"
+        android:text="Edit Supplier" />
+
+    <EditText
+        android:id="@+id/etNamaSupplier_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editSupplierTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="Nama Supplier" />
+    <EditText
+        android:id="@+id/etAlamatSupplier_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etNamaSupplier_edit"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:hint="Alamat Supplier" />
+
+    <EditText
+        android:id="@+id/etNotelpSupplier_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etAlamatSupplier_edit"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:inputType="number"
+        android:hint="No.Telp" />
+    <Button
+        android:id="@+id/btn_Submit_edit_supplier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sumbit"
+        android:textColor="@color/WhiteSmoke"
+        android:layout_below="@id/etNotelpSupplier_edit"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/roundedbutton"/>
+
+</RelativeLayout>
