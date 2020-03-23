@@ -76,7 +76,7 @@ public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.
         holder.parent.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                showDialog(jenis);
+                showDialog(jenis,position);//tambahi ini
                 return false;
             }
         });
@@ -151,7 +151,7 @@ public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.
         edit.putExtra("nama",hasil.getNama());
         context.startActivity(edit);
     }
-    private void showDialog(final UkuranHewanDAO hasil){
+    private void showDialog(final UkuranHewanDAO hasil, int position){ //tambahi ini
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 
         // set title dialog
@@ -170,9 +170,11 @@ public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.
                 .setNegativeButton("Hapus",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int idukuran) {
                         //delete
-                        deleteUkuran(hasil.getIdukuran());
+                        Toast.makeText(context, String.format("%d",position), Toast.LENGTH_SHORT).show();
+                       deleteUkuran(hasil.getIdukuran());
 
-                        notifyItemRemoved(idukuran);
+                        notifyItemRemoved(position);
+                        resultFiltered.remove(position);
                     }
                 })
                 .setNeutralButton("Batal", new DialogInterface.OnClickListener() {

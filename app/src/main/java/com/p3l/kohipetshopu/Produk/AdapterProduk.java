@@ -63,7 +63,8 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.MyViewHold
         holder.stok.setText(produk.getStok());
         holder.stokminimum.setText(produk.getStokminimum());
 
-        Picasso.with(context).load(produk.getGambar()).into(holder.gambar);
+        System.out.println("PANTSU"+produk.getGambar());
+        Picasso.get().load(produk.getGambar()).fit().into(holder.gambar); //produk.getGambar()
 
         holder.created_at.setText(produk.getCreated_at());
         holder.updated_at.setText(produk.getUpdated_at());
@@ -71,6 +72,8 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.MyViewHold
         holder.aktor.setText(produk.getAktor());
         holder.aksi.setText(produk.getAksi());
         holder.idsupplier.setText(produk.getIdsupplier());
+
+        System.out.println("GAMBAR: "+produk.getGambar());
 
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +97,7 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.MyViewHold
         holder.parent.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                showDialog(produk);
+                showDialog(produk,position);
                 return false;
             }
         });
@@ -179,7 +182,7 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.MyViewHold
         edit.putExtra("gambar",hasil.getGambar());
         context.startActivity(edit);
     }
-    private void showDialog(final ProdukDAO hasil){
+    private void showDialog(final ProdukDAO hasil,int position){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 
         // set title dialog
@@ -199,7 +202,8 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.MyViewHold
                     public void onClick(DialogInterface dialog, int idproduk) {
                         //delete
                         deleteProduk(hasil.getIdproduk());
-                        notifyItemRemoved(idproduk);
+                        notifyItemRemoved(position);
+                        resultFiltered.remove(position);
                     }
                 })
                 .setNeutralButton("Batal", new DialogInterface.OnClickListener() {

@@ -59,7 +59,6 @@ public class EditSupplier extends AppCompatActivity {
                             Toast.makeText(EditSupplier.this, "Edit Success", Toast.LENGTH_SHORT).show();
                             progress.dismiss();
                             startIntent();
-                            finish();
                         }
                         @Override
                         public void onFailure(Call<SupplierDAO> call, Throwable t) {
@@ -67,7 +66,6 @@ public class EditSupplier extends AppCompatActivity {
                             System.out.println(t.getMessage());
                             progress.dismiss();
                             startIntent();
-                            finish();
                         }
                     });
                 }

@@ -7,6 +7,7 @@
     tools:context=".Fragment_CS.AkunCSFragment">
 
     <RelativeLayout
+        android:id="@+id/RelativeAtasCS"
         android:background="@drawable/bg_header"
         android:layout_width="match_parent"
         android:layout_height="300dp">
@@ -77,6 +78,62 @@
         </androidx.cardview.widget.CardView>
 
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@id/RelativeAtasCS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alamat : " />
+            <TextView
+                android:id="@+id/IsiAlamat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jl. sipang sipang sipang" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No.Telp : " />
+                <TextView
+                    android:id="@+id/isiNoHpCS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="082227975222" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tanggal Lahir : " />
+                <TextView
+                    android:id="@+id/isiTglLahir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="30 Februari 1999" />
+            </LinearLayout>
+
+        </LinearLayout>
     </RelativeLayout>
 
 </RelativeLayout>

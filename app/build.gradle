@@ -43,6 +43,6 @@ dependencies {
     //noinspection GradleCompatible
     implementation 'com.android.support:cardview-v7:28.0.0' //cardview
     implementation 'com.squareup.okhttp3:logging-interceptor:3.3.1'
-    implementation 'com.squareup.picasso:picasso:2.3.3'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 //loging se JsonReader.setLenient(true) to accept malformed JSON at line 1 column 1 path $
 }

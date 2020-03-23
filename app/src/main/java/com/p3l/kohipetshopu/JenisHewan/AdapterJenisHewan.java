@@ -78,7 +78,7 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.My
         holder.parent.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                showDialog(jenis);
+                showDialog(jenis,position);
                 return false;
             }
         });
@@ -145,7 +145,7 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.My
         edit.putExtra("nama",hasil.getNama());
         context.startActivity(edit);
     }
-    private void showDialog(final JenisHewanDAO hasil){
+    private void showDialog(final JenisHewanDAO hasil,int position){
 
         // set pesan dari dialog
         new MaterialAlertDialogBuilder(context)
@@ -163,7 +163,8 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.My
                     public void onClick(DialogInterface dialog, int idjenis) {
                         //delete
                         deleteJenis(hasil.getIdjenis());
-                        notifyItemRemoved(idjenis);
+                        notifyItemRemoved(position);
+                        resultFiltered.remove(position);
                     }
                 })
                 .setNeutralButton("Batal", new DialogInterface.OnClickListener() {

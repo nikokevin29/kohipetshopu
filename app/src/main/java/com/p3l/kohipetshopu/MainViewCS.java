@@ -24,7 +24,7 @@ public class MainViewCS extends AppCompatActivity {
         setContentView(R.layout.main_view_cs);
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation_view_cs);
-        loadFragment(new AkunCSFragment());
+        loadFragment(new TransaksiPenjualanFragment());
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

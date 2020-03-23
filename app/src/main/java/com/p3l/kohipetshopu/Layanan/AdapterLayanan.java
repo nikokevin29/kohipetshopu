@@ -81,7 +81,7 @@ public class AdapterLayanan extends RecyclerView.Adapter<AdapterLayanan.MyViewHo
         holder.parent.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                showDialog(layanan);
+                showDialog(layanan,position);
                 return false;
             }
         });
@@ -159,7 +159,7 @@ public class AdapterLayanan extends RecyclerView.Adapter<AdapterLayanan.MyViewHo
         context.startActivity(edit);
     }
     @SuppressLint("PrivateResource")
-    private void showDialog(final LayananDAO hasil){
+    private void showDialog(final LayananDAO hasil,int position){
         //memunculkan Dialog Saat Long Press Adapter
 
         new MaterialAlertDialogBuilder(context, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog)
@@ -176,7 +176,8 @@ public class AdapterLayanan extends RecyclerView.Adapter<AdapterLayanan.MyViewHo
                 public void onClick(DialogInterface dialog, int idlayanan) {
                     //delete
                     deleteLayanan(hasil.getIdlayanan());
-                    notifyItemRemoved(idlayanan);
+                    notifyItemRemoved(position);
+                    resultFiltered.remove(position);
                 }
             })
             .setNeutralButton("Batal", new DialogInterface.OnClickListener() {

@@ -80,7 +80,7 @@ public class AdapterSupplier extends RecyclerView.Adapter<AdapterSupplier.MyView
         holder.parent.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                showDialog(supplier);
+                showDialog(supplier,position);
                 return false;
             }
         });
@@ -160,7 +160,7 @@ public class AdapterSupplier extends RecyclerView.Adapter<AdapterSupplier.MyView
 
         context.startActivity(edit);
     }
-    private void showDialog(final SupplierDAO hasil){
+    private void showDialog(final SupplierDAO hasil, int position){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 
         // set title dialog
@@ -180,8 +180,8 @@ public class AdapterSupplier extends RecyclerView.Adapter<AdapterSupplier.MyView
                     public void onClick(DialogInterface dialog, int idsupplier) {
                         //delete
                         deleteSupplier(hasil.getIdsupplier());
-
-                        notifyItemRemoved(idsupplier);
+                        notifyItemRemoved(position);
+                        resultFiltered.remove(position);
                     }
                 })
                 .setNeutralButton("Batal", new DialogInterface.OnClickListener() {

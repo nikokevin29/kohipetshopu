@@ -98,7 +98,9 @@ public interface ApiInterface {
     @FormUrlEncoded
     Call<ProdukDAO> editProduk(@Path("idproduk") String idproduk,
                                @Field("nama") String nama,
-                               @Field("harga") String harga);
+                               @Field("harga") String harga,
+                               @Field("stok")String stok,
+                               @Field("stokminimum")String stokminimum);
 
     @DELETE("/api/produk/{idproduk}")
     Call<Void> deleteProduk(@Path("idproduk") String idproduk);

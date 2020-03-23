@@ -19,7 +19,8 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".Supplier.EditSupplier"></activity>
         <activity android:name=".Supplier.AddSupplier" />
-        <activity android:name=".Supplier.ViewSupplier" />
+        <activity android:name=".Supplier.ViewSupplier"
+                  android:theme="@style/ActionBar"/>
         <activity android:name=".Supplier.AdapterSupplier" />
         <activity android:name=".Produk.EditProduk" />
         <activity android:name=".Produk.AddProduk" />
