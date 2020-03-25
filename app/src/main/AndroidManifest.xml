@@ -25,7 +25,8 @@
         <activity android:name=".Produk.EditProduk" />
         <activity android:name=".Produk.AddProduk" />
         <activity android:name=".Produk.AdapterProduk" />
-        <activity android:name=".Produk.ViewProduk" />
+        <activity android:name=".Produk.ViewProduk"
+                  android:theme="@style/ActionBar"/>
         <activity
             android:name=".Layanan.ViewLayanan"
             android:theme="@style/ActionBar" />

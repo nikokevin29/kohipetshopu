@@ -31,6 +31,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.p3l.kohipetshopu.API.ApiClient.BASE_URL;
+
 public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.MyViewHolder> implements Filterable {
 
     private Context context;
@@ -64,7 +66,7 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.MyViewHold
         holder.stokminimum.setText(produk.getStokminimum());
 
         System.out.println("PANTSU"+produk.getGambar());
-        Picasso.get().load(produk.getGambar()).fit().into(holder.gambar); //produk.getGambar()
+        Picasso.get().load(produk.URLproduk()).fit().into(holder.gambar); //produk.getGambar()
 
         holder.created_at.setText(produk.getCreated_at());
         holder.updated_at.setText(produk.getUpdated_at());

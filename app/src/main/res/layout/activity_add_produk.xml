@@ -55,23 +55,40 @@
         android:ems="10"
         android:inputType="number"
         android:hint="Stok Minimum" />
-    <Button
-        android:id="@+id/btn_add_gambar"
-        android:layout_width="220dp"
+    <LinearLayout
+        android:id="@+id/linearProduk"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tambah Gambar"
-        android:textColor="@color/WhiteSmoke"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/etStokMinimumProduk"
-        android:background="@drawable/roundedbutton"/>
+        android:layout_below="@id/etStokMinimumProduk">
+        <ImageView
+            android:id="@+id/preview_produk"
+            android:background="@drawable/image_border"
+            android:layout_below="@+id/btn_Submit_add_produk"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="2dp"
+            android:layout_centerHorizontal="true"/>
+        <Button
+            android:id="@+id/btn_add_gambar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Upload\nGambar"
+            android:textColor="@color/WhiteSmoke"
+            android:layout_margin="2dp"
+            android:layout_below="@id/etStokMinimumProduk"
+            android:drawableBottom="@drawable/ic_galery"
+            android:padding="10dp"
+            android:background="@drawable/roundedbutton"/>
+
+    </LinearLayout>
     <Spinner
         android:id="@+id/spinnerSupplierProduk"
         android:layout_width="220dp"
         android:layout_height="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/btn_add_gambar"/>
+        android:layout_below="@+id/linearProduk"/>
     <Button
         android:id="@+id/btn_Submit_add_produk"
         android:layout_width="wrap_content"
@@ -79,8 +96,10 @@
         android:text="Sumbit"
         android:textColor="@color/WhiteSmoke"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/spinnerSupplierProduk"
         android:background="@drawable/roundedbutton"/>
+
+
 
 </RelativeLayout>

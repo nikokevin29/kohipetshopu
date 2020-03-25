@@ -2,6 +2,8 @@ package com.p3l.kohipetshopu.Produk;
 
 import com.google.gson.annotations.SerializedName;
 
+import static com.p3l.kohipetshopu.API.ApiClient.BASE_URL;
+
 public class ProdukDAO {
 
     @SerializedName("idproduk")
@@ -46,6 +48,9 @@ public class ProdukDAO {
         this.idsupplier = idsupplier;
     }
 
+    public String URLproduk(){
+        return BASE_URL+"/uploads/produk/"+getGambar();
+    }
     public String getIdproduk() {
         return idproduk;
     }

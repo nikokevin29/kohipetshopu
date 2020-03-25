@@ -27,17 +27,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.p3l.kohipetshopu.API.ApiClient.BASE_URL;
+
 public class AddProduk extends AppCompatActivity {
 
     EditText namaProduk,Harga,stok,stokmin;
     Button btn_Submit_add_produk,btngambar;
-
+    ImageView preview_produk;
     Spinner spinnerSupplier;
 
-    ImageView gambar;
     final int galleryCode = 100;
     Uri imageUri;
-    Bitmap bitmapImg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +46,7 @@ public class AddProduk extends AppCompatActivity {
         Harga = findViewById(R.id.etHargaProduk);
         stok = findViewById(R.id.etStokProduk);
         stokmin = findViewById(R.id.etStokMinimumProduk);
-        gambar = (ImageView) findViewById(R.id.gambar_produk);
+        preview_produk = (ImageView) findViewById(R.id.preview_produk);
         btngambar = findViewById(R.id.btn_add_gambar);
         btn_Submit_add_produk = (Button) findViewById(R.id.btn_Submit_add_produk);
 
@@ -74,7 +74,7 @@ public class AddProduk extends AppCompatActivity {
                                     Harga.getText().toString(),
                                     stok.getText().toString(),
                                     stokmin.getText().toString(),
-                                    gambar.toString());
+                                    imageUri.toString());
                             ProdukDAO.enqueue(new Callback<ProdukDAO>() {
                                 @Override
                                 public void onResponse(Call<ProdukDAO> call, Response<ProdukDAO> response) {
@@ -86,7 +86,7 @@ public class AddProduk extends AppCompatActivity {
                                     Toast.makeText(AddProduk.this, "Sukses Tambah.", Toast.LENGTH_SHORT).show();
                                     Intent i = new Intent(AddProduk.this, ViewProduk.class);
                                     i.putExtra("from","produk");
-                                    System.out.println(t.getMessage());
+                                    System.out.println("PESAN ERROR"+t.getMessage());
                                     progress.dismiss();
                                     startActivity(i);
                                     finish();
@@ -96,6 +96,8 @@ public class AddProduk extends AppCompatActivity {
                         @Override
                         public void onFailure(Call<List<ProdukDAO>> call, Throwable t) {
                             System.out.println("gagal");
+                            Toast.makeText(AddProduk.this, "Gagal dari produkDAOCall", Toast.LENGTH_SHORT).show();
+                            progress.dismiss();
                         }
                     });
                 }
@@ -105,19 +107,29 @@ public class AddProduk extends AppCompatActivity {
         btngambar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentGallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intentGallery, galleryCode);
+                openGaler();
             }
         });
+    }
+    public void openGaler(){
+        Intent galer = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(galer, galleryCode);
+    }
+    public void uploadGambar(String url_produk){
+
+        ProdukDAO produk = new ProdukDAO();
+        url_produk = BASE_URL+"/uploads/produk/"+produk.getGambar();
+
+
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == galleryCode && resultCode == RESULT_OK){
+        if(resultCode == RESULT_OK && requestCode == galleryCode){
             imageUri = data.getData();
             try {
-                bitmapImg = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-
+                Bitmap bitmapImg = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                preview_produk.setImageBitmap(bitmapImg);
             } catch (IOException e) {
                 e.printStackTrace();
             }
