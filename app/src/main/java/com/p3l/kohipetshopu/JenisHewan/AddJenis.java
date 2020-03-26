@@ -65,7 +65,7 @@ public class AddJenis extends AppCompatActivity {
                                 }
                                 @Override
                                 public void onFailure(Call<JenisHewanDAO> call, Throwable t) {
-                                    Toast.makeText(AddJenis.this, "Sukses Tambah, tapi...", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(AddJenis.this, "Sukses Tambah.", Toast.LENGTH_SHORT).show();
                                     Intent i = new Intent(AddJenis.this, ViewJenisHewan.class);
                                     i.putExtra("from","jenis");
                                     System.out.println(t.getMessage());
@@ -83,10 +83,6 @@ public class AddJenis extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    public void isEmpty(){
-
     }
 
 

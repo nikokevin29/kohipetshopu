@@ -8,7 +8,10 @@ import com.p3l.kohipetshopu.Supplier.SupplierDAO;
 import com.p3l.kohipetshopu.UkuranHewan.UkuranHewanDAO;
 
 import java.util.List;
+import java.util.Map;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.*;
@@ -86,13 +89,23 @@ public interface ApiInterface {
     @GET("/api/produk/search/{nama}")
     Call<ProdukDAO> searchNamaProduk(@Path("nama") String nama);
 
+    @Headers({
+            "Accept: multipart/form-data"
+    })
+    @Multipart
     @POST("/api/produk")
-    @FormUrlEncoded
-    Call<ProdukDAO> createProduk (@Field("nama")String nama,
-                                    @Field("harga") String harga,
-                                  @Field("stok")String stok,
-                                  @Field("stokminimum")String stokminimum,
-                                  @Field("gambar")String gambar);
+    Call<ResponseBody> createProduk (
+            @Part MultipartBody.Part gambar,
+            @PartMap Map<String,RequestBody> body);
+
+
+//    @POST("/api/produk")
+//    @FormUrlEncoded
+//    Call<ProdukDAO> createProduk(@Field("nama") String nama,
+//                                 @Field("harga") String harga,
+//                                 @Field("stok") String stok,
+//                                 @Field("stokminimum") String stokminimum,
+//                                 @Field("gambar") String gambar);
 
     @PUT("/api/produk/{idproduk}")
     @FormUrlEncoded

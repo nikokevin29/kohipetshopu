@@ -1,12 +1,21 @@
 package com.p3l.kohipetshopu.Produk;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -20,9 +29,16 @@ import com.p3l.kohipetshopu.API.ApiClient;
 import com.p3l.kohipetshopu.API.ApiInterface;
 import com.p3l.kohipetshopu.R;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,7 +51,6 @@ public class AddProduk extends AppCompatActivity {
     Button btn_Submit_add_produk,btngambar;
     ImageView preview_produk;
     Spinner spinnerSupplier;
-
     final int galleryCode = 100;
     Uri imageUri;
     @Override
@@ -57,47 +72,54 @@ public class AddProduk extends AppCompatActivity {
                 if(namaProduk.getText().length() == 0 || Harga.getText().length() == 0 ||  stok.getText().length() == 0  ||  stokmin.getText().length() == 0 ){
                     Toast.makeText(AddProduk.this, "Masih Kosong", Toast.LENGTH_SHORT).show();
                 }else{
-                    ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-                    Call<List<ProdukDAO>> produkDAOCall = apiService.getAllProduk();
-
                     progress.setMessage("Memproses data . . . ");
                     progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                     progress.setCancelable(false);
                     progress.show();
+                    ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
-                    produkDAOCall.enqueue(new Callback<List<ProdukDAO>>() {
+                    File file = new File(getRealPathFromURI(imageUri));
+
+                    Toast.makeText(AddProduk.this, file.getName(), Toast.LENGTH_SHORT).show();
+                    HashMap<String, RequestBody> map = new HashMap<>();
+                    map.put("nama", createPartFromString(namaProduk.getText().toString()));
+                    map.put("harga", createPartFromString(Harga.getText().toString()));
+                    map.put("stok", createPartFromString(stok.getText().toString()));
+                    map.put("stokminimum", createPartFromString(stokmin.getText().toString()));
+                     RequestBody GAMBAR = RequestBody.create(MediaType.parse("image/jpeg"), file);
+                    MultipartBody.Part fileGambar = MultipartBody.Part.createFormData("gambar", file.getName(), RequestBody.create(MediaType.parse("image/jpeg"), file));
+
+                    Call<ResponseBody> calls = apiService.createProduk(fileGambar,map);
+                    calls.enqueue(new Callback<ResponseBody>() {
                         @Override
-                        public void onResponse(Call<List<ProdukDAO>> call, Response<List<ProdukDAO>> response) {
-                            ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-                            Call<ProdukDAO> ProdukDAO = apiService.createProduk(
-                                    namaProduk.getText().toString(),
-                                    Harga.getText().toString(),
-                                    stok.getText().toString(),
-                                    stokmin.getText().toString(),
-                                    imageUri.toString());
-                            ProdukDAO.enqueue(new Callback<ProdukDAO>() {
-                                @Override
-                                public void onResponse(Call<ProdukDAO> call, Response<ProdukDAO> response) {
-                                    Toast.makeText(AddProduk.this, "Sukses Tambah", Toast.LENGTH_SHORT).show();
-                                    progress.dismiss();
-                                }
-                                @Override
-                                public void onFailure(Call<ProdukDAO> call, Throwable t) {
-                                    Toast.makeText(AddProduk.this, "Sukses Tambah.", Toast.LENGTH_SHORT).show();
-                                    Intent i = new Intent(AddProduk.this, ViewProduk.class);
-                                    i.putExtra("from","produk");
-                                    System.out.println("PESAN ERROR"+t.getMessage());
-                                    progress.dismiss();
-                                    startActivity(i);
-                                    finish();
-                                }
-                            });
-                        }
-                        @Override
-                        public void onFailure(Call<List<ProdukDAO>> call, Throwable t) {
-                            System.out.println("gagal");
-                            Toast.makeText(AddProduk.this, "Gagal dari produkDAOCall", Toast.LENGTH_SHORT).show();
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                             progress.dismiss();
+                            if (response.isSuccessful()) {
+                                try {
+                                    Toast.makeText(AddProduk.this, response.body().string(), Toast.LENGTH_SHORT).show();
+                                }
+                                catch (Exception e)
+                                {
+                                    Toast.makeText(AddProduk.this, e.toString(), Toast.LENGTH_SHORT).show();
+                                }
+                                Intent i = new Intent(AddProduk.this, ViewProduk.class);
+                                progress.dismiss();
+                                startActivity(i);
+                                Toast.makeText(AddProduk.this, response.message(), Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                            else
+                            {
+
+                                Toast.makeText(AddProduk.this, response.message(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            progress.dismiss();
+                            Toast.makeText(AddProduk.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                            t.printStackTrace();
                         }
                     });
                 }
@@ -111,9 +133,29 @@ public class AddProduk extends AppCompatActivity {
             }
         });
     }
+    @NonNull
+    private RequestBody createPartFromString(String descriptionString) {
+        return RequestBody.create(
+                okhttp3.MultipartBody.FORM, descriptionString);
+    }
     public void openGaler(){
-        Intent galer = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(galer, galleryCode);
+        if(checkPermissionForReadExtertalStorage())
+        {
+            Intent galer = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(galer, galleryCode);
+        }
+        else
+        {
+            try {
+                requestPermissionForReadExtertalStorage();
+                Toast.makeText(this, "a", Toast.LENGTH_SHORT).show();
+            }
+            catch (Exception e)
+            {
+                Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }
+
     }
     public void uploadGambar(String url_produk){
 
@@ -135,4 +177,37 @@ public class AddProduk extends AppCompatActivity {
             }
         }
     }
+    private String getRealPathFromURI(Uri contentURI) {
+        String result;
+        Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);
+        if (cursor == null) { // Source is Dropbox or other similar local file path
+            result = contentURI.getPath();
+        } else {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            result = cursor.getString(idx);
+            cursor.close();
+        }
+        return result;
+    }
+    public boolean checkPermissionForReadExtertalStorage() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            int result = ContextCompat.checkSelfPermission(AddProduk.this, Manifest.permission.READ_EXTERNAL_STORAGE);
+            int result2 = ContextCompat.checkSelfPermission(AddProduk.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            Toast.makeText(this, String.format("%d %d",result,result2), Toast.LENGTH_SHORT).show();
+            return result == PackageManager.PERMISSION_GRANTED && result2 == PackageManager.PERMISSION_GRANTED;
+        }
+        return false;
+    }
+    public void requestPermissionForReadExtertalStorage() throws Exception {
+        try {
+            ActivityCompat.requestPermissions((Activity) AddProduk.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    1);
+        } catch (Exception e) {
+            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
 }
