@@ -33,15 +33,22 @@ public class EditProduk extends AppCompatActivity {
         harga = findViewById(R.id.etHargaProduk_edit);
         submitProduk_edit = findViewById(R.id.btn_Submit_edit_produk);
         setField();
-
-
         ProgressDialog progress = new ProgressDialog(this);
+
         submitProduk_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                int cekstok = Integer.parseInt(stok.getText().toString());
+                int cekstokmin = Integer.parseInt(stokmin.getText().toString());
                 if(nama.getText().length() == 0 || stok.getText().length() == 0 || stokmin.getText().length() == 0|| harga.getText().length() == 0){
                     Toast.makeText(EditProduk.this, "Masih Kosong", Toast.LENGTH_SHORT).show();
-                }else{
+                }else if(cekstokmin > cekstok ){
+                    System.out.println("stokmin :"+cekstokmin);
+                    System.out.println("stok :"+cekstok);
+                    Toast.makeText(EditProduk.this, "Stok Minimum Tidak Boleh lebih kecil dari jumlah stok", Toast.LENGTH_SHORT).show();
+                }
+                else{
                     ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
                     Call<ProdukDAO> produkDAOCall = apiService.editProduk(getIntent().getStringExtra("idproduk"),
                             nama.getText().toString(),

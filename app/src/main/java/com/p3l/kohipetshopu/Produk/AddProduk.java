@@ -69,9 +69,15 @@ public class AddProduk extends AppCompatActivity {
         btn_Submit_add_produk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int cekstok = Integer.parseInt(stok.getText().toString());
+                int cekstokmin = Integer.parseInt(stokmin.getText().toString());
                 if(namaProduk.getText().length() == 0 || Harga.getText().length() == 0 ||  stok.getText().length() == 0  ||  stokmin.getText().length() == 0 ){
                     Toast.makeText(AddProduk.this, "Masih Kosong", Toast.LENGTH_SHORT).show();
-                }else{
+                }
+                else if(cekstokmin > cekstok ){
+                    Toast.makeText(AddProduk.this, "Stok Minimum Tidak Boleh lebih kecil dari jumlah stok", Toast.LENGTH_SHORT).show();
+                }
+                else{
                     progress.setMessage("Memproses data . . . ");
                     progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                     progress.setCancelable(false);
