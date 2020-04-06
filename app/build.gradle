@@ -45,5 +45,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.3.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+
+    implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
 //loging se JsonReader.setLenient(true) to accept malformed JSON at line 1 column 1 path $
 }
