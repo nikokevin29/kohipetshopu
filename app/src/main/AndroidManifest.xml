@@ -19,7 +19,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AdapterPriceList"></activity>
+        <activity android:name=".Fragment_Owner.Pemesanan.adapterPickProdukPemesanan"></activity>
+        <activity android:name=".Fragment_Owner.Pemesanan.pemesananViewProduk"
+            android:theme="@style/ActionBar"/>
+        <activity android:name=".AdapterPriceList" />
         <activity android:name=".Supplier.EditSupplier" />
         <activity android:name=".Supplier.AddSupplier" />
         <activity
@@ -54,9 +57,10 @@
         <activity android:name=".MainViewCS" />
         <activity android:name=".Fragment_Owner.AkunFragment" />
         <activity android:name=".Fragment_Owner.KelolaFragment" />
-        <activity android:name=".Fragment_Owner.TransaksiPemesananFragment" />
-        <activity android:name=".PriceList"
-            android:theme="@style/ActionBar"/>
+        <activity android:name=".Fragment_Owner.Pemesanan.TransaksiPemesananFragment" />
+        <activity
+            android:name=".PriceList"
+            android:theme="@style/ActionBar" />
         <activity android:name=".Landing_About">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

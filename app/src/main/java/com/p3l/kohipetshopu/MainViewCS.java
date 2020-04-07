@@ -10,9 +10,6 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.p3l.kohipetshopu.Fragment_CS.AkunCSFragment;
 import com.p3l.kohipetshopu.Fragment_CS.TransaksiPenjualanFragment;
-import com.p3l.kohipetshopu.Fragment_Owner.AkunFragment;
-import com.p3l.kohipetshopu.Fragment_Owner.KelolaFragment;
-import com.p3l.kohipetshopu.Fragment_Owner.TransaksiPemesananFragment;
 
 public class MainViewCS extends AppCompatActivity {
 

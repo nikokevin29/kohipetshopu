@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.p3l.kohipetshopu.Fragment_Owner.AkunFragment;
 import com.p3l.kohipetshopu.Fragment_Owner.KelolaFragment;
-import com.p3l.kohipetshopu.Fragment_Owner.TransaksiPemesananFragment;
+import com.p3l.kohipetshopu.Fragment_Owner.Pemesanan.TransaksiPemesananFragment;
 
 public class MainView extends AppCompatActivity {
     private boolean doubleTapParam;

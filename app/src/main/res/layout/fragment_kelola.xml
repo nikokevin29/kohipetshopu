@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,53 +9,131 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-
-        android:orientation="horizontal">
+        android:orientation="vertical">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/kelola_jenishewan"
-                android:layout_width="180dp"
-                android:layout_height="100dp"
-                android:text="Jenis Hewan"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:weightSum="2">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Jenis Hewan"
+                    android:gravity="center"
+                    android:textColor="@color/Black"/>
+                <ImageView
+                    android:id="@+id/kelola_jenishewan"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:padding="15dp"
+                    android:background="@drawable/rounded_button_100"
+                    android:src="@drawable/icon_jenis"/>
+            </LinearLayout>
 
-            <Button
-                android:id="@+id/kelola_ukuranhewan"
-                android:layout_width="180dp"
-                android:layout_height="100dp"
-                android:text="Ukuran Hewan"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Ukuran Hewan"
+                    android:gravity="center"
+                    android:textColor="@color/Black"/>
+                <ImageView
+                    android:id="@+id/kelola_ukuranhewan"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:padding="17dp"
+                    android:background="@drawable/rounded_button_100"
+                    android:src="@drawable/icon_ukuran"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Produk"
+                    android:gravity="center"
+                    android:textColor="@color/Black"/>
+                <ImageView
+                    android:id="@+id/kelola_produk"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:padding="17dp"
+                    android:background="@drawable/rounded_button_100"
+                    android:src="@drawable/icon_produk"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Layanan"
+                    android:gravity="center"
+                    android:textColor="@color/Black"/>
+                <ImageView
+                    android:id="@+id/kelola_layanan"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:padding="15dp"
+                    android:background="@drawable/rounded_button_100"
+                    android:src="@drawable/icon_layanan"/>
+            </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:gravity="center"
+            android:weightSum="2">
 
-            <Button
-                android:id="@+id/kelola_produk"
-                android:layout_width="180dp"
-                android:layout_height="100dp"
-                android:text="Produk" />
-
-            <Button
-                android:id="@+id/kelola_layanan"
-                android:layout_width="180dp"
-                android:layout_height="100dp"
-                android:text="Layanan" />
-
-            <Button
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Supplier"
+                android:gravity="center"
+                android:textColor="@color/Black"/>
+            <ImageView
                 android:id="@+id/kelola_supplier"
-                android:layout_width="180dp"
+                android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:text="Supplier" />
-
+                android:padding="16dp"
+                android:background="@drawable/rounded_button_100"
+                android:src="@drawable/icon_supplier"/>
         </LinearLayout>
+
+
     </LinearLayout>
 
 

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.p3l.kohipetshopu.JenisHewan.ViewJenisHewan;
 import com.p3l.kohipetshopu.Layanan.ViewLayanan;
@@ -20,22 +21,16 @@ import com.p3l.kohipetshopu.Supplier.ViewSupplier;
 import com.p3l.kohipetshopu.UkuranHewan.ViewUkuranHewan;
 
 public class KelolaFragment extends Fragment {
-    Button jenis;
-    Button ukuran;
-    Button layanan;
-    Button produk;
-    Button supplier;
+    ImageView jenis,ukuran,layanan,produk,supplier;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_kelola, container, false);
-        setButton(view);
+        setImageButton(view);
         
         return view;
     }
-
-    public void setButton(View view){
-
-        jenis = (Button) view.findViewById(R.id.kelola_jenishewan);
+    public void setImageButton(View view){
+        jenis = view.findViewById(R.id.kelola_jenishewan);
         jenis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,7 +39,7 @@ public class KelolaFragment extends Fragment {
             }
         });
 
-        ukuran = (Button) view.findViewById(R.id.kelola_ukuranhewan);
+        ukuran = view.findViewById(R.id.kelola_ukuranhewan);
         ukuran.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,4 +72,12 @@ public class KelolaFragment extends Fragment {
             }
         });
     }
+
+//    public void setButton(View view){
+//
+//
+
+
+
+//    }
 }

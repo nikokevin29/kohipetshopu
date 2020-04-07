@@ -1,26 +1,27 @@
-package com.p3l.kohipetshopu.Fragment_Owner;
+package com.p3l.kohipetshopu.Fragment_Owner.Pemesanan;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.app.ProgressDialog;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.p3l.kohipetshopu.API.ApiClient;
 import com.p3l.kohipetshopu.API.ApiInterface;
+import com.p3l.kohipetshopu.Fragment_Owner.Pemesanan.pemesananViewProduk;
 import com.p3l.kohipetshopu.R;
 import com.p3l.kohipetshopu.Supplier.SupplierDAO;
 
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,30 +32,41 @@ import retrofit2.Response;
 
 public class TransaksiPemesananFragment extends Fragment {
     Spinner spinnerSupplier;
-    Context mContext;
+    private Button tambahPesananBarang;
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_transaksi_pemesanan, container, false);
 
         spinnerSupplier = view.findViewById(R.id.SpinSupplier);
+        tambahPesananBarang =  view.findViewById(R.id.tambah_pesanan_barang);
+
         initSupplier();
+
         spinnerSupplier.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {//test toast kalo selected
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selected = parent.getItemAtPosition(position).toString();
-                Toast.makeText(getActivity(), selected, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Anda Memilih Supplier "+selected, Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
 
-        return view;
+        tambahPesananBarang.setOnClickListener(new View.OnClickListener() {// Masuk ke RecycleView Pemilihan Barang untuk Pemesanan
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), pemesananViewProduk.class);
+                startActivity(i);
+            }
+        });
 
+        return view;
     }
 
     private void initSupplier(){
         ProgressDialog progress = new ProgressDialog(getActivity());
-        progress.setMessage("Fetching Supplier");
+        progress.setMessage("Fetching Supplier ke Spinner");
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progress.setCancelable(false);
         progress.show();
@@ -86,6 +98,5 @@ public class TransaksiPemesananFragment extends Fragment {
                 Toast.makeText(getActivity(), "Koneksi Anda benar-benar Ampas", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 }
