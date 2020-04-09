@@ -9,39 +9,87 @@
         android:id="@+id/JudulPenjualan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Transaksi Penjualan"
+        android:text="@string/transaksi_penjualan"
         android:textColor="@color/Black"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"/>
     <LinearLayout
         android:id="@+id/LinearPenjualan"
         android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="20dp"
+        android:weightSum="2">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/Black"
+                android:text="@string/layanan"/>
+            <ImageView
+                android:id="@+id/imgBtn_inputLayanan"
+                android:background="@drawable/rounded_button_100"
+                android:src="@drawable/icon_layanan"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:padding="15dp"
+                android:layout_margin="5dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/Black"
+                android:text="Produk"/>
+            <ImageView
+                android:id="@+id/imgBtn_inputProduk"
+                android:background="@drawable/rounded_button_100"
+                android:src="@drawable/icon_produk"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:padding="30dp"
+                android:layout_margin="5dp"
+                android:contentDescription="@string/todo" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="15dp"
-        android:weightSum="2">
+        android:layout_alignParentBottom="true"
+        android:weightSum="2"
+        android:padding="5dp"
+        android:gravity="center">
         <Button
-            android:id="@+id/btn_inputHewan"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="10dp"
-            android:layout_width="wrap_content"
+            android:id="@+id/kelola_customer"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="layanan"
-            android:textColor="@color/White"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
             android:background="@drawable/roundedbutton"
-            android:paddingHorizontal="10dp"/>
+            android:textColor="@color/White"
+            android:text="@string/kelola_customer"/>
         <Button
-            android:id="@+id/btn_inputCustomer"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="10dp"
-            android:layout_width="wrap_content"
+            android:id="@+id/kelola_hewan"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="Produk"
-            android:textColor="@color/White"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
             android:background="@drawable/roundedbutton"
-            android:paddingHorizontal="10dp"/>
+            android:textColor="@color/White"
+            android:text="@string/kelola_hewan"/>
     </LinearLayout>
 
 </RelativeLayout>

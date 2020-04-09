@@ -162,7 +162,7 @@ public class AdapterLayanan extends RecyclerView.Adapter<AdapterLayanan.MyViewHo
     private void showDialog(final LayananDAO hasil,int position){
         //memunculkan Dialog Saat Long Press Adapter
 
-        new MaterialAlertDialogBuilder(context, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog)
+        new MaterialAlertDialogBuilder(context, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Centered)
             .setTitle("Aksi apa yang akan anda lakukan?")
             .setIcon(R.mipmap.ic_launcher)
             .setCancelable(false)

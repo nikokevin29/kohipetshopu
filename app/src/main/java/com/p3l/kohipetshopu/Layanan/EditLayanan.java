@@ -63,7 +63,6 @@ public class EditLayanan extends AppCompatActivity {
                             System.out.println(t.getMessage());
                             progress.dismiss();
                             startIntent();
-                            finish();
                         }
                     });
                 }

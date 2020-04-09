@@ -1,5 +1,6 @@
 package com.p3l.kohipetshopu.API;
 
+import com.p3l.kohipetshopu.Fragment_CS.Customer.CustomerDAO;
 import com.p3l.kohipetshopu.JenisHewan.JenisHewanDAO;
 import com.p3l.kohipetshopu.Layanan.LayananDAO;
 import com.p3l.kohipetshopu.PegawaiDAO;
@@ -140,6 +141,45 @@ public interface ApiInterface {
 
     @DELETE("/api/supplier/{idsupplier}")
     Call<Void> deleteSupplier(@Path("idsupplier") String idsupplier);
+
+    //Customer
+    @GET("/api/customer")
+    Call<List<CustomerDAO>> getAllCustomer();
+    @GET("/api/customer/search/{nama}")
+    Call<CustomerDAO> searchNamaCustomer(@Path("nama") String nama);
+    @POST("/api/customer")
+    @FormUrlEncoded
+    Call<CustomerDAO> createCustomer (@Field("nama")String nama,
+                                      @Field("notelp")String notelp,
+                                      @Field("alamat") String alamat,
+                                      @Field("tgllahir")String tgllahir);
+    @PUT("/api/customer/{idcustomer}")
+    @FormUrlEncoded
+    Call<CustomerDAO> editCustomer(@Path("idcustomer") String idcustomer,
+                                   @Field("nama")String nama,
+                                   @Field("notelp")String notelp,
+                                   @Field("alamat") String alamat,
+                                   @Field("tgllahir")String tgllahir);
+    @DELETE("/api/customer/{idcustomer}")
+    Call<Void> deleteCustomer(@Path("idcustomer") String idcustomer);
+
+
+//    //Hewan
+//    @GET("/api/hewan")
+//    Call<List<HewanDAO>> getAllHewan();
+//    @GET("/api/hewan/search/{nama}")
+//    Call<HewanDAO> searchNamaHewan(@Path("nama") String nama);
+//    @POST("/api/hewan")
+//    @FormUrlEncoded
+//    Call<HewanDAO> createHewan (@Field("nama")String nama,
+//                                   @Field("tgllahir")String tgllahir);
+//    @PUT("/api/hewan/{idhewan}")
+//    @FormUrlEncoded
+//    Call<HewanDAO> editHewan(@Path("idhewan") String idhewan,
+//                                @Field("nama")String nama,
+//                                @Field("tgllahir")String tgllahir);
+//    @DELETE("/api/hewan/{idhewan}")
+//    Call<Void> deleteHewan(@Path("idhewan") String idhewan);
 
 
 }

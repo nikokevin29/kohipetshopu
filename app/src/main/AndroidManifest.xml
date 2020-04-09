@@ -19,9 +19,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Fragment_Owner.Pemesanan.adapterPickProdukPemesanan"></activity>
-        <activity android:name=".Fragment_Owner.Pemesanan.pemesananViewProduk"
+        <activity android:name=".Fragment_CS.Customer.EditCustomer"></activity>
+        <activity android:name=".Fragment_CS.Customer.AdapterCustomer" />
+        <activity android:name=".Fragment_CS.Customer.ViewCustomer"
             android:theme="@style/ActionBar"/>
+        <activity android:name=".Fragment_Owner.Pemesanan.adapterPickProdukPemesanan" />
+        <activity
+            android:name=".Fragment_Owner.Pemesanan.pemesananViewProduk"
+            android:theme="@style/ActionBar" />
         <activity android:name=".AdapterPriceList" />
         <activity android:name=".Supplier.EditSupplier" />
         <activity android:name=".Supplier.AddSupplier" />

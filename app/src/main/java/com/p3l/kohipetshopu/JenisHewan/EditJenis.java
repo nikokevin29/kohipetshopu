@@ -31,7 +31,7 @@ public class EditJenis extends AppCompatActivity {
         btn_Submit_update_jenis = findViewById(R.id.btn_Submit_update_jenis);
         setField();
 
-        ProgressDialog progress = new ProgressDialog(this);
+
 
         btn_Submit_update_jenis.setOnClickListener(new View.OnClickListener() {
             @Override

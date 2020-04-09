@@ -7,6 +7,8 @@
       <w>gambar</w>
       <w>harga</w>
       <w>hewan</w>
+      <w>idcustomer</w>
+      <w>idhewan</w>
       <w>idlayanan</w>
       <w>idpegawai</w>
       <w>idproduk</w>
@@ -14,6 +16,7 @@
       <w>jenis</w>
       <w>judulharga</w>
       <w>kelola</w>
+      <w>lahir</w>
       <w>layanan</w>
       <w>lproduk</w>
       <w>namalayanan</w>
@@ -26,6 +29,7 @@
       <w>stok</w>
       <w>stokmin</w>
       <w>stokminimum</w>
+      <w>sumbit</w>
       <w>telp</w>
       <w>tgllahir</w>
     </words>

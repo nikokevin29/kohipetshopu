@@ -153,10 +153,8 @@ public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.
     }
     private void showDialog(final UkuranHewanDAO hasil, int position){ //tambahi ini
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-
         // set title dialog
         alertDialogBuilder.setTitle("Aksi apa yang akan anda lakukan?");
-
         // set pesan dari dialog
         alertDialogBuilder
                 .setIcon(R.mipmap.ic_launcher)

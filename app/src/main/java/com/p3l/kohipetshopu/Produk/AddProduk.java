@@ -163,13 +163,6 @@ public class AddProduk extends AppCompatActivity {
         }
 
     }
-    public void uploadGambar(String url_produk){
-
-        ProdukDAO produk = new ProdukDAO();
-        url_produk = BASE_URL+"/uploads/produk/"+produk.getGambar();
-
-
-    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

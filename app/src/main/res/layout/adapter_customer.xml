@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="6dp"
+    android:layout_margin="8dp"
+    android:id="@+id/ParentCustomer"
+    android:background="@color/WhiteSmoke"
+    tools:ignore="PrivateResource">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nama"
+                android:textSize="12dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Notelp"
+                android:textSize="12dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tanggal Lahir"
+                android:textSize="12dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Alamat"
+                android:textSize="12dp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" : "
+                android:textColor="@color/Black"
+                android:textSize="12dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" : "
+                android:textColor="@color/Black"
+                android:textSize="12dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" : "
+                android:textColor="@color/Black"
+                android:textSize="12dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" : "
+                android:textColor="@color/Black"
+                android:textSize="12dp"/>
+        </LinearLayout> <!--TITIK DUA-->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tvNamaCustomer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" Nicholas Kevin"
+                android:textColor="@color/Black"
+                android:textSize="12dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/tvNotelpCustomer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="082227975222"
+                android:textColor="@color/Black"
+                android:textSize="12dp"/>
+            <TextView
+                android:id="@+id/tvTgllahirCustomer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="01-01-2000"
+                android:textColor="@color/Black"
+                android:textSize="12dp"/>
+            <TextView
+                android:id="@+id/tvAlamatCustomer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Jl. Pegangsaan Timur No.56 Jakarta Pusat"
+                android:textColor="@color/Black"
+                android:textSize="12dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

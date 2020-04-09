@@ -186,10 +186,8 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.MyViewHold
     }
     private void showDialog(final ProdukDAO hasil,int position){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-
         // set title dialog
         alertDialogBuilder.setTitle("Aksi apa yang akan anda lakukan?");
-
         // set pesan dari dialog
         alertDialogBuilder
                 .setIcon(R.mipmap.ic_launcher)
