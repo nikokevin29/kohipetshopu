@@ -91,9 +91,8 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.MyViewHold
                 data.putString("updated_at", produk.getUpdated_at());
                 data.putString("deleted_at", produk.getDeleted_at());
                 data.putString("aktor", produk.getAktor());
-                data.putString("aksi", produk.getAksi());// klik adapternya 3 detik buat kluarin box
+                data.putString("aksi", produk.getAksi());
                 data.putString("idsupplier", produk.getIdsupplier());
-
             }
         });
         holder.parent.setOnLongClickListener(new View.OnLongClickListener() {

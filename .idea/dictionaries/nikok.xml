@@ -3,6 +3,8 @@
     <words>
       <w>akun</w>
       <w>alamat</w>
+      <w>cekstok</w>
+      <w>cekstokmin</w>
       <w>galer</w>
       <w>gambar</w>
       <w>harga</w>
@@ -18,13 +20,17 @@
       <w>kelola</w>
       <w>lahir</w>
       <w>layanan</w>
+      <w>linearhewan</w>
       <w>lproduk</w>
       <w>namalayanan</w>
       <w>notelp</w>
       <w>pasrsing</w>
       <w>pegawai</w>
       <w>pemesanan</w>
+      <w>pemilik</w>
+      <w>penjualan</w>
       <w>pesan</w>
+      <w>posisi</w>
       <w>produk</w>
       <w>stok</w>
       <w>stokmin</w>
@@ -32,6 +38,7 @@
       <w>sumbit</w>
       <w>telp</w>
       <w>tgllahir</w>
+      <w>transaksi</w>
     </words>
   </dictionary>
 </component>

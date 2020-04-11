@@ -1,9 +1,14 @@
-package com.p3l.kohipetshopu.JenisHewan;
+package com.p3l.kohipetshopu.Fragment_CS.Customer_RUDS;
 
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +17,6 @@ import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.p3l.kohipetshopu.API.ApiClient;
 import com.p3l.kohipetshopu.API.ApiInterface;
 import com.p3l.kohipetshopu.R;
@@ -29,11 +28,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.MyViewHolder> implements Filterable {
+public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.MyViewHolder> implements Filterable {
+
     private Context context;
-    private List<JenisHewanDAO> resultFiltered;
-    private JenisAdapterListener listener;
-    public AdapterJenisHewan(Context context, List<JenisHewanDAO> result, JenisAdapterListener listener){
+    private List<CustomerDAO> resultFiltered;
+    private CustomerAdapterListener listener;
+    public AdapterCustomer(Context context, List<CustomerDAO> result, CustomerAdapterListener listener){
         this.context = context;
         this.resultFiltered = result;
         this.listener = listener;
@@ -42,40 +42,30 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.My
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.adapter_jenis_hewan,parent,false);
+        View v = LayoutInflater.from(context).inflate(R.layout.adapter_customer,parent,false);
         final MyViewHolder holder = new MyViewHolder(v);
 
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterJenisHewan.MyViewHolder holder, int position) {
-        final JenisHewanDAO jenis = resultFiltered.get(position);
-        holder.nama.setText(jenis.getNama());
-        holder.created_at.setText(jenis.getCreated_at());
-        holder.updated_at.setText(jenis.getUpdated_at());
-        holder.deleted_at.setText(jenis.getDeleted_at());
-        holder.aksi.setText(jenis.getAksi());
-        holder.aktor.setText(jenis.getAktor());
+    public void onBindViewHolder(@NonNull AdapterCustomer.MyViewHolder holder, int position) {
+        final CustomerDAO data = resultFiltered.get(position);
+        holder.nama.setText(data.getNama());
+        holder.notelp.setText(data.getNotelp());
+        holder.alamat.setText(data.getAlamat());
+        holder.tgllahir.setText(data.getTgllahir());
 
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle data = new Bundle();
-
-                data.putString("nama", jenis.getNama());
-                data.putString("created_at", jenis.getCreated_at());
-                data.putString("updated_at", jenis.getUpdated_at());
-                data.putString("deleted_at", jenis.getDeleted_at());
-                data.putString("aksi", jenis.getAksi());
-                data.putString("aktor", jenis.getAktor());
-
+                Toast.makeText(context, "Kamu Menekan "+data.getNama(), Toast.LENGTH_SHORT).show();
             }
         });
         holder.parent.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                showDialog(jenis,position);
+                showDialog(data,position);
                 return false;
             }
         });
@@ -90,17 +80,13 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.My
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                List<JenisHewanDAO> filteredList = new ArrayList<>();
-
+                List<CustomerDAO> filteredList = new ArrayList<>();
                 if (constraint == null || constraint.length() == 0) {
                     filteredList.addAll(resultFiltered);
                 } else {
                     String fillPattern = constraint.toString().toLowerCase().trim();
-                    //List<JenisHewanDAO> filteredList = new ArrayList<>();
-                    for (JenisHewanDAO row : resultFiltered) {
-                        // name match condition. this might differ depending on your requirement
-                        // here we are looking for name or phone number match
-                        if (row.getNama().toLowerCase().contains(fillPattern)) {
+                    for (CustomerDAO row : resultFiltered) {
+                        if (row.getNama().toLowerCase().contains(fillPattern) || row.getNotelp().contains(fillPattern)) {
                             filteredList.add(row);
                         }
                     }
@@ -114,53 +100,52 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.My
             protected void publishResults(CharSequence constraint, FilterResults filterResults) {
                 resultFiltered.clear();
                 resultFiltered.addAll((List) filterResults.values);
-
                 notifyDataSetChanged();
             }
         };
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        private TextView nama, created_at, updated_at, deleted_at, aksi, aktor;
+        private TextView nama,notelp,alamat,tgllahir;
         private CardView parent;
 
         public MyViewHolder(@NonNull View itemView)
         {
             super(itemView);
-            nama = itemView.findViewById(R.id.tvNamaJenisHewan);
-            created_at =  itemView.findViewById(R.id.tvCreated_at);
-            updated_at = itemView.findViewById(R.id.tvUpdated_at);
-            deleted_at = itemView.findViewById(R.id.tvDeleted_at);
-            aksi = itemView.findViewById(R.id.tvAksi);
-            aktor = itemView.findViewById(R.id.tvAktor);
-            parent =  itemView.findViewById(R.id.ParentJenisHewan);
+            nama = itemView.findViewById(R.id.tvNamaCustomer);
+            notelp = itemView.findViewById(R.id.tvNotelpCustomer);
+            alamat = itemView.findViewById(R.id.tvAlamatCustomer);
+            tgllahir = itemView.findViewById(R.id.tvTgllahirCustomer);
+            parent =  itemView.findViewById(R.id.ParentCustomer);
         }
     }
-    private void startIntent(JenisHewanDAO hasil){
-        Intent edit = new Intent(context, EditJenis.class);
-        edit.putExtra("idjenis",hasil.getIdjenis());
+    private void startIntent(CustomerDAO hasil){
+        Intent edit = new Intent(context, EditCustomer.class);
+        edit.putExtra("idcustomer",hasil.getIdcustomer());
         edit.putExtra("nama",hasil.getNama());
+        edit.putExtra("notelp",hasil.getNotelp());
+        edit.putExtra("alamat",hasil.getAlamat());
+        edit.putExtra("tgllahir",hasil.getTgllahir());
         context.startActivity(edit);
     }
-    private void showDialog(final JenisHewanDAO hasil,int position){
-
+    @SuppressLint("PrivateResource")
+    private void showDialog(final CustomerDAO hasil, int position){
         // set pesan dari dialog
-        androidx.appcompat.app.AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-        alertDialogBuilder
+        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+                dialog
                 .setTitle("Aksi apa yang akan anda lakukan?")
                 .setIcon(R.mipmap.ic_launcher)
                 .setCancelable(false)
                 .setPositiveButton("Edit",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int idjenis) {
+                    public void onClick(DialogInterface dialog,int idcustomer) {
                         // update
                         startIntent(hasil);
-
                     }
                 })
                 .setNegativeButton("Hapus",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int idjenis) {
+                    public void onClick(DialogInterface dialog, int idcustomer) {
                         //delete
-                        deleteJenis(hasil.getIdjenis());
+                        delete(hasil.getIdcustomer());
                         notifyItemRemoved(position);
                         resultFiltered.remove(position);
                     }
@@ -168,18 +153,16 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.My
                 .setNeutralButton("Batal", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
+                        //tutup dialog
                         dialog.cancel();
                     }
                 }).show();
-
     }
 
-    private void deleteJenis(String idjenis){
+    private void delete(String id){//Delete Customer
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<Void> jenisDAOCall = apiService.deleteJenis(idjenis);
-
-
-        jenisDAOCall.enqueue(new Callback<Void>() {
+        Call<Void> callDAO = apiService.deleteCustomer(id);
+        callDAO.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 Toast.makeText(context, "Success Deleting", Toast.LENGTH_SHORT).show();
@@ -191,8 +174,7 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.My
             }
         });
     }
-    public interface JenisAdapterListener {
-        void onJenisSelected(JenisHewanDAO ukuranHewanDAO);
+    public interface CustomerAdapterListener {
+        void onCustomerSelected(CustomerDAO customerDAO);
     }
 }
-

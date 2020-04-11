@@ -9,16 +9,19 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -28,10 +31,11 @@ import android.widget.Toast;
 import com.p3l.kohipetshopu.API.ApiClient;
 import com.p3l.kohipetshopu.API.ApiInterface;
 import com.p3l.kohipetshopu.R;
+import com.p3l.kohipetshopu.Supplier.SupplierDAO;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -43,8 +47,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.p3l.kohipetshopu.API.ApiClient.BASE_URL;
-
 public class AddProduk extends AppCompatActivity {
 
     EditText namaProduk,Harga,stok,stokmin;
@@ -53,6 +55,8 @@ public class AddProduk extends AppCompatActivity {
     Spinner spinnerSupplier;
     final int galleryCode = 100;
     Uri imageUri;
+    String selectedSupplier;
+    List<SupplierDAO> ListSupplier;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +68,24 @@ public class AddProduk extends AppCompatActivity {
         preview_produk = (ImageView) findViewById(R.id.preview_produk);
         btngambar = findViewById(R.id.btn_add_gambar);
         btn_Submit_add_produk = (Button) findViewById(R.id.btn_Submit_add_produk);
+        spinnerSupplier = findViewById(R.id.spinnerSupplierProduk);
+        spinnerSupplier.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {//test toast kalo selected
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedSupplier = parent.getItemAtPosition(position).toString();
+                System.out.println("SUPPLIER  "+selectedSupplier);
+                for(int count=0;count<ListSupplier.size();count++){
+                    if(selectedSupplier.equalsIgnoreCase(ListSupplier.get(count).getNama())){
+                        selectedSupplier = ListSupplier.get(count).getIdsupplier();
+                    }
+                }
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        initSupplier();
 
         ProgressDialog progress = new ProgressDialog(this);
         btn_Submit_add_produk.setOnClickListener(new View.OnClickListener() {
@@ -86,13 +108,16 @@ public class AddProduk extends AppCompatActivity {
 
                     File file = new File(getRealPathFromURI(imageUri));
 
+                    SharedPreferences mSettings = getSharedPreferences("Login", Context.MODE_PRIVATE);
+                    String aktor = mSettings.getString("id","missing");
                     Toast.makeText(AddProduk.this, file.getName(), Toast.LENGTH_SHORT).show();
                     HashMap<String, RequestBody> map = new HashMap<>();
                     map.put("nama", createPartFromString(namaProduk.getText().toString()));
                     map.put("harga", createPartFromString(Harga.getText().toString()));
                     map.put("stok", createPartFromString(stok.getText().toString()));
                     map.put("stokminimum", createPartFromString(stokmin.getText().toString()));
-                     RequestBody GAMBAR = RequestBody.create(MediaType.parse("image/jpeg"), file);
+                    map.put("idsupplier", createPartFromString(selectedSupplier));
+                    map.put("aktor", createPartFromString(aktor));
                     MultipartBody.Part fileGambar = MultipartBody.Part.createFormData("gambar", file.getName(), RequestBody.create(MediaType.parse("image/jpeg"), file));
 
                     Call<ResponseBody> calls = apiService.createProduk(fileGambar,map);
@@ -116,7 +141,6 @@ public class AddProduk extends AppCompatActivity {
                             }
                             else
                             {
-
                                 Toast.makeText(AddProduk.this, response.message(), Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -207,6 +231,42 @@ public class AddProduk extends AppCompatActivity {
             e.printStackTrace();
             throw e;
         }
+    }
+
+    private void initSupplier(){
+        ProgressDialog progress = new ProgressDialog(this);
+        progress.setMessage("Fetching Supplier ke Spinner");
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progress.setCancelable(false);
+        progress.show();
+
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<List<SupplierDAO>> supplierDAOCall = apiService.getAllSupplier();
+        supplierDAOCall.enqueue(new Callback<List<SupplierDAO>>() {
+            @Override
+            public void onResponse(Call<List<SupplierDAO>> call, Response<List<SupplierDAO>> response) {
+                if(response.isSuccessful()){
+                    progress.dismiss();
+                    ListSupplier = response.body();
+                    List<String> listSpinner = new ArrayList<>();
+                    for(int i=0;i<ListSupplier.size();i++){
+                        listSpinner.add(ListSupplier.get(i).getNama());
+                    }
+                    //masukin hasil ke spinner
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(AddProduk.this, android.R.layout.simple_spinner_item,listSpinner);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerSupplier.setAdapter(adapter);
+                }else{
+                    progress.dismiss();
+                    Toast.makeText(AddProduk.this, "Gagal get Supplier ke Spinner", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<List<SupplierDAO>> call, Throwable t) {
+                progress.dismiss();
+                Toast.makeText(AddProduk.this, "Koneksi Anda benar-benar Ampas", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

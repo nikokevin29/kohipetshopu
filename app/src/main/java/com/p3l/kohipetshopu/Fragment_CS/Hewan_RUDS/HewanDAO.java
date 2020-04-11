@@ -1,19 +1,19 @@
-package com.p3l.kohipetshopu.Fragment_CS.Customer;
+package com.p3l.kohipetshopu.Fragment_CS.Hewan_RUDS;
 
 import com.google.gson.annotations.SerializedName;
 
-public class CustomerDAO {
+public class HewanDAO {
 
-    @SerializedName("idcustomer")
-    String idcustomer;
+    @SerializedName("idhewan")
+    String idhewan;
     @SerializedName("nama")
     String nama;
-    @SerializedName("notelp")
-    String notelp;
-    @SerializedName("alamat")
-    String alamat;
     @SerializedName("tgllahir")
     String tgllahir;
+    @SerializedName("idjenis")
+    String idjenis;
+    @SerializedName("idukuran")
+    String idukuran;
     @SerializedName("created_at")
     String created_at;
     @SerializedName("updated_at")
@@ -24,27 +24,29 @@ public class CustomerDAO {
     String aktor;
     @SerializedName("aksi")
     String aksi;
+    @SerializedName("idcustomer")
+    String idcustomer;
 
-    public CustomerDAO(){}
-    public CustomerDAO(String idcustomer, String nama, String notelp, String alamat, String tgllahir, String created_at, String updated_at, String deleted_at, String aktor, String aksi) {
-        this.idcustomer = idcustomer;
+    public HewanDAO(String idhewan, String nama, String tgllahir, String idjenis, String idukuran, String created_at, String updated_at, String deleted_at, String aktor, String aksi, String idcustomer) {
+        this.idhewan = idhewan;
         this.nama = nama;
-        this.notelp = notelp;
-        this.alamat = alamat;
         this.tgllahir = tgllahir;
+        this.idjenis = idjenis;
+        this.idukuran = idukuran;
         this.created_at = created_at;
         this.updated_at = updated_at;
         this.deleted_at = deleted_at;
         this.aktor = aktor;
         this.aksi = aksi;
-    }
-
-    public String getIdcustomer() {
-        return idcustomer;
-    }
-
-    public void setIdcustomer(String idcustomer) {
         this.idcustomer = idcustomer;
+    }
+
+    public String getIdhewan() {
+        return idhewan;
+    }
+
+    public void setIdhewan(String idhewan) {
+        this.idhewan = idhewan;
     }
 
     public String getNama() {
@@ -55,28 +57,28 @@ public class CustomerDAO {
         this.nama = nama;
     }
 
-    public String getNotelp() {
-        return notelp;
-    }
-
-    public void setNotelp(String notelp) {
-        this.notelp = notelp;
-    }
-
-    public String getAlamat() {
-        return alamat;
-    }
-
-    public void setAlamat(String alamat) {
-        this.alamat = alamat;
-    }
-
     public String getTgllahir() {
         return tgllahir;
     }
 
     public void setTgllahir(String tgllahir) {
         this.tgllahir = tgllahir;
+    }
+
+    public String getIdjenis() {
+        return idjenis;
+    }
+
+    public void setIdjenis(String idjenis) {
+        this.idjenis = idjenis;
+    }
+
+    public String getIdukuran() {
+        return idukuran;
+    }
+
+    public void setIdukuran(String idukuran) {
+        this.idukuran = idukuran;
     }
 
     public String getCreated_at() {
@@ -117,5 +119,13 @@ public class CustomerDAO {
 
     public void setAksi(String aksi) {
         this.aksi = aksi;
+    }
+
+    public String getIdcustomer() {
+        return idcustomer;
+    }
+
+    public void setIdcustomer(String idcustomer) {
+        this.idcustomer = idcustomer;
     }
 }

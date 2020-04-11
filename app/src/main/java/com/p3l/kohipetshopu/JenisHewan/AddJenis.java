@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -55,8 +57,12 @@ public class AddJenis extends AppCompatActivity {
                     jenisDAOCall.enqueue(new Callback<List<JenisHewanDAO>>() {
                         @Override
                         public void onResponse(Call<List<JenisHewanDAO>> call, Response<List<JenisHewanDAO>> response) {
+
+                            SharedPreferences mSettings = getSharedPreferences("Login", Context.MODE_PRIVATE);
+                            String aktor = mSettings.getString("id","2");
+
                             ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-                            Call<JenisHewanDAO> JenisHewanDAO = apiService.createJenis(etNamajenis.getText().toString());
+                            Call<JenisHewanDAO> JenisHewanDAO = apiService.createJenis(etNamajenis.getText().toString(),aktor);
                             JenisHewanDAO.enqueue(new Callback<JenisHewanDAO>() {
                                 @Override
                                 public void onResponse(Call<JenisHewanDAO> call, Response<JenisHewanDAO> response) {

@@ -3,7 +3,9 @@ package com.p3l.kohipetshopu.Layanan;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -39,8 +41,12 @@ public class EditLayanan extends AppCompatActivity {
                 if(etNama.getText().length() == 0  || etHarga.getText().length() == 0){
                     Toast.makeText(EditLayanan.this, "Masih Kosong", Toast.LENGTH_SHORT).show();
                 }else{
+
+                    SharedPreferences mSettings = getSharedPreferences("Login", Context.MODE_PRIVATE);
+                    String aktor = mSettings.getString("id","2");
+
                     ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-                    Call<LayananDAO> layananDAOCall = apiService.editLayanan(getIntent().getStringExtra("idlayanan"),etNama.getText().toString(),etHarga.getText().toString());
+                    Call<LayananDAO> layananDAOCall = apiService.editLayanan(getIntent().getStringExtra("idlayanan"),etNama.getText().toString(),etHarga.getText().toString(),aktor);
 
                    // System.out.println(getIntent().getStringExtra("idlayanan")+" "+etNama.getText().toString());
 

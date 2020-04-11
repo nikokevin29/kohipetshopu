@@ -4,23 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment_CS.Customer_RUDS.ViewCustomer">
+    tools:context=".Fragment_CS.Hewan_RUDS.ViewHewan">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true">
         <LinearLayout
-            android:id="@+id/linearCustomer"
+            android:id="@+id/linearhewan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_centerHorizontal="true">
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Kelola Customer"
+                android:text="Kelola Hewan"
                 android:padding="10dp"
                 android:textColor="@color/Black"
                 android:textSize="30dp"
@@ -34,14 +29,11 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_customer"
-            android:layout_below="@id/linearCustomer"
+            android:id="@+id/recycler_view_hewan"
+            android:layout_below="@id/linearhewan"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"/>
-
-    </RelativeLayout>
-
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/refresh_data"
@@ -53,5 +45,4 @@
         android:layout_marginBottom="20dp"
         app:fabSize="auto"
         app:srcCompat="@drawable/ic_refresh" />
-
 </RelativeLayout>

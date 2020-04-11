@@ -1,74 +1,69 @@
-package com.p3l.kohipetshopu.Fragment_CS.Customer;
+package com.p3l.kohipetshopu.Fragment_CS.Hewan_RUDS;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.p3l.kohipetshopu.API.ApiClient;
 import com.p3l.kohipetshopu.API.ApiInterface;
+import com.p3l.kohipetshopu.JenisHewan.JenisHewanDAO;
 import com.p3l.kohipetshopu.R;
+import com.p3l.kohipetshopu.UkuranHewan.UkuranHewanDAO;
 
 import java.util.ArrayList;
 import java.util.List;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.MyViewHolder> implements Filterable {
+public class AdapterHewan extends RecyclerView.Adapter<AdapterHewan.MyViewHolder> implements Filterable {
 
     private Context context;
-    private List<CustomerDAO> resultFiltered;
-    private CustomerAdapterListener listener;
-    public AdapterCustomer(Context context, List<CustomerDAO> result, CustomerAdapterListener listener){
+    private List<HewanDAO> resultFiltered;
+    HewanAdapterListener listener;
+    public AdapterHewan(Context context, List<HewanDAO> result, HewanAdapterListener listener){
         this.context = context;
         this.resultFiltered = result;
-        this.listener = listener;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.adapter_customer,parent,false);
+        View v = LayoutInflater.from(context).inflate(R.layout.adapter_hewan,parent,false);
         final MyViewHolder holder = new MyViewHolder(v);
 
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterCustomer.MyViewHolder holder, int position) {
-        final CustomerDAO data = resultFiltered.get(position);
+    public void onBindViewHolder(@NonNull AdapterHewan.MyViewHolder holder, int position) {
+        final HewanDAO data = resultFiltered.get(position);
         holder.nama.setText(data.getNama());
-        holder.notelp.setText(data.getNotelp());
-        holder.alamat.setText(data.getAlamat());
         holder.tgllahir.setText(data.getTgllahir());
+        holder.jenis.setText(data.getIdjenis());
+        holder.ukuran.setText(data.getIdukuran());
+        holder.pemilik.setText(data.getIdcustomer());
 
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Bundle bundle = new Bundle();
-//
-//                bundle.putString("nama", data.getNama());
-//                bundle.putString("created_at", data.getCreated_at());
-//                bundle.putString("updated_at", data.getUpdated_at());
-//                bundle.putString("deleted_at", data.getDeleted_at());
-//                bundle.putString("aksi", data.getAksi());
-//                bundle.putString("aktor", data.getAktor());
-
+                Toast.makeText(context, "Kamu Menekan "+data.getNama(), Toast.LENGTH_SHORT).show();
             }
         });
         holder.parent.setOnLongClickListener(new View.OnLongClickListener() {
@@ -89,13 +84,13 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.MyView
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                List<CustomerDAO> filteredList = new ArrayList<>();
+                List<HewanDAO> filteredList = new ArrayList<>();
                 if (constraint == null || constraint.length() == 0) {
                     filteredList.addAll(resultFiltered);
                 } else {
                     String fillPattern = constraint.toString().toLowerCase().trim();
-                    for (CustomerDAO row : resultFiltered) {
-                        if (row.getNama().toLowerCase().contains(fillPattern)) {
+                    for (HewanDAO row : resultFiltered) {
+                        if (row.getNama().toLowerCase().contains(fillPattern)){
                             filteredList.add(row);
                         }
                     }
@@ -115,46 +110,57 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.MyView
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        private TextView nama,notelp,alamat,tgllahir;
+        private TextView nama,tgllahir,jenis,ukuran,pemilik;
         private CardView parent;
 
         public MyViewHolder(@NonNull View itemView)
         {
             super(itemView);
-            nama = itemView.findViewById(R.id.tvNamaCustomer);
-            notelp = itemView.findViewById(R.id.tvNotelpCustomer);
-            alamat = itemView.findViewById(R.id.tvAlamatCustomer);
-            tgllahir = itemView.findViewById(R.id.tvTgllahirCustomer);
-            parent =  itemView.findViewById(R.id.ParentCustomer);
+            nama = itemView.findViewById(R.id.tvNamaHewan);
+            tgllahir = itemView.findViewById(R.id.tvTgllahirHewan);
+
+            jenis = itemView.findViewById(R.id.tvJenisHewan);
+            ukuran = itemView.findViewById(R.id.tvUkuranHewan);
+            pemilik = itemView.findViewById(R.id.tvNamaPemilik);
+
+            parent =  itemView.findViewById(R.id.ParentHewan);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onHewanSelected(resultFiltered.get(getAdapterPosition()));
+                }
+            });
         }
     }
-    private void startIntent(CustomerDAO hasil){
-        Intent edit = new Intent(context, EditCustomer.class);
-        edit.putExtra("idcustomer",hasil.getIdcustomer());
+    private void startIntent(HewanDAO hasil){
+        Intent edit = new Intent(context, EditHewan.class);//nama,tgllahir,jenis,ukuran,pemilik
+        edit.putExtra("idhewan",hasil.getIdhewan());
         edit.putExtra("nama",hasil.getNama());
-        edit.putExtra("notelp",hasil.getNotelp());
-        edit.putExtra("alamat",hasil.getAlamat());
         edit.putExtra("tgllahir",hasil.getTgllahir());
+        edit.putExtra("idjenis",hasil.getIdjenis());
+        edit.putExtra("idukuran",hasil.getIdukuran());
+        edit.putExtra("idcustomer",hasil.getIdcustomer());
+        System.out.println("BNN "+hasil.getIdcustomer());
         context.startActivity(edit);
     }
-    @SuppressLint("PrivateResource")
-    private void showDialog(final CustomerDAO hasil, int position){
+
+    private void showDialog(final HewanDAO hasil, int position){
         // set pesan dari dialog
         AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-                dialog
+        dialog
                 .setTitle("Aksi apa yang akan anda lakukan?")
                 .setIcon(R.mipmap.ic_launcher)
                 .setCancelable(false)
                 .setPositiveButton("Edit",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int idcustomer) {
+                    public void onClick(DialogInterface dialog,int id) {
                         // update
                         startIntent(hasil);
                     }
                 })
                 .setNegativeButton("Hapus",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int idcustomer) {
+                    public void onClick(DialogInterface dialog, int id) {
                         //delete
-                        delete(hasil.getIdcustomer());
+                        delete(hasil.getIdhewan());
                         notifyItemRemoved(position);
                         resultFiltered.remove(position);
                     }
@@ -162,14 +168,15 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.MyView
                 .setNeutralButton("Batal", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
+                        //tutup dialog
                         dialog.cancel();
                     }
                 }).show();
     }
 
-    private void delete(String id){//Delete Customer
+    private void delete(String id){//Delete Hewan
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<Void> callDAO = apiService.deleteCustomer(id);
+        Call<Void> callDAO = apiService.deleteHewan(id);
         callDAO.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -182,7 +189,8 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.MyView
             }
         });
     }
-    public interface CustomerAdapterListener {
-        void onCustomerSelected(CustomerDAO customerDAO);
+    public interface HewanAdapterListener {
+        void onHewanSelected(HewanDAO hewanDAO);
     }
+
 }

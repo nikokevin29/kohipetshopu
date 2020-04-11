@@ -53,13 +53,20 @@
         android:ems="10"
         android:inputType="number"
         android:hint="Stok Minimum" />
+    <Spinner
+        android:id="@+id/spinner_edit_supplier_produk"
+        android:layout_width="220dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/etStokMinimumProduk_edit"/>
     <Button
         android:id="@+id/btn_Submit_edit_produk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sumbit"
         android:textColor="@color/WhiteSmoke"
-        android:layout_below="@id/etStokMinimumProduk_edit"
+        android:layout_below="@id/spinner_edit_supplier_produk"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="@drawable/roundedbutton"/>

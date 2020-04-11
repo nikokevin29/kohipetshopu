@@ -37,7 +37,7 @@ import retrofit2.Response;
 public class Login extends AppCompatActivity {
     private TextInputLayout etUsername,etPassword;
     private Button btnLogin;
-    public static PegawaiDAO pegawaiDAO;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +69,7 @@ public class Login extends AppCompatActivity {
                     public void onResponse(Call<PegawaiDAO> call, Response<PegawaiDAO> response) {
                         if(response.isSuccessful() && response.body()!=null){
                             progress.dismiss();
-
+                            String id = response.body().getIdpegawai().trim();
                             String role = response.body().getRole().trim();
                             String nama = response.body().getNama();
                             String username = response.body().getUsername();
@@ -89,6 +89,7 @@ public class Login extends AppCompatActivity {
                                 Intent i =  new Intent(Login.this,MainView.class);
 
                                 SharedPreferences.Editor editor = mSettings.edit();
+                                editor.putString("id",id);
                                 editor.putString("nama",nama);
                                 editor.putString("username",username);
                                 editor.putString("role",role);
@@ -105,6 +106,7 @@ public class Login extends AppCompatActivity {
                                 startActivity(i);
 
                                 SharedPreferences.Editor editor = mCS.edit();
+                                editor.putString("id",id);
                                 editor.putString("nama",nama);
                                 editor.putString("username",username);
                                 editor.putString("role",role);
@@ -125,6 +127,7 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<PegawaiDAO> call, Throwable t) {
                         Log.e("debug", "onFailure: ERROR > " + t.toString());
+                        System.out.println("GG"+t.getMessage());
                         Toast.makeText(Login.this, "Login Gagal", Toast.LENGTH_SHORT).show();
                         progress.dismiss();
                     }

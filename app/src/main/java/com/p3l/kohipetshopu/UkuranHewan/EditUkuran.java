@@ -3,7 +3,9 @@ package com.p3l.kohipetshopu.UkuranHewan;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -38,8 +40,13 @@ public class EditUkuran extends AppCompatActivity {
                 if(etNamaUkuran_update.getText().length() == 0){
                     Toast.makeText(EditUkuran.this, "Masih Kosong", Toast.LENGTH_SHORT).show();
                 }else{
+
+
+                    SharedPreferences mSettings = getSharedPreferences("Login", Context.MODE_PRIVATE);
+                    String aktor = mSettings.getString("id","2");
+
                     ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-                    Call<UkuranHewanDAO> tipsDAOCall = apiService.editUkuran(getIntent().getStringExtra("idukuran"),etNamaUkuran_update.getText().toString());
+                    Call<UkuranHewanDAO> tipsDAOCall = apiService.editUkuran(getIntent().getStringExtra("idukuran"),etNamaUkuran_update.getText().toString(),aktor);
 
                     System.out.println(getIntent().getStringExtra("idukuran")+" "+etNamaUkuran_update.getText().toString());
 
@@ -47,6 +54,7 @@ public class EditUkuran extends AppCompatActivity {
                     progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                     progress.setCancelable(false);
                     progress.show();
+
 
                     tipsDAOCall.enqueue(new Callback<UkuranHewanDAO>() {
                         @Override

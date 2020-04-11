@@ -3,7 +3,9 @@ package com.p3l.kohipetshopu.UkuranHewan;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -42,11 +44,14 @@ public class AddUkuran extends AppCompatActivity {
                     progress.setCancelable(false);
                     progress.show();
 
+                    SharedPreferences mSettings = getSharedPreferences("Login", Context.MODE_PRIVATE);
+                    String aktor = mSettings.getString("id","2");
+
                     ukuranDAOCall.enqueue(new Callback<List<UkuranHewanDAO>>() {
                         @Override
                         public void onResponse(Call<List<UkuranHewanDAO>> call, Response<List<UkuranHewanDAO>> response) {
                             ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-                            Call<UkuranHewanDAO> UkuranHewanDAO = apiService.createUkuran(etNamaukuran.getText().toString());
+                            Call<UkuranHewanDAO> UkuranHewanDAO = apiService.createUkuran(etNamaukuran.getText().toString(),aktor);
                             UkuranHewanDAO.enqueue(new Callback<UkuranHewanDAO>() {
                                 @Override
                                 public void onResponse(Call<UkuranHewanDAO> call, Response<UkuranHewanDAO> response) {

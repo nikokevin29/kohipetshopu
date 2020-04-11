@@ -3,7 +3,9 @@ package com.p3l.kohipetshopu.Supplier;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -50,13 +52,17 @@ public class AddSupplier extends AppCompatActivity {
                     progress.setCancelable(false);
                     progress.show();
 
+                    SharedPreferences mSettings = getSharedPreferences("Login", Context.MODE_PRIVATE);
+                    String aktor = mSettings.getString("id","2");
+
                     supplierDAOCall.enqueue(new Callback<List<SupplierDAO>>() {
                         @Override
                         public void onResponse(Call<List<SupplierDAO>> call, Response<List<SupplierDAO>> response) {
                             ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
                             Call<SupplierDAO> SupplierDAO = apiService.createSupplier(etNamaSupplier.getText().toString(),
                                                                                       etAlamatSupplier.getText().toString(),
-                                                                                      etNotelpSupplier.getText().toString());
+                                                                                      etNotelpSupplier.getText().toString(),
+                                                                                      aktor);
                             SupplierDAO.enqueue(new Callback<SupplierDAO>() {
                                 @Override
                                 public void onResponse(Call<SupplierDAO> call, Response<SupplierDAO> response) {

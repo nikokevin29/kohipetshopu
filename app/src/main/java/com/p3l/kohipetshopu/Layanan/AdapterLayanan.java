@@ -1,12 +1,12 @@
 package com.p3l.kohipetshopu.Layanan;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -161,8 +161,8 @@ public class AdapterLayanan extends RecyclerView.Adapter<AdapterLayanan.MyViewHo
     @SuppressLint("PrivateResource")
     private void showDialog(final LayananDAO hasil,int position){
         //memunculkan Dialog Saat Long Press Adapter
-
-        new MaterialAlertDialogBuilder(context, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Centered)
+        androidx.appcompat.app.AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+        alertDialogBuilder
             .setTitle("Aksi apa yang akan anda lakukan?")
             .setIcon(R.mipmap.ic_launcher)
             .setCancelable(false)

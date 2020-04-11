@@ -3,7 +3,9 @@ package com.p3l.kohipetshopu.Supplier;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +36,9 @@ public class EditSupplier extends AppCompatActivity {
 
         ProgressDialog progress = new ProgressDialog(this);
 
+        SharedPreferences mSettings = getSharedPreferences("Login", Context.MODE_PRIVATE);
+        String aktor = mSettings.getString("id","2");
+
         btn_Submit_update_supplier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,7 +49,7 @@ public class EditSupplier extends AppCompatActivity {
                     Call<SupplierDAO> supplierDAOCall = apiService.editSupplier(getIntent().getStringExtra("idsupplier"),
                                                                                             etNamaSupplier_update.getText().toString(),
                                                                                             etAlamatSupplier_update.getText().toString(),
-                                                                                            etNotelpSupplier_update.getText().toString());
+                                                                                            etNotelpSupplier_update.getText().toString(),aktor);
 
                     System.out.println(getIntent().getStringExtra("idsupplier")+" "+etNamaSupplier_update.getText().toString());
 

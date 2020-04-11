@@ -1,6 +1,7 @@
 package com.p3l.kohipetshopu.API;
 
-import com.p3l.kohipetshopu.Fragment_CS.Customer.CustomerDAO;
+import com.p3l.kohipetshopu.Fragment_CS.Customer_RUDS.CustomerDAO;
+import com.p3l.kohipetshopu.Fragment_CS.Hewan_RUDS.HewanDAO;
 import com.p3l.kohipetshopu.JenisHewan.JenisHewanDAO;
 import com.p3l.kohipetshopu.Layanan.LayananDAO;
 import com.p3l.kohipetshopu.PegawaiDAO;
@@ -33,12 +34,14 @@ public interface ApiInterface {
 
     @POST("/api/jenis_hewan")
     @FormUrlEncoded
-    Call<JenisHewanDAO> createJenis (@Field("nama")String nama);
+    Call<JenisHewanDAO> createJenis (@Field("nama")String nama,
+                                     @Field("aktor")String aktor);
 
     @PUT("/api/jenis_hewan/{idjenis}")
     @FormUrlEncoded
     Call<JenisHewanDAO> editJenis(@Path("idjenis") String idjenis,
-                                  @Field("nama") String nama);
+                                  @Field("nama") String nama,
+                                  @Field("aktor")String aktor);
 
     @DELETE("/api/jenis_hewan/{idjenis}")
     Call<Void> deleteJenis(@Path("idjenis") String idjenis);
@@ -52,12 +55,14 @@ public interface ApiInterface {
 
     @POST("/api/ukuran_hewan")
     @FormUrlEncoded
-    Call<UkuranHewanDAO> createUkuran (@Field("nama")String nama);
+    Call<UkuranHewanDAO> createUkuran (@Field("nama")String nama,
+                                       @Field("aktor") String aktor);
 
     @PUT("/api/ukuran_hewan/{idukuran}")
     @FormUrlEncoded
     Call<UkuranHewanDAO> editUkuran(@Path("idukuran") String idukuran,
-                                  @Field("nama") String nama);
+                                    @Field("nama") String nama,
+                                    @Field("aktor") String aktor);
 
     @DELETE("/api/ukuran_hewan/{idukuran}")
     Call<Void> deleteUkuran(@Path("idukuran") String idukuran);
@@ -72,13 +77,15 @@ public interface ApiInterface {
     @POST("/api/layanan")
     @FormUrlEncoded
     Call<LayananDAO> createLayanan (@Field("nama")String nama,
-                                    @Field("harga") String harga);
+                                    @Field("harga") String harga,
+                                    @Field("aktor") String aktor);
 
     @PUT("/api/layanan/{idlayanan}")
     @FormUrlEncoded
     Call<LayananDAO> editLayanan(@Path("idlayanan") String idlayanan,
                                     @Field("nama") String nama,
-                                    @Field("harga") String harga);
+                                    @Field("harga") String harga,
+                                    @Field("aktor") String aktor);
 
     @DELETE("/api/layanan/{idlayanan}")
     Call<Void> deleteLayanan(@Path("idlayanan") String idlayanan);
@@ -100,21 +107,15 @@ public interface ApiInterface {
             @PartMap Map<String,RequestBody> body);
 
 
-//    @POST("/api/produk")
-//    @FormUrlEncoded
-//    Call<ProdukDAO> createProduk(@Field("nama") String nama,
-//                                 @Field("harga") String harga,
-//                                 @Field("stok") String stok,
-//                                 @Field("stokminimum") String stokminimum,
-//                                 @Field("gambar") String gambar);
-
     @PUT("/api/produk/{idproduk}")
     @FormUrlEncoded
     Call<ProdukDAO> editProduk(@Path("idproduk") String idproduk,
                                @Field("nama") String nama,
                                @Field("harga") String harga,
                                @Field("stok")String stok,
-                               @Field("stokminimum")String stokminimum);
+                               @Field("stokminimum")String stokminimum,
+                               @Field("idsupplier")String idsupplier,
+                               @Field("aktor") String aktor);
 
     @DELETE("/api/produk/{idproduk}")
     Call<Void> deleteProduk(@Path("idproduk") String idproduk);
@@ -130,14 +131,16 @@ public interface ApiInterface {
     @FormUrlEncoded
     Call<SupplierDAO> createSupplier (@Field("nama")String nama,
                                       @Field("alamat") String alamat,
-                                      @Field("notelp")String notelp);
+                                      @Field("notelp")String notelp,
+                                      @Field("aktor") String aktor);
 
     @PUT("/api/supplier/{idsupplier}")
     @FormUrlEncoded
     Call<SupplierDAO> editSupplier(@Path("idsupplier") String idsupplier,
                                    @Field("nama") String nama,
                                    @Field("alamat") String alamat,
-                                   @Field("notelp") String notelp);
+                                   @Field("notelp") String notelp,
+                                   @Field("aktor") String aktor);
 
     @DELETE("/api/supplier/{idsupplier}")
     Call<Void> deleteSupplier(@Path("idsupplier") String idsupplier);
@@ -152,34 +155,41 @@ public interface ApiInterface {
     Call<CustomerDAO> createCustomer (@Field("nama")String nama,
                                       @Field("notelp")String notelp,
                                       @Field("alamat") String alamat,
-                                      @Field("tgllahir")String tgllahir);
+                                      @Field("tgllahir")String tgllahir,
+                                      @Field("aktor")String aktor);
     @PUT("/api/customer/{idcustomer}")
     @FormUrlEncoded
     Call<CustomerDAO> editCustomer(@Path("idcustomer") String idcustomer,
                                    @Field("nama")String nama,
                                    @Field("notelp")String notelp,
                                    @Field("alamat") String alamat,
-                                   @Field("tgllahir")String tgllahir);
+                                   @Field("tgllahir")String tgllahir,
+                                   @Field("aktor")String aktor);
     @DELETE("/api/customer/{idcustomer}")
     Call<Void> deleteCustomer(@Path("idcustomer") String idcustomer);
 
 
-//    //Hewan
-//    @GET("/api/hewan")
-//    Call<List<HewanDAO>> getAllHewan();
-//    @GET("/api/hewan/search/{nama}")
-//    Call<HewanDAO> searchNamaHewan(@Path("nama") String nama);
-//    @POST("/api/hewan")
-//    @FormUrlEncoded
-//    Call<HewanDAO> createHewan (@Field("nama")String nama,
-//                                   @Field("tgllahir")String tgllahir);
-//    @PUT("/api/hewan/{idhewan}")
-//    @FormUrlEncoded
-//    Call<HewanDAO> editHewan(@Path("idhewan") String idhewan,
-//                                @Field("nama")String nama,
-//                                @Field("tgllahir")String tgllahir);
-//    @DELETE("/api/hewan/{idhewan}")
-//    Call<Void> deleteHewan(@Path("idhewan") String idhewan);
+    //Hewan
+    @GET("/api/hewan")
+    Call<List<HewanDAO>> getAllHewan();
+    @GET("/api/hewan/search/{nama}")
+    Call<HewanDAO> searchNamaHewan(@Path("nama") String nama);
+    @POST("/api/hewan")
+    @FormUrlEncoded
+    Call<HewanDAO> createHewan (@Field("nama")String nama,
+                                @Field("tgllahir")String tgllahir,
+                                @Field("aktor")String aktor);
+    @PUT("/api/hewan/{idhewan}")
+    @FormUrlEncoded
+    Call<HewanDAO> editHewan(@Path("idhewan") String idhewan,
+                             @Field("nama")String nama,
+                             @Field("tgllahir")String tgllahir,
+                             @Field("idjenis")String idjenis,
+                             @Field("idukuran")String idukuran,
+                             @Field("idcustomer")String idcustomer,
+                             @Field("aktor")String aktor);
+    @DELETE("/api/hewan/{idhewan}")
+    Call<Void> deleteHewan(@Path("idhewan") String idhewan);
 
 
 }

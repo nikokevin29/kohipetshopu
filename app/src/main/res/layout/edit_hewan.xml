@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment_CS.Customer_RUDS.EditCustomer">
-
+    tools:context=".Fragment_CS.Hewan_RUDS.EditHewan">
     <TextView
         android:id="@+id/titleUbahCustomer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ubah Customer"
+        android:text="Ubah Hewan"
         android:textColor="@color/Black"
         android:layout_centerHorizontal="true"
         android:textSize="25dp"
         android:layout_margin="30dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edit_nama_customer"
+        android:id="@+id/edit_nama_hewan"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
@@ -26,43 +26,54 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:hint="Nama"/>
+            android:hint="Nama Hewan"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edit_notelp_customer"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:layout_below="@+id/edit_nama_customer"
-        android:layout_centerHorizontal="true">
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="Nomor Telepon"/>
-    </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edit_alamat_customer"
+    <LinearLayout
+        android:id="@+id/linearJenisUkuran"
+        android:layout_below="@+id/edit_nama_hewan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        android:layout_centerHorizontal="true">
+
+        <Spinner
+            android:id="@+id/spinnerJenisHewan"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:autofillHints="Jenis"
+            android:spinnerMode="dropdown"
+            android:textAlignment="center"
+            android:layout_marginHorizontal="5dp"/>
+
+        <Spinner
+            android:id="@+id/spinnerUkuranHewan"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:autofillHints="Ukuran"
+            android:spinnerMode="dropdown"
+            android:textAlignment="center"
+            android:layout_marginHorizontal="5dp"/>
+    </LinearLayout>
+
+    <Spinner
+        android:id="@+id/spinnerPemilik"
+        android:layout_below="@id/linearJenisUkuran"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:layout_below="@+id/edit_notelp_customer"
-        android:layout_centerHorizontal="true">
-        <com.google.android.material.textfield.TextInputEditText
-            android:lines="4"
-            android:maxLines="12"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
-            android:scrollbars="vertical"
-            android:hint="Alamat"/>
-    </com.google.android.material.textfield.TextInputLayout>
+        android:autofillHints="Nama Pemilik"
+        android:spinnerMode="dropdown"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:padding="10dp"
+        android:layout_margin="10dp"/>
 
     <LinearLayout
         android:id="@+id/linear_edit_tgllahir"
-        android:layout_below="@+id/edit_alamat_customer"
+        android:layout_below="@+id/spinnerPemilik"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -71,30 +82,31 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/show_tgllahir_customer"
+            android:id="@+id/show_tgllahir_hewan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18dp"
             android:layout_marginRight="30dp"
             android:layout_weight="1"
-            android:text="April 9,2020"/>
+            android:text="THN-BLN-TGL"
+            android:layout_gravity="center"/>
 
         <Button
-            android:id="@+id/edit_tgllahir_customer"
+            android:id="@+id/edit_tgllahir_hewan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/roundedbutton"
             android:drawableLeft="@drawable/icon_date"
             android:padding="5dp"
-            android:text="Tanggal lahir"
+            android:text="SET\n   TANGGAL LAHIR   "
             android:textColor="@color/White"
             android:textSize="10dp" />
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_submit_edit_customer"
+        android:id="@+id/btn_submit_edit_hewan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/roundedbutton"
@@ -103,6 +115,4 @@
         android:layout_below="@+id/linear_edit_tgllahir"
         android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"/>
-
-
 </RelativeLayout>

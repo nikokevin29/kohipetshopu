@@ -3,7 +3,9 @@ package com.p3l.kohipetshopu.Layanan;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -38,44 +40,35 @@ public class AddLayanan extends AppCompatActivity {
                 if(etNamalayanan.getText().length() == 0){
                     Toast.makeText(AddLayanan.this, "Masih Kosong", Toast.LENGTH_SHORT).show();
                 }else{
-                    ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-                    Call<List<LayananDAO>> layananDAOCall = apiService.getAllLayanan();
 
                     progress.setMessage("Memproses data . . . ");
                     progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                     progress.setCancelable(false);
                     progress.show();
 
-                    layananDAOCall.enqueue(new Callback<List<LayananDAO>>() {
+                    SharedPreferences mSettings = getSharedPreferences("Login", Context.MODE_PRIVATE);
+                    String aktor = mSettings.getString("id","2");
+
+                    ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+                    Call<LayananDAO> LayananDAO = apiService.createLayanan(etNamalayanan.getText().toString(),etHarga.getText().toString(),aktor);
+                    LayananDAO.enqueue(new Callback<LayananDAO>() {
                         @Override
-                        public void onResponse(Call<List<LayananDAO>> call, Response<List<LayananDAO>> response) {
-                            ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-                            Call<LayananDAO> LayananDAO = apiService.createLayanan(etNamalayanan.getText().toString(),etHarga.getText().toString());
-                            LayananDAO.enqueue(new Callback<LayananDAO>() {
-                                @Override
-                                public void onResponse(Call<LayananDAO> call, Response<LayananDAO> response) {
-                                    Toast.makeText(AddLayanan.this, "Sukses Tambah", Toast.LENGTH_SHORT).show();
-                                    progress.dismiss();
-                                }
-                                @Override
-                                public void onFailure(Call<LayananDAO> call, Throwable t) {
-                                    Toast.makeText(AddLayanan.this, "Sukses Tambah.", Toast.LENGTH_SHORT).show();
-                                    Intent i = new Intent(AddLayanan.this, ViewLayanan.class);
-                                    i.putExtra("from","layanan");
-                                    System.out.println(t.getMessage());
-                                    progress.dismiss();
-                                    startActivity(i);
-                                    finish();
-                                }
-                            });
+                        public void onResponse(Call<LayananDAO> call, Response<LayananDAO> response) {
+                            Toast.makeText(AddLayanan.this, "Sukses Tambah", Toast.LENGTH_SHORT).show();
+                            progress.dismiss();
                         }
                         @Override
-                        public void onFailure(Call<List<LayananDAO>> call, Throwable t) {
-                            System.out.println("gagal");
+                        public void onFailure(Call<LayananDAO> call, Throwable t) {
+                            Toast.makeText(AddLayanan.this, "Sukses Tambah.", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(AddLayanan.this, ViewLayanan.class);
+                            i.putExtra("from","layanan");
+                            System.out.println(t.getMessage());
+                            progress.dismiss();
+                            startActivity(i);
+                            finish();
                         }
                     });
                 }
-
             }
         });
     }
