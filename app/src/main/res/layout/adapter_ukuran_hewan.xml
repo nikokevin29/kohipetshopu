@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -13,55 +14,113 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:padding="8dp">
-
         <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
         <TextView
-            android:id="@+id/tvNamaUkuranSaja"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nama Ukuran Hewan : "
-            android:textSize="14dp"
-            android:textStyle="bold"/>
+            android:text="Ukuran Hewan"
+            android:textSize="12dp"/>
+         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aksi Terakhir"
+            android:textSize="12dp"/>
         <TextView
-            android:id="@+id/tvNamaUkuranHewan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=" XL / L"
-            android:textColor="@color/Black"
-            android:textSize="14dp"
-            android:textStyle="bold"/>
+            android:text="Pelaku Terakhir"
+            android:textSize="12dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dibuat"
+            android:textSize="7dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Diupdate"
+            android:textSize="7dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DiDelete"
+            android:textSize="7dp"/>
     </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
             <TextView
-                android:id="@+id/tvJudulCreated_at"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Dibuat : "
+                android:text=" : "
+                android:textColor="@color/Black"
+                android:textSize="12dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" : "
+                android:textColor="@color/Black"
+                android:textSize="12dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" : "
+                android:textColor="@color/Black"
+                android:textSize="12dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" : "
+                android:textColor="@color/Black"
                 android:textSize="7dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" : "
+                android:textColor="@color/Black"
+                android:textSize="7dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" : "
+                android:textColor="@color/Black"
+                android:textSize="7dp"/>
+        </LinearLayout> <!--TITIK DUA-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+            <TextView
+                android:id="@+id/tvNamaUkuranHewan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="XL / L"
+                android:textColor="@color/Black"
+                android:textSize="12dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/tvAksi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tambah/Edit"
+                android:textSize="12dp" />
+            <TextView
+                android:id="@+id/tvAktor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Owner / CS"
+                android:textSize="12dp"/>
             <TextView
                 android:id="@+id/tvCreated_at"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="created_at"
-                android:textSize="7dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/tvJudulUpdated_at"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Diupdate : "
                 android:textSize="7dp"/>
             <TextView
                 android:id="@+id/tvUpdated_at"
@@ -69,64 +128,12 @@
                 android:layout_height="wrap_content"
                 android:text="updated_at"
                 android:textSize="7dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/tvJudulDeleted_at"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="DiDelete :"
-                android:textSize="7dp"/>
             <TextView
                 android:id="@+id/tvDeleted_at"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="deleted_at"
                 android:textSize="7dp"/>
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/judulSaja"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Aksi Terakhir Dilakukan :"
-                android:textSize="13dp"/>
-            <TextView
-                android:id="@+id/tvAksi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text=" Tambah/Edit"
-                android:textSize="13dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/tvJudulAktor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Pelaku Terakhir : "
-                android:textSize="12dp"
-                android:layout_marginTop="3dp"/>
-            <TextView
-                android:id="@+id/tvAktor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Owner / CS"
-                android:textSize="12dp"
-                android:layout_marginTop="3dp"/>
         </LinearLayout>
 
     </LinearLayout>

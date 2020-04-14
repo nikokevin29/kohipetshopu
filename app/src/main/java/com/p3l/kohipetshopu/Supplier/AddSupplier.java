@@ -41,7 +41,7 @@ public class AddSupplier extends AppCompatActivity {
         btn_Submit_add_supplier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(etNamaSupplier.getText().length() == 0 || etNotelpSupplier.getText().length() == 0 || etNotelpSupplier.getText().length() == 0){
+                if(etNamaSupplier.getText().length() == 0 || etNotelpSupplier.getText().length() == 0 || etAlamatSupplier.getText().length() == 0){
                     Toast.makeText(AddSupplier.this, "Masih Kosong", Toast.LENGTH_SHORT).show();
                 }else{
                     ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);

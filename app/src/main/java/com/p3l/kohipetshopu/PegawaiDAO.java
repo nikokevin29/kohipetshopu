@@ -11,7 +11,7 @@ public class PegawaiDAO {
     String alamat;
     @SerializedName("tgllahir")
     String tgllahir;
-    @SerializedName("noTelp")
+    @SerializedName("notelp")
     String noTelp;
     @SerializedName("role")
     String role;

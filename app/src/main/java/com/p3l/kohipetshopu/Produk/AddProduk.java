@@ -93,7 +93,7 @@ public class AddProduk extends AppCompatActivity {
             public void onClick(View v) {
                 int cekstok = Integer.parseInt(stok.getText().toString());
                 int cekstokmin = Integer.parseInt(stokmin.getText().toString());
-                if(namaProduk.getText().length() == 0 || Harga.getText().length() == 0 ||  stok.getText().length() == 0  ||  stokmin.getText().length() == 0 ){
+                if(namaProduk.getText().length() == 0 || Harga.getText().length() == 0 ||  stok.getText().length() == 0  ||  stokmin.getText().length() == 0){
                     Toast.makeText(AddProduk.this, "Masih Kosong", Toast.LENGTH_SHORT).show();
                 }
                 else if(cekstokmin > cekstok ){

@@ -54,7 +54,6 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.My
         holder.nama.setText(jenis.getNama());
         holder.created_at.setText(jenis.getCreated_at());
         holder.updated_at.setText(jenis.getUpdated_at());
-        holder.deleted_at.setText(jenis.getDeleted_at());
         holder.aksi.setText(jenis.getAksi());
         holder.aktor.setText(jenis.getAktor());
 
@@ -66,7 +65,6 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.My
                 data.putString("nama", jenis.getNama());
                 data.putString("created_at", jenis.getCreated_at());
                 data.putString("updated_at", jenis.getUpdated_at());
-                data.putString("deleted_at", jenis.getDeleted_at());
                 data.putString("aksi", jenis.getAksi());
                 data.putString("aktor", jenis.getAktor());
 
@@ -121,7 +119,7 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.My
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        private TextView nama, created_at, updated_at, deleted_at, aksi, aktor;
+        private TextView nama, created_at, updated_at, aksi, aktor;
         private CardView parent;
 
         public MyViewHolder(@NonNull View itemView)
@@ -130,7 +128,6 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.My
             nama = itemView.findViewById(R.id.tvNamaJenisHewan);
             created_at =  itemView.findViewById(R.id.tvCreated_at);
             updated_at = itemView.findViewById(R.id.tvUpdated_at);
-            deleted_at = itemView.findViewById(R.id.tvDeleted_at);
             aksi = itemView.findViewById(R.id.tvAksi);
             aktor = itemView.findViewById(R.id.tvAktor);
             parent =  itemView.findViewById(R.id.ParentJenisHewan);

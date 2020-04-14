@@ -142,6 +142,7 @@ public class AdapterHewan extends RecyclerView.Adapter<AdapterHewan.MyViewHolder
         edit.putExtra("idcustomer",hasil.getIdcustomer());
         System.out.println("BNN "+hasil.getIdcustomer());
         context.startActivity(edit);
+        Toast.makeText(context, hasil.getIdcustomer(), Toast.LENGTH_SHORT).show();
     }
 
     private void showDialog(final HewanDAO hasil, int position){

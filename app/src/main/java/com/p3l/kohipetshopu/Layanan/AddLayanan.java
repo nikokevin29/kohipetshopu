@@ -37,7 +37,7 @@ public class AddLayanan extends AppCompatActivity {
         btn_Submit_add_layanan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(etNamalayanan.getText().length() == 0){
+                if(etNamalayanan.getText().length() == 0 ||etHarga.getText().length() == 0 ){
                     Toast.makeText(AddLayanan.this, "Masih Kosong", Toast.LENGTH_SHORT).show();
                 }else{
 
