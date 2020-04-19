@@ -3,6 +3,7 @@
     <words>
       <w>akun</w>
       <w>alamat</w>
+      <w>barang</w>
       <w>cekstok</w>
       <w>cekstokmin</w>
       <w>galer</w>
@@ -10,9 +11,11 @@
       <w>harga</w>
       <w>hewan</w>
       <w>idcustomer</w>
+      <w>iddetilpemesanan</w>
       <w>idhewan</w>
       <w>idlayanan</w>
       <w>idpegawai</w>
+      <w>idpemesanan</w>
       <w>idproduk</w>
       <w>idsupplier</w>
       <w>jenis</w>
@@ -30,6 +33,7 @@
       <w>pemilik</w>
       <w>penjualan</w>
       <w>pesan</w>
+      <w>pesanan</w>
       <w>posisi</w>
       <w>produk</w>
       <w>saja</w>
@@ -37,8 +41,10 @@
       <w>stokmin</w>
       <w>stokminimum</w>
       <w>sumbit</w>
+      <w>tampil</w>
       <w>telp</w>
       <w>tgllahir</w>
+      <w>tglpesan</w>
       <w>transaksi</w>
     </words>
   </dictionary>

@@ -22,7 +22,9 @@ import com.p3l.kohipetshopu.API.ApiClient;
 import com.p3l.kohipetshopu.API.ApiInterface;
 import com.p3l.kohipetshopu.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -56,6 +58,8 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.My
         holder.updated_at.setText(jenis.getUpdated_at());
         holder.aksi.setText(jenis.getAksi());
         holder.aktor.setText(jenis.getAktor());
+
+
 
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override

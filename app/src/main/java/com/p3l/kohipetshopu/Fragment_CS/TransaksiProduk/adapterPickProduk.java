@@ -1,4 +1,4 @@
-package com.p3l.kohipetshopu.Fragment_Owner.Pemesanan;
+package com.p3l.kohipetshopu.Fragment_CS.TransaksiProduk;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -22,13 +22,13 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class adapterPickProdukPemesanan extends RecyclerView.Adapter<adapterPickProdukPemesanan.MyViewHolder> implements Filterable {
+public class adapterPickProduk extends RecyclerView.Adapter<adapterPickProduk.MyViewHolder> implements Filterable {
 
     private Context context;
     private List<ProdukDAO> resultFiltered;
-    private PickProdukPemesananAdapterListener listener;
+    private PickProdukAdapterListener listener;
 
-    public adapterPickProdukPemesanan(Context context, List<ProdukDAO> result, adapterPickProdukPemesanan.PickProdukPemesananAdapterListener listener){
+    public adapterPickProduk(Context context, List<ProdukDAO> result, adapterPickProduk.PickProdukAdapterListener listener){
         this.context = context;
         this.resultFiltered = result;
         this.listener = listener;
@@ -36,19 +36,19 @@ public class adapterPickProdukPemesanan extends RecyclerView.Adapter<adapterPick
 
     @NonNull
     @Override
-    public adapterPickProdukPemesanan.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.adapter_pick_produk_pemesanan,parent,false);
-        final adapterPickProdukPemesanan.MyViewHolder holder = new adapterPickProdukPemesanan.MyViewHolder(v);
+    public adapterPickProduk.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(context).inflate(R.layout.adapter_pick_produk,parent,false);
+        final adapterPickProduk.MyViewHolder holder = new adapterPickProduk.MyViewHolder(v);
 
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull adapterPickProdukPemesanan.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull adapterPickProduk.MyViewHolder holder, int position) {
         final ProdukDAO produk = resultFiltered.get(position);
         holder.nama.setText(produk.getNama());
         holder.harga.setText(produk.getHarga());
-        holder.stok.setText(produk.getStok());
+        holder.jumlah.setText(produk.getStok());
 
         Picasso.get().load(produk.URLproduk()).fit().into(holder.gambar); //produk.getGambar()
 
@@ -106,7 +106,7 @@ public class adapterPickProdukPemesanan extends RecyclerView.Adapter<adapterPick
         };
     }
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        private TextView nama,harga,stok,stokminimum, aksi, aktor,idsupplier;
+        private TextView nama,harga,jumlah;
         private CardView parent;
         private ImageView gambar;
 
@@ -115,12 +115,8 @@ public class adapterPickProdukPemesanan extends RecyclerView.Adapter<adapterPick
             super(itemView);
             nama = itemView.findViewById(R.id.tvNamaProduk);
             harga = itemView.findViewById(R.id.tvHargaProduk);
-            stok = itemView.findViewById(R.id.tvStokProduk);
-            stokminimum = itemView.findViewById(R.id.tvStokMinimumProduk);
-            aksi = itemView.findViewById(R.id.tvAksi);
-            aktor = itemView.findViewById(R.id.tvAktor);
-            idsupplier = itemView.findViewById(R.id.tvSupplierproduk);
-            gambar = (ImageView) itemView.findViewById(R.id.gambar_produk);
+            jumlah = itemView.findViewById(R.id.tvJumlah);
+            gambar = itemView.findViewById(R.id.gambar_produk);
             parent =  itemView.findViewById(R.id.ParentProduk);
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -133,7 +129,7 @@ public class adapterPickProdukPemesanan extends RecyclerView.Adapter<adapterPick
     }
 
 
-    public interface PickProdukPemesananAdapterListener {
+    public interface PickProdukAdapterListener {
         void onProdukSelected(ProdukDAO produkDAO);
     }
 }

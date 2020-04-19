@@ -1,65 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Fragment_Owner.Pemesanan.TransaksiPemesananFragment">
-    <TextView
-        android:id="@+id/JudulPemesanan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Transaksi Pemesanan"
-        android:textColor="@color/Black"
-        android:textSize="25sp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
-        android:layout_marginTop="20dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/SpinSupplier"
-        android:textColor="@color/Black"
-        android:textSize="10sp"
-        android:layout_centerHorizontal="true"
-        android:text="Nama Supplier :"
-        tools:ignore="SmallSp" />
-    <Spinner
-        android:id="@+id/SpinSupplier"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/JudulPemesanan"
-        android:layout_centerHorizontal="true"
-        android:autofillHints="Supplier" />
-    <LinearLayout
-        android:layout_below="@id/SpinSupplier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        android:layout_centerHorizontal="true"
-        android:weightSum="1">
-        <Button
-            android:id="@+id/tambah_pesanan_barang"
-            android:layout_marginTop="10dp"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Fragment_Owner.Pemesanan.TransaksiPemesananFragment">
+        <TextView
+            android:id="@+id/JudulPemesanan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/roundedbutton"
+            android:text="Transaksi Pemesanan"
+            android:textColor="@color/Black"
+            android:textSize="25sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/SpinSupplier"
+            android:textColor="@color/Black"
+            android:textSize="10sp"
+            android:layout_centerHorizontal="true"
+            android:text="Nama Supplier :"
+            tools:ignore="SmallSp" />
+        <Spinner
+            android:id="@+id/SpinSupplier"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/JudulPemesanan"
+            android:layout_centerHorizontal="true"
+            android:autofillHints="Supplier" />
+        <LinearLayout
+            android:id="@+id/linearAlalaPemesanan"
+            android:layout_below="@id/SpinSupplier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:padding="10dp"
-            android:layout_weight="1"
+            android:layout_centerHorizontal="true"
+            android:weightSum="1">
+            <Button
+                android:id="@+id/tambah_pesanan_barang"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/roundedbutton"
+                android:padding="10dp"
+                android:layout_weight="1"
+                android:textColor="@color/White"
+                android:text="Tambah Pesanan Barang"/>
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tampilan_pemesanan_barang"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearAlalaPemesanan"
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/rounded_button"/>
+        <Button
+            android:id="@+id/Proses_Transaksi_Pemesanan"
+            android:padding="10dp"
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
+            android:text="@string/proses_pemesanan"
             android:textColor="@color/White"
-            android:text="Tambah Pesanan Barang"/>
-    </LinearLayout>
-    <Button
-        android:id="@+id/Proses_Transaksi_Pemesanan"
-        android:padding="10dp"
-        android:layout_margin="15dp"
-        android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content"
-        android:text="@string/proses_pemesanan"
-        android:textColor="@color/White"
-        android:background="@drawable/roundedbutton"
-        android:paddingHorizontal="10dp"/>
-
-
-</RelativeLayout>
+            android:background="@drawable/roundedbutton"
+            android:paddingHorizontal="10dp"/>
+    </RelativeLayout>
+</ScrollView>

@@ -1,4 +1,4 @@
-package com.p3l.kohipetshopu.Fragment_Owner.Pemesanan;
+package com.p3l.kohipetshopu.Fragment_CS.TransaksiProduk;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -24,35 +24,32 @@ import java.util.List;
 
 import retrofit2.*;
 
-public class pemesananViewProduk extends AppCompatActivity implements adapterPickProdukPemesanan.PickProdukPemesananAdapterListener {
+public class ViewPickProduk extends AppCompatActivity implements com.p3l.kohipetshopu.Fragment_CS.TransaksiProduk.adapterPickProduk.PickProdukAdapterListener {
 
     private List<ProdukDAO> ListProduk, ListProdukTemp;
-    adapterPickProdukPemesanan adapterPickProdukPemesanan;
+    adapterPickProduk adapterPickProduk;
     private RecyclerView recyclerProduk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.pemesanan_view_produk);
-        recyclerProduk = findViewById(R.id.recycler_view_produk_pemesanan);
+        setContentView(R.layout.view_pick_produk);
+        recyclerProduk = findViewById(R.id.recycler_view_pick_produk);
 
         ListProduk = new ArrayList<>();
         ListProdukTemp = new ArrayList();
-        adapterPickProdukPemesanan = new adapterPickProdukPemesanan(this, ListProduk, this);
+        adapterPickProduk = new adapterPickProduk(this, ListProduk, this);
         RecyclerView.LayoutManager mLayoutmanager = new LinearLayoutManager(getApplicationContext());
         recyclerProduk.setLayoutManager(mLayoutmanager);
         recyclerProduk.setItemAnimator(new DefaultItemAnimator());
-        recyclerProduk.setAdapter(adapterPickProdukPemesanan);
-
-
+        recyclerProduk.setAdapter(adapterPickProduk);
         loadData();
-
     }//End Of On Create
 
 
     public void loadData() {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<List<ProdukDAO>> produkDAOCall = apiService.getAllProduk();
+        Call<List<ProdukDAO>> DAOCall = apiService.getAllProduk();
 
         ProgressDialog progress = new ProgressDialog(this);
         progress.setMessage("Fetching data");
@@ -60,20 +57,20 @@ public class pemesananViewProduk extends AppCompatActivity implements adapterPic
         progress.setCancelable(false);
         progress.show();
 
-        produkDAOCall.enqueue(new Callback<List<ProdukDAO>>() {
+        DAOCall.enqueue(new Callback<List<ProdukDAO>>() {
             @Override
             public void onResponse(Call<List<ProdukDAO>> call, Response<List<ProdukDAO>> response) {
                 ListProduk.addAll(response.body());
                 ListProdukTemp.addAll(response.body());
-                adapterPickProdukPemesanan.notifyDataSetChanged();
+                adapterPickProduk.notifyDataSetChanged();
                 progress.dismiss();
-                Toast.makeText(pemesananViewProduk.this, "Tekan yang Lama untuk Melakukan Aksi", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ViewPickProduk.this, "Tekan yang Lama untuk Melakukan Aksi", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<List<ProdukDAO>> call, Throwable t) {
                 progress.dismiss();
-                Toast.makeText(pemesananViewProduk.this, "Internet Anda Ampas", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewPickProduk.this, "Ulangi lagi, koneksi bermasalah", Toast.LENGTH_SHORT).show();
                 System.out.println(t.getMessage());
             }
         });
@@ -92,12 +89,11 @@ public class pemesananViewProduk extends AppCompatActivity implements adapterPic
             public boolean onQueryTextSubmit(String query) {
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
                 ListProduk.clear();
                 ListProduk.addAll(ListProdukTemp);
-                adapterPickProdukPemesanan.getFilter().filter(newText);
+                adapterPickProduk.getFilter().filter(newText);
                 return false;
             }
         });

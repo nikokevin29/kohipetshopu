@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import com.p3l.kohipetshopu.API.ApiClient;
 import com.p3l.kohipetshopu.API.ApiInterface;
-import com.p3l.kohipetshopu.Fragment_Owner.Pemesanan.pemesananViewProduk;
+import com.p3l.kohipetshopu.Fragment_CS.TransaksiProduk.ViewPickProduk;
 import com.p3l.kohipetshopu.R;
 import com.p3l.kohipetshopu.Supplier.SupplierDAO;
 
@@ -46,7 +46,7 @@ public class TransaksiPemesananFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selected = parent.getItemAtPosition(position).toString();
-                Toast.makeText(getActivity(), "Anda Memilih Supplier "+selected, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Anda Memilih Supplier "+selected, Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -56,7 +56,7 @@ public class TransaksiPemesananFragment extends Fragment {
         tambahPesananBarang.setOnClickListener(new View.OnClickListener() {// Masuk ke RecycleView Pemilihan Barang untuk Pemesanan
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(), pemesananViewProduk.class);
+                Intent i = new Intent(getActivity(), ViewPickProduk.class);
                 startActivity(i);
             }
         });

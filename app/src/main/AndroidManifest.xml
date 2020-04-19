@@ -19,18 +19,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Fragment_CS.Hewan_RUDS.EditHewan"></activity>
-        <activity android:name=".Fragment_CS.Hewan_RUDS.ViewHewan"
-            android:theme="@style/ActionBar"/>
+        <activity android:name=".Fragment_CS.Customer_RUDS.CreateCustomer"></activity>
+        <activity android:name=".Fragment_CS.TransaksiProduk.ViewTransaksiProduk" />
+        <activity android:name=".Fragment_CS.Hewan_RUDS.EditHewan" />
+        <activity android:name=".Fragment_CS.Hewan_RUDS.CreateHewan" />
+        <activity
+            android:name=".Fragment_CS.Hewan_RUDS.ViewHewan"
+            android:theme="@style/ActionBar" />
         <activity android:name=".Fragment_CS.Hewan_RUDS.AdapterHewan" />
         <activity android:name=".Fragment_CS.Customer_RUDS.EditCustomer" />
         <activity android:name=".Fragment_CS.Customer_RUDS.AdapterCustomer" />
         <activity
             android:name=".Fragment_CS.Customer_RUDS.ViewCustomer"
             android:theme="@style/ActionBar" />
-        <activity android:name=".Fragment_Owner.Pemesanan.adapterPickProdukPemesanan" />
+        <activity android:name=".Fragment_CS.TransaksiProduk.adapterPickProduk" />
         <activity
-            android:name=".Fragment_Owner.Pemesanan.pemesananViewProduk"
+            android:name=".Fragment_CS.TransaksiProduk.ViewPickProduk"
             android:theme="@style/ActionBar" />
         <activity android:name=".AdapterPriceList" />
         <activity android:name=".Supplier.EditSupplier" />
@@ -63,7 +67,7 @@
             android:name=".JenisHewan.ViewJenisHewan"
             android:theme="@style/ActionBar" />
         <activity android:name=".Fragment_CS.AkunCSFragment" />
-        <activity android:name=".Fragment_CS.TransaksiPenjualanFragment" />
+        <activity android:name=".Fragment_CS.TransaksiFragment" />
         <activity android:name=".MainViewCS" />
         <activity android:name=".Fragment_Owner.AkunFragment" />
         <activity android:name=".Fragment_Owner.KelolaFragment" />

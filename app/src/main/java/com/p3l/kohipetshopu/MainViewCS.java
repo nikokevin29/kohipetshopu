@@ -9,7 +9,7 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.p3l.kohipetshopu.Fragment_CS.AkunCSFragment;
-import com.p3l.kohipetshopu.Fragment_CS.TransaksiPenjualanFragment;
+import com.p3l.kohipetshopu.Fragment_CS.TransaksiFragment;
 
 public class MainViewCS extends AppCompatActivity {
 
@@ -21,7 +21,7 @@ public class MainViewCS extends AppCompatActivity {
         setContentView(R.layout.main_view_cs);
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation_view_cs);
-        loadFragment(new TransaksiPenjualanFragment());
+        loadFragment(new TransaksiFragment());
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -29,7 +29,7 @@ public class MainViewCS extends AppCompatActivity {
                 Fragment fragment = null;
                 switch (menuItem.getItemId()) {
                     case R.id.menu_transaksi_penjualan:
-                        fragment = new TransaksiPenjualanFragment();
+                        fragment = new TransaksiFragment();
                         break;
                     case R.id.menu_akun_cs:
                         fragment = new AkunCSFragment();

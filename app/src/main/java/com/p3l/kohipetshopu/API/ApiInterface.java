@@ -2,6 +2,8 @@ package com.p3l.kohipetshopu.API;
 
 import com.p3l.kohipetshopu.Fragment_CS.Customer_RUDS.CustomerDAO;
 import com.p3l.kohipetshopu.Fragment_CS.Hewan_RUDS.HewanDAO;
+import com.p3l.kohipetshopu.Fragment_Owner.Pemesanan.DetilPemesananDAO;
+import com.p3l.kohipetshopu.Fragment_Owner.Pemesanan.PemesananDAO;
 import com.p3l.kohipetshopu.JenisHewan.JenisHewanDAO;
 import com.p3l.kohipetshopu.Layanan.LayananDAO;
 import com.p3l.kohipetshopu.PegawaiDAO;
@@ -178,6 +180,9 @@ public interface ApiInterface {
     @FormUrlEncoded
     Call<HewanDAO> createHewan (@Field("nama")String nama,
                                 @Field("tgllahir")String tgllahir,
+                                @Field("idjenis")String idjenis,
+                                @Field("idukuran")String idukuran,
+                                @Field("idcustomer")String idcustomer,
                                 @Field("aktor")String aktor);
     @PUT("/api/hewan/{idhewan}")
     @FormUrlEncoded
@@ -190,6 +195,43 @@ public interface ApiInterface {
                              @Field("aktor")String aktor);
     @DELETE("/api/hewan/{idhewan}")
     Call<Void> deleteHewan(@Path("idhewan") String idhewan);
+
+    //detil Pemesanan
+    @GET("/api/detil_pemesanan")
+    @FormUrlEncoded
+    Call<List<DetilPemesananDAO>> getAllDetilPemesanan();
+    @POST("/api/detil_pemesanan")
+    @FormUrlEncoded
+    Call<DetilPemesananDAO> createDetilPemesanan (@Field("idproduk")String idproduk,
+                                                  @Field("jumlah")String jumlah,
+                                                  @Field("satuan")String satuan,
+                                                  @Field("idpemesanan")String idpemesanan);
+    @PUT("/api/detil_pemesanan/{iddetilpemesanan}")
+    @FormUrlEncoded
+    Call<DetilPemesananDAO> editDetilPemesanan(@Part("iddetilpemesanan")String iddetilpemesanan,
+                                               @Field("jumlah")String jumlah);
+    @DELETE("/api/detil_pemesanan/{iddetilpemesanan}")
+    Call<Void> deleteDetilPemesanan(@Path("iddetilpemesanan") String iddetilpemesanan);
+    // Pemesanan Barang
+    @GET("/api/pemesanan_barang")
+    @FormUrlEncoded
+    Call<List<PemesananDAO>> getAllPemesanan();
+    @POST("/api/pemesanan_barang")
+    @FormUrlEncoded
+    Call<PemesananDAO> createPemesanan (@Field("idpegawai")String idpegawai,
+                                        @Field("tglpesan")String tglpesan,
+                                        @Field("status")String status);
+    @PUT("/api/pemesanan_barang/{idpemesanan}")
+    @FormUrlEncoded
+    Call<List<PemesananDAO>> editPemesanan(@Path("idpemesanan") String idpemesanan,
+                                           @Field("tglpesan")String tglpesan,
+                                           @Field("status")String status);
+    @DELETE ("/api/pemesanan_barang/{idpemesanan}")
+    Call<Void> deletePemesanan(@Path("idpemesanan") String idpemesanan);
+
+
+
+
 
 
 }

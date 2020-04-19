@@ -3,20 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment_CS.Customer_RUDS.EditCustomer">
+    tools:context=".Fragment_CS.Customer_RUDS.CreateCustomer">
 
     <TextView
         android:id="@+id/titleUbahCustomer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ubah Customer"
+        android:text="Tambah Customer"
         android:textColor="@color/Black"
         android:layout_centerHorizontal="true"
         android:textSize="25dp"
         android:layout_margin="30dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edit_nama_customer"
+        android:id="@+id/tambah_nama_customer"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
@@ -30,11 +30,11 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edit_notelp_customer"
+        android:id="@+id/tambah_notelp_customer"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:layout_below="@+id/edit_nama_customer"
+        android:layout_below="@+id/tambah_nama_customer"
         android:layout_centerHorizontal="true">
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -44,11 +44,11 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edit_alamat_customer"
+        android:id="@+id/tambah_alamat_customer"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:layout_below="@+id/edit_notelp_customer"
+        android:layout_below="@+id/tambah_notelp_customer"
         android:layout_centerHorizontal="true">
         <com.google.android.material.textfield.TextInputEditText
             android:lines="4"
@@ -61,8 +61,8 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
-        android:id="@+id/linear_edit_tgllahir"
-        android:layout_below="@+id/edit_alamat_customer"
+        android:id="@+id/linear_tambah_tgllahir"
+        android:layout_below="@+id/tambah_alamat_customer"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -75,12 +75,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18dp"
-            android:layout_marginRight="30dp"
+            android:paddingHorizontal="10dp"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="2000-01-01"/>
+            android:text="2000-01-01"
+            android:textColor="@color/Black"/>
 
         <Button
-            android:id="@+id/edit_tgllahir_customer"
+            android:id="@+id/tambah_tgllahir_customer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -94,15 +96,14 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_submit_edit_customer"
+        android:id="@+id/btn_submit_tambah_customer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/roundedbutton"
         android:text="SUBMIT"
         android:textColor="@color/White"
-        android:layout_below="@+id/linear_edit_tgllahir"
+        android:layout_below="@+id/linear_tambah_tgllahir"
         android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"/>
-
 
 </RelativeLayout>
