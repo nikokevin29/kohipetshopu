@@ -31,7 +31,7 @@ public class ProdukDAO {
     @SerializedName("idsupplier")
     String idsupplier;
 
-    public ProdukDAO(){}
+    //public ProdukDAO(){}
 
     public ProdukDAO(String idproduk, String nama, String harga, String stok, String stokminimum, String gambar, String created_at, String updated_at, String deleted_at, String aktor, String aksi, String idsupplier) {
         this.idproduk = idproduk;

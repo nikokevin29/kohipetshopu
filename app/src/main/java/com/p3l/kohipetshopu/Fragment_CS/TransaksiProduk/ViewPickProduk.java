@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.p3l.kohipetshopu.API.ApiClient;
@@ -19,33 +20,45 @@ import com.p3l.kohipetshopu.API.ApiInterface;
 import com.p3l.kohipetshopu.Produk.ProdukDAO;
 import com.p3l.kohipetshopu.R;
 
+import com.p3l.kohipetshopu.Fragment_CS.TransaksiProduk.adapterPickProduk;
 import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.*;
 
-public class ViewPickProduk extends AppCompatActivity implements com.p3l.kohipetshopu.Fragment_CS.TransaksiProduk.adapterPickProduk.PickProdukAdapterListener {
+public class ViewPickProduk extends AppCompatActivity  {
 
     private List<ProdukDAO> ListProduk, ListProdukTemp;
     adapterPickProduk adapterPickProduk;
     private RecyclerView recyclerProduk;
+    TextView subtotal_display;
+
+    public static List<DetilPenjualanDAO> tempProduk = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_pick_produk);
         recyclerProduk = findViewById(R.id.recycler_view_pick_produk);
+        subtotal_display = findViewById(R.id.subtotaldisplay);
 
         ListProduk = new ArrayList<>();
         ListProdukTemp = new ArrayList();
-        adapterPickProduk = new adapterPickProduk(this, ListProduk, this);
+        adapterPickProduk = new adapterPickProduk(this, ListProduk);
         RecyclerView.LayoutManager mLayoutmanager = new LinearLayoutManager(getApplicationContext());
         recyclerProduk.setLayoutManager(mLayoutmanager);
         recyclerProduk.setItemAnimator(new DefaultItemAnimator());
         recyclerProduk.setAdapter(adapterPickProduk);
+
         loadData();
     }//End Of On Create
-
+    public void update_subtotal(){
+        double tempsubtotal = 0;
+        for(int i=0;i<tempProduk.size();i++){
+            tempsubtotal = Double.parseDouble(tempProduk.get(i).subtotal);
+        }
+        subtotal_display.setText(String.valueOf(tempsubtotal));
+    }
 
     public void loadData() {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
@@ -109,8 +122,8 @@ public class ViewPickProduk extends AppCompatActivity implements com.p3l.kohipet
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onProdukSelected(ProdukDAO produkDAO) {
-        Toast.makeText(this, "Selected", Toast.LENGTH_SHORT).show();
-    }
+//    @Override
+//    public void onProdukSelected(ProdukDAO produkDAO) {
+//        Toast.makeText(this, "Selected", Toast.LENGTH_SHORT).show();
+//    }
 }

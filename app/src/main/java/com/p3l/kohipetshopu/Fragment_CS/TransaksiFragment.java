@@ -15,8 +15,11 @@ import android.widget.Toast;
 
 import com.p3l.kohipetshopu.Fragment_CS.Customer_RUDS.ViewCustomer;
 import com.p3l.kohipetshopu.Fragment_CS.Hewan_RUDS.ViewHewan;
+import com.p3l.kohipetshopu.Fragment_CS.TransaksiProduk.DetilPenjualanDAO;
 import com.p3l.kohipetshopu.Fragment_CS.TransaksiProduk.ViewTransaksiProduk;
 import com.p3l.kohipetshopu.R;
+
+import java.util.List;
 
 public class TransaksiFragment extends Fragment {
     private Button kelola_customer,kelola_hewan;

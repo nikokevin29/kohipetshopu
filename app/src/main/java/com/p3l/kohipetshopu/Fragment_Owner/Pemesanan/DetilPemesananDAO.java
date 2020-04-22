@@ -15,7 +15,7 @@ public class DetilPemesananDAO {
     @SerializedName("idpemesanan")
     String idpemesanan;
 
-    public DetilPemesananDAO(){}
+    //public DetilPemesananDAO(){}
 
     public DetilPemesananDAO(String iddetilpemesanan, String idproduk, String jumlah, String satuan, String idpemesanan) {
         this.iddetilpemesanan = iddetilpemesanan;

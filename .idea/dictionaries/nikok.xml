@@ -4,27 +4,38 @@
       <w>akun</w>
       <w>alamat</w>
       <w>barang</w>
+      <w>buat</w>
       <w>cekstok</w>
       <w>cekstokmin</w>
+      <w>detil</w>
+      <w>dibeli</w>
+      <w>diskon</w>
       <w>galer</w>
       <w>gambar</w>
       <w>harga</w>
       <w>hewan</w>
       <w>idcustomer</w>
+      <w>iddetilpelayanan</w>
       <w>iddetilpemesanan</w>
+      <w>iddetilpenjualan</w>
       <w>idhewan</w>
       <w>idlayanan</w>
       <w>idpegawai</w>
       <w>idpemesanan</w>
       <w>idproduk</w>
       <w>idsupplier</w>
+      <w>idtransaksipelayanan</w>
+      <w>idtransaksipenjualan</w>
+      <w>ingin</w>
       <w>jenis</w>
       <w>judulharga</w>
+      <w>jumlah</w>
       <w>kelola</w>
       <w>lahir</w>
       <w>layanan</w>
       <w>linearhewan</w>
       <w>lproduk</w>
+      <w>masukan</w>
       <w>namalayanan</w>
       <w>notelp</w>
       <w>pasrsing</w>
@@ -40,9 +51,11 @@
       <w>stok</w>
       <w>stokmin</w>
       <w>stokminimum</w>
+      <w>subtotaldisplay</w>
       <w>sumbit</w>
       <w>tampil</w>
       <w>telp</w>
+      <w>tempsubtotal</w>
       <w>tgllahir</w>
       <w>tglpesan</w>
       <w>transaksi</w>

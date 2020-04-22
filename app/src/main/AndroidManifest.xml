@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Fragment_CS.Customer_RUDS.CreateCustomer"></activity>
+        <activity android:name=".Fragment_CS.TransaksiProduk.adapterViewTransaksi"></activity>
+        <activity android:name=".Fragment_CS.Customer_RUDS.CreateCustomer" />
         <activity android:name=".Fragment_CS.TransaksiProduk.ViewTransaksiProduk" />
         <activity android:name=".Fragment_CS.Hewan_RUDS.EditHewan" />
         <activity android:name=".Fragment_CS.Hewan_RUDS.CreateHewan" />

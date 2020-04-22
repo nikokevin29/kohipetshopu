@@ -2,6 +2,8 @@ package com.p3l.kohipetshopu.API;
 
 import com.p3l.kohipetshopu.Fragment_CS.Customer_RUDS.CustomerDAO;
 import com.p3l.kohipetshopu.Fragment_CS.Hewan_RUDS.HewanDAO;
+import com.p3l.kohipetshopu.Fragment_CS.TransaksiProduk.DetilPenjualanDAO;
+import com.p3l.kohipetshopu.Fragment_CS.TransaksiProduk.TransaksiPenjualanDAO;
 import com.p3l.kohipetshopu.Fragment_Owner.Pemesanan.DetilPemesananDAO;
 import com.p3l.kohipetshopu.Fragment_Owner.Pemesanan.PemesananDAO;
 import com.p3l.kohipetshopu.JenisHewan.JenisHewanDAO;
@@ -95,7 +97,8 @@ public interface ApiInterface {
     //Produk
     @GET("/api/produk")
     Call<List<ProdukDAO>> getAllProduk();
-
+    @GET("/api/produk/getbyid/{idproduk}")
+    Call<ProdukDAO> getProdukbyId(@Path("idproduk")String idproduk);
     @GET("/api/produk/search/{nama}")
     Call<ProdukDAO> searchNamaProduk(@Path("nama") String nama);
 
@@ -198,7 +201,6 @@ public interface ApiInterface {
 
     //detil Pemesanan
     @GET("/api/detil_pemesanan")
-    @FormUrlEncoded
     Call<List<DetilPemesananDAO>> getAllDetilPemesanan();
     @POST("/api/detil_pemesanan")
     @FormUrlEncoded
@@ -229,9 +231,41 @@ public interface ApiInterface {
     @DELETE ("/api/pemesanan_barang/{idpemesanan}")
     Call<Void> deletePemesanan(@Path("idpemesanan") String idpemesanan);
 
+    //detil Penjualan Produk
+    @GET("/api/detil_penjualan")
+    Call<List<DetilPenjualanDAO>> getAllDetilPenjualan();
 
+    @POST("/api/detil_penjualan")
+    @FormUrlEncoded
+    Call<DetilPenjualanDAO> createDetilPenjualan (@Field("idproduk")String idproduk,
+                                                  @Field("jumlah")String jumlah,
+                                                  @Field("subtotal")String subtotal,
+                                                  @Field("idtransaksipenjualan")String idtransaksipenjualan);
+    @PUT("/api/detil_penjualan/{iddetilpenjualan}")
+    @FormUrlEncoded
+    Call<DetilPenjualanDAO> editDetilPenjualan(@Part("iddetilpenjualan")String iddetilpenjualan,
+                                               @Field("jumlah")String jumlah);
+    @DELETE("/api/detil_penjualan/{iddetilpenjualan}")
+    Call<Void> deleteDetilPenjualan(@Path("iddetilpenjualan") String iddetilpenjualan);
 
-
+    // Transaksi Penjualan Produk
+    @GET("/api/transaksi_penjualan")
+    @FormUrlEncoded
+    Call<List<TransaksiPenjualanDAO>> getAllPenjualan();
+    @POST("/api/transaksi_penjualan")
+    @FormUrlEncoded
+    Call<TransaksiPenjualanDAO> createPenjualan (@Field("idpegawai")String idpegawai,
+                                                 @Field("idhewan")String idhewan,
+                                                 @Field("idcustomer")String idcustomer,
+                                                 @Field("diskon")String diskon,
+                                                 @Field("total")String total);
+    @PUT("/api/transaksi_penjualan/{idtransaksipenjualan}")
+    @FormUrlEncoded
+    Call<List<TransaksiPenjualanDAO>> editPenjualan(@Path("idtransaksipenjualan") String idtransaksipenjualan,
+                                                    @Field("tglpesan")String tglpesan,
+                                                    @Field("status")String status);
+    @DELETE ("/api/transaksi_penjualan/{idtransaksipenjualan}")
+    Call<Void> deletePenjualan(@Path("idtransaksipenjualan") String idtransaksipenjualan);
 
 
 }
