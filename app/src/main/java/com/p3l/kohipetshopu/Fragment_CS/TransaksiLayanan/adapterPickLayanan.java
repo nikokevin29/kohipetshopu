@@ -1,4 +1,4 @@
-package com.p3l.kohipetshopu.Fragment_CS.TransaksiProduk;
+package com.p3l.kohipetshopu.Fragment_CS.TransaksiLayanan;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -11,56 +11,52 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.Toast;
 
-import com.p3l.kohipetshopu.Produk.ProdukDAO;
+import com.p3l.kohipetshopu.Layanan.LayananDAO;
 import com.p3l.kohipetshopu.R;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class adapterPickProduk extends RecyclerView.Adapter<adapterPickProduk.MyViewHolder> implements Filterable {
+public class adapterPickLayanan extends RecyclerView.Adapter<adapterPickLayanan.MyViewHolder> implements Filterable {
 
-    private ViewPickProduk context;
-    private List<ProdukDAO> resultFiltered;
-    public static List<DetilPenjualanDAO> tempProduk = new ArrayList<>();
+    private ViewPickLayanan context;
+    private List<LayananDAO> resultFiltered;
+    public static List<DetilPelayananDAO> tempLayanan = new ArrayList<>();
     public String jumlah = "";
     public double subtotal = 0;
 
-    public adapterPickProduk(ViewPickProduk context, List<ProdukDAO> result){
+    public adapterPickLayanan(ViewPickLayanan context, List<LayananDAO> result){
         this.context = context;
         this.resultFiltered = result;
     }
 
     @NonNull
     @Override
-    public adapterPickProduk.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public adapterPickLayanan.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.adapter_pick_produk,parent,false);
-        final adapterPickProduk.MyViewHolder holder = new adapterPickProduk.MyViewHolder(v);
+        final adapterPickLayanan.MyViewHolder holder = new adapterPickLayanan.MyViewHolder(v);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull adapterPickProduk.MyViewHolder holder, int position) {
-        final ProdukDAO produk = resultFiltered.get(position);
-        holder.nama.setText(produk.getNama());
-        holder.harga.setText(produk.getHarga());
-        holder.stok.setText(produk.getStok());
+    public void onBindViewHolder(@NonNull adapterPickLayanan.MyViewHolder holder, int position) {
+        final LayananDAO item = resultFiltered.get(position);
+        holder.nama.setText(item.getNama());
+        holder.harga.setText(item.getHarga());
 
-        Picasso.get().load(produk.URLproduk()).fit().into(holder.gambar); //produk.getGambar()
 
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(v.getContext(), "Clicked "+produk.getNama(), Toast.LENGTH_SHORT).show();
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Transaksi Produk");
-                builder.setMessage("Masukan Jumlah Produk yang ingin dibeli :");
+                builder.setTitle("Transaksi Layanan");
+                builder.setMessage("Masukan Jumlah Layanan untuk Peliharaan anda :");
                 builder.setIcon(R.mipmap.ic_launcher);
                 final EditText input = new EditText(context);
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -73,11 +69,11 @@ public class adapterPickProduk extends RecyclerView.Adapter<adapterPickProduk.My
                         if(jumlah.equals("")){
                             Toast.makeText(context, "Masih Kosong", Toast.LENGTH_SHORT).show();
                         }else {
-                            subtotal = Double.parseDouble(produk.getHarga()) * Double.parseDouble(jumlah);
+                            subtotal = Double.parseDouble(item.getHarga()) * Double.parseDouble(jumlah);
 
-                            tempProduk.add(new DetilPenjualanDAO("", produk.getIdproduk(), jumlah, String.valueOf(subtotal), "0"));
+                            tempLayanan.add(new DetilPelayananDAO("", item.getIdlayanan(), jumlah, String.valueOf(subtotal), "0"));
                             for (int i = 0; i < resultFiltered.size(); i++) {
-                                if (produk.getIdproduk().equals(resultFiltered.get(i).getIdproduk())) {
+                                if (item.getIdlayanan().equals(resultFiltered.get(i).getIdlayanan())) {
                                     context.update_subtotalPicker();//update subtotal di View Pick Produk
                                 }
                             }
@@ -104,13 +100,13 @@ public class adapterPickProduk extends RecyclerView.Adapter<adapterPickProduk.My
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                List<ProdukDAO> filteredList = new ArrayList<>();
+                List<LayananDAO> filteredList = new ArrayList<>();
 
                 if (constraint == null || constraint.length() == 0) {
                     filteredList.addAll(resultFiltered);
                 } else {
                     String fillPattern = constraint.toString().toLowerCase().trim();
-                    for (ProdukDAO row : resultFiltered) {
+                    for (LayananDAO row : resultFiltered) {
                         if (row.getNama().toLowerCase().contains(fillPattern)) {
                             filteredList.add(row);
                         }
@@ -130,16 +126,13 @@ public class adapterPickProduk extends RecyclerView.Adapter<adapterPickProduk.My
         };
     }
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        private TextView nama,harga,stok;
+        private TextView nama,harga;
         private CardView parent;
-        private ImageView gambar;
         public MyViewHolder(@NonNull View itemView)
         {
             super(itemView);
             nama = itemView.findViewById(R.id.tvNamaProduk);
             harga = itemView.findViewById(R.id.tvHargaProduk);
-            stok = itemView.findViewById(R.id.tvStok);
-            gambar = itemView.findViewById(R.id.gambar_produk);
             parent =  itemView.findViewById(R.id.ParentProduk);
         }
     }

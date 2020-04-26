@@ -73,11 +73,4 @@ public class KelolaFragment extends Fragment {
         });
     }
 
-//    public void setButton(View view){
-//
-//
-
-
-
-//    }
 }

@@ -1,4 +1,4 @@
-package com.p3l.kohipetshopu.Fragment_CS.Customer_RUDS;
+package com.p3l.kohipetshopu.Fragment_CS.Customer_CRUDS;
 
 import androidx.appcompat.app.AppCompatActivity;
 

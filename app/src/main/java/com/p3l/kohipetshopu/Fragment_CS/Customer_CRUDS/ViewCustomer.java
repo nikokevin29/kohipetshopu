@@ -1,4 +1,4 @@
-package com.p3l.kohipetshopu.Fragment_CS.Hewan_RUDS;
+package com.p3l.kohipetshopu.Fragment_CS.Customer_CRUDS;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -27,24 +27,26 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ViewHewan extends AppCompatActivity implements AdapterHewan.HewanAdapterListener {
 
-    private List<HewanDAO> ListHewan, ListHewanTemp;
-    AdapterHewan adapterHewan;
+
+public class ViewCustomer extends AppCompatActivity implements AdapterCustomer.CustomerAdapterListener {
+
+    private List<CustomerDAO> ListCustomer, ListCustomerTemp;
+    AdapterCustomer adapterCustomer;
     private RecyclerView recycle;
     FloatingActionButton refresh_data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.view_hewan);
-        recycle = findViewById(R.id.recycler_view_hewan);
-        ListHewan = new ArrayList<>();
-        ListHewanTemp = new ArrayList<>();
-        adapterHewan = new AdapterHewan(this, ListHewan,this);
+        setContentView(R.layout.view_customer);
+        recycle = findViewById(R.id.recycler_view_customer);
+        ListCustomer = new ArrayList<>();
+        ListCustomerTemp = new ArrayList<>();
+        adapterCustomer = new AdapterCustomer(this, ListCustomer,this);
         RecyclerView.LayoutManager mLayoutmanager = new LinearLayoutManager(getApplicationContext());
         recycle.setLayoutManager(mLayoutmanager);
         recycle.setItemAnimator(new DefaultItemAnimator());
-        recycle.setAdapter(adapterHewan);
+        recycle.setAdapter(adapterCustomer);
         initFloatingButton();
         loadData();
     }//end of onCreate
@@ -61,32 +63,34 @@ public class ViewHewan extends AppCompatActivity implements AdapterHewan.HewanAd
 
     public void loadData(){
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<List<HewanDAO>> callDAO = apiService.getAllHewan();
+        Call<List<CustomerDAO>> callDAO = apiService.getAllCustomer();
+
         ProgressDialog progress = new ProgressDialog(this);
         progress.setMessage("Fetching data");
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progress.setCancelable(false);
         progress.show();
-        callDAO.enqueue(new Callback<List<HewanDAO>>() {
+
+        callDAO.enqueue(new Callback<List<CustomerDAO>>() {
             @Override
-            public void onResponse(Call<List<HewanDAO>> call, Response<List<HewanDAO>> response) {
-                ListHewan.addAll(response.body());
-                ListHewanTemp.addAll(response.body());
-                adapterHewan.notifyDataSetChanged();
+            public void onResponse(Call<List<CustomerDAO>> call, Response<List<CustomerDAO>> response) {
+                ListCustomer.addAll(response.body());
+                ListCustomerTemp.addAll(response.body());
+                adapterCustomer.notifyDataSetChanged();
                 progress.dismiss();
-                Toast.makeText(ViewHewan.this, "Tekan yang Lama untuk Melakukan Aksi", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewCustomer.this, "Tekan yang Lama untuk Melakukan Aksi", Toast.LENGTH_SHORT).show();
             }
             @Override
-            public void onFailure(Call<List<HewanDAO>> call, Throwable t) {
+            public void onFailure(Call<List<CustomerDAO>> call, Throwable t) {
                 progress.dismiss();
-                Toast.makeText(ViewHewan.this, "Internet Anda Ampas",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewCustomer.this, "Internet Anda Ampas",Toast.LENGTH_SHORT).show();
                 System.out.println(t.getMessage());
             }
         });
     }//end of loaddata()
 
     @Override
-    public void onHewanSelected(HewanDAO hewanDAO) {
+    public void onCustomerSelected(CustomerDAO customerDAO) {
         Toast.makeText(getApplicationContext(), "Selected", Toast.LENGTH_SHORT).show();
     }
 
@@ -105,9 +109,9 @@ public class ViewHewan extends AppCompatActivity implements AdapterHewan.HewanAd
             }
             @Override
             public boolean onQueryTextChange(String newText) {
-                ListHewan.clear();
-                ListHewan.addAll(ListHewanTemp);
-                adapterHewan.getFilter().filter(newText);
+                ListCustomer.clear();
+                ListCustomer.addAll(ListCustomerTemp);
+                adapterCustomer.getFilter().filter(newText);
                 return false;
             }
         });
@@ -121,4 +125,5 @@ public class ViewHewan extends AppCompatActivity implements AdapterHewan.HewanAd
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

@@ -103,29 +103,48 @@
             android:textColor="@color/White"
             android:textSize="10dp"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycle_tampilan_penjualan_barang"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/addProdukTransaksi"
-            android:padding="10dp"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/rounded_button"/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/addProdukTransaksi"
             android:layout_centerHorizontal="true"
-            android:layout_margin="10dp">
-            <Button
-                android:id="@+id/proses_Transaksi_penjualan"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycle_tampilan_penjualan_barang"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/rounded_button"/>
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/roundedbutton"
-                android:textColor="@color/White"
-                android:text="Proses Transaksi"
-                android:layout_margin="5dp"/>
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/proses_Transaksi_penjualan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/roundedbutton"
+                    android:textColor="@color/White"
+                    android:text="Proses Transaksi"
+                    android:layout_margin="5dp"/>
+                <Button
+                    android:id="@+id/tampil_all_transaksi"
+                    android:layout_width="170dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/roundedbutton"
+                    android:textColor="@color/White"
+                    android:text="Tampil Semua transaksi"
+                    android:layout_margin="5dp"/>
+            </LinearLayout>
         </LinearLayout>
+
     </RelativeLayout>
 </ScrollView>

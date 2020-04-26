@@ -11,21 +11,43 @@ public class TransaksiPelayananDAO {
     String idpegawai;
     @SerializedName("idhewan")
     String idhewan;
+    @SerializedName("idcustomer")
+    String idcustomer;
     @SerializedName("status")
     String status;
     @SerializedName("diskon")
     String diskon;
     @SerializedName("total")
     String total;
+    @SerializedName("tanggaltransaksi")
+    String tanggaltransaksi;
 
-    public TransaksiPelayananDAO(String idtransaksipelayanan, String noLY, String idpegawai, String idhewan, String status, String diskon, String total) {
+    public TransaksiPelayananDAO(String idtransaksipelayanan, String noLY, String idpegawai, String idhewan,String idcustomer, String status, String diskon, String total,String tanggaltransaksi) {
         this.idtransaksipelayanan = idtransaksipelayanan;
         this.noLY = noLY;
         this.idpegawai = idpegawai;
         this.idhewan = idhewan;
+        this.idcustomer = idcustomer;
         this.status = status;
         this.diskon = diskon;
         this.total = total;
+        this.tanggaltransaksi = tanggaltransaksi;
+    }
+
+    public String getTanggaltransaksi() {
+        return tanggaltransaksi;
+    }
+
+    public void setTanggaltransaksi(String tanggaltransaksi) {
+        this.tanggaltransaksi = tanggaltransaksi;
+    }
+
+    public String getIdcustomer() {
+        return idcustomer;
+    }
+
+    public void setIdcustomer(String idcustomer) {
+        this.idcustomer = idcustomer;
     }
 
     public String getIdtransaksipelayanan() {

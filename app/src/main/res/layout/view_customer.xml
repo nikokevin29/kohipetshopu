@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment_CS.Customer_RUDS.ViewCustomer">
+    tools:context=".Fragment_CS.Customer_CRUDS.ViewCustomer">
 
     <RelativeLayout
         android:layout_width="wrap_content"

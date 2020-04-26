@@ -76,7 +76,7 @@ public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.
         holder.parent.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                showDialog(jenis,position);//tambahi ini
+                showDialog(jenis,position);
                 return false;
             }
         });

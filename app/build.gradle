@@ -48,5 +48,7 @@ dependencies {
 
     implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
 
+    implementation 'com.roger.catloadinglibrary:catloadinglibrary:1.0.5' //dialog library
+
 
 }

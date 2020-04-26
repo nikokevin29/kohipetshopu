@@ -1,4 +1,7 @@
-package com.p3l.kohipetshopu.Fragment_CS.Hewan_RUDS;
+package com.p3l.kohipetshopu.Fragment_CS.Hewan_CRUDS;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
@@ -15,15 +18,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-
 import com.google.android.material.textfield.TextInputLayout;
 import com.p3l.kohipetshopu.API.ApiClient;
 import com.p3l.kohipetshopu.API.ApiInterface;
 import com.p3l.kohipetshopu.DatePickerFragment;
-import com.p3l.kohipetshopu.Fragment_CS.Customer_RUDS.CustomerDAO;
-import com.p3l.kohipetshopu.Fragment_CS.TransaksiProduk.ViewTransaksiProduk;
+import com.p3l.kohipetshopu.Fragment_CS.Customer_CRUDS.CustomerDAO;
 import com.p3l.kohipetshopu.JenisHewan.JenisHewanDAO;
 import com.p3l.kohipetshopu.R;
 import com.p3l.kohipetshopu.UkuranHewan.UkuranHewanDAO;
@@ -37,7 +36,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CreateHewan extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class EditHewan extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     TextView tvEditTglLahir_hewan;
     Button pickDate,sumbit_edit;
@@ -65,6 +64,7 @@ public class CreateHewan extends AppCompatActivity implements DatePickerDialog.O
                 for(int count=0;count<ListCustomer.size();count++){
                     if(selectedCustomer.equalsIgnoreCase(ListCustomer.get(count).getNama())){
                         selectedCustomer = ListCustomer.get(count).getIdcustomer();
+                        //Toast.makeText(EditHewan.this, "PIN "+selectedCustomer, Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -78,6 +78,7 @@ public class CreateHewan extends AppCompatActivity implements DatePickerDialog.O
                 for(int count=0;count<ListUkuranHewan.size();count++){
                     if(selectedUkuran.equalsIgnoreCase(ListUkuranHewan.get(count).getNama())){
                         selectedUkuran = ListUkuranHewan.get(count).getIdukuran();
+                        //Toast.makeText(EditHewan.this, "PIN "+selectedUkuran, Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -91,6 +92,7 @@ public class CreateHewan extends AppCompatActivity implements DatePickerDialog.O
                 for(int count=0;count<ListJenisHewan.size();count++){
                     if(selectedJenis.equalsIgnoreCase(ListJenisHewan.get(count).getNama())){
                         selectedJenis = ListJenisHewan.get(count).getIdjenis();
+                        //Toast.makeText(EditHewan.this, "PIN "+selectedJenis, Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -99,6 +101,7 @@ public class CreateHewan extends AppCompatActivity implements DatePickerDialog.O
         });
         nama = findViewById(R.id.edit_nama_hewan);
         tvEditTglLahir_hewan = findViewById(R.id.show_tgllahir_hewan);
+        setField();
         pickDate = findViewById(R.id.edit_tgllahir_hewan);
         pickDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,13 +117,14 @@ public class CreateHewan extends AppCompatActivity implements DatePickerDialog.O
             @Override
             public void onClick(View v) {
                 if(nama.getEditText().getText().length() == 0 ){
-                    Toast.makeText(CreateHewan.this, "Text Field Tidak Boleh Kosong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditHewan.this, "Text Field Tidak Boleh Kosong", Toast.LENGTH_SHORT).show();
                 }else{
                     SharedPreferences mSettings = getSharedPreferences("LoginCS", Context.MODE_PRIVATE);// SharedPreferences Ambil dari Login
                     String aktor = mSettings.getString("id","1");
 
                     ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-                    Call<HewanDAO> callDAO = apiService.createHewan(
+                    Call<HewanDAO> callDAO = apiService.editHewan(
+                            getIntent().getStringExtra("idhewan"),
                             nama.getEditText().getText().toString(),
                             tvEditTglLahir_hewan.getText().toString(),
                             selectedJenis,
@@ -134,14 +138,14 @@ public class CreateHewan extends AppCompatActivity implements DatePickerDialog.O
                     callDAO.enqueue(new Callback<HewanDAO>() {
                         @Override
                         public void onResponse(Call<HewanDAO> call, Response<HewanDAO> response) {
-                            Toast.makeText(CreateHewan.this, "Gagal "+response.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditHewan.this, "Edit Gagal "+response.toString(), Toast.LENGTH_SHORT).show();
                             progress.dismiss();
                         }
                         @Override
                         public void onFailure(Call<HewanDAO> call, Throwable t) {
-                            Toast.makeText(CreateHewan.this, "Sukses", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditHewan.this, "Edit Sukses", Toast.LENGTH_SHORT).show();
                             System.out.println(t.getMessage());
-                            Intent i =  new Intent(CreateHewan.this, ViewTransaksiProduk.class);
+                            Intent i =  new Intent(EditHewan.this,ViewHewan.class);
                             startActivity(i);
                             finish();
                             progress.dismiss();
@@ -164,6 +168,10 @@ public class CreateHewan extends AppCompatActivity implements DatePickerDialog.O
         tvEditTglLahir_hewan.setText(strDate);
     }
 
+    public void setField(){
+        nama.getEditText().setText(getIntent().getStringExtra("nama"));
+        tvEditTglLahir_hewan.setText(getIntent().getStringExtra("tgllahir"));
+    }
     private void initCustomer(){
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<List<CustomerDAO>> callDAO = apiService.getAllCustomer();
@@ -177,16 +185,16 @@ public class CreateHewan extends AppCompatActivity implements DatePickerDialog.O
                         listSpinner.add(ListCustomer.get(i).getNama());
                     }
                     //masukin hasil ke spinner
-                    adapterCustomer = new ArrayAdapter<>(CreateHewan.this, android.R.layout.simple_spinner_item,listSpinner);
+                    adapterCustomer = new ArrayAdapter<>(EditHewan.this, android.R.layout.simple_spinner_item,listSpinner);
                     adapterCustomer.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinnerCustomer.setAdapter(adapterCustomer);
                 }else{
-                    Toast.makeText(CreateHewan.this, "Gagal get Customer ke Spinner", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditHewan.this, "Gagal get Customer ke Spinner", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<List<CustomerDAO>> call, Throwable t) {
-                Toast.makeText(CreateHewan.this, "Koneksi Anda benar-benar Ampas", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditHewan.this, "Koneksi Anda benar-benar Ampas", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -203,16 +211,16 @@ public class CreateHewan extends AppCompatActivity implements DatePickerDialog.O
                         listSpinner.add(ListJenisHewan.get(i).getNama());
                     }
                     //masukin hasil ke spinner
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(CreateHewan.this, android.R.layout.simple_spinner_item,listSpinner);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(EditHewan.this, android.R.layout.simple_spinner_item,listSpinner);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinnerJenis.setAdapter(adapter);
                 }else{
-                    Toast.makeText(CreateHewan.this, "Gagal get Jenis ke Spinner", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditHewan.this, "Gagal get Jenis ke Spinner", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<List<JenisHewanDAO>> call, Throwable t) {
-                Toast.makeText(CreateHewan.this, "Koneksi Anda benar-benar Ampas", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditHewan.this, "Koneksi Anda benar-benar Ampas", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -229,18 +237,17 @@ public class CreateHewan extends AppCompatActivity implements DatePickerDialog.O
                         listSpinner.add(ListUkuranHewan.get(i).getNama());
                     }
                     //masukin hasil ke spinner
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(CreateHewan.this, android.R.layout.simple_spinner_item,listSpinner);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(EditHewan.this, android.R.layout.simple_spinner_item,listSpinner);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinnerUkuran.setAdapter(adapter);
                 }else{
-                    Toast.makeText(CreateHewan.this, "Gagal get Jenis ke Spinner", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditHewan.this, "Gagal get Jenis ke Spinner", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<List<UkuranHewanDAO>> call, Throwable t) {
-                Toast.makeText(CreateHewan.this, "Koneksi Anda benar-benar Ampas", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditHewan.this, "Koneksi Anda benar-benar Ampas", Toast.LENGTH_SHORT).show();
             }
         });
     }
-    
 }

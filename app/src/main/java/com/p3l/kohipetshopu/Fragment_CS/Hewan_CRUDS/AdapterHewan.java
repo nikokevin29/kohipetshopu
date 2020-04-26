@@ -1,7 +1,6 @@
-package com.p3l.kohipetshopu.Fragment_CS.Hewan_RUDS;
+package com.p3l.kohipetshopu.Fragment_CS.Hewan_CRUDS;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,7 +8,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,14 +17,11 @@ import android.widget.Toast;
 
 import com.p3l.kohipetshopu.API.ApiClient;
 import com.p3l.kohipetshopu.API.ApiInterface;
-import com.p3l.kohipetshopu.JenisHewan.JenisHewanDAO;
 import com.p3l.kohipetshopu.R;
-import com.p3l.kohipetshopu.UkuranHewan.UkuranHewanDAO;
 
 import java.util.ArrayList;
 import java.util.List;
 import android.widget.Filter;
-import android.widget.Filterable;
 
 import retrofit2.Call;
 import retrofit2.Callback;

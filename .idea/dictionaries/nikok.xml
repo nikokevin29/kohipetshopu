@@ -3,6 +3,7 @@
     <words>
       <w>akun</w>
       <w>alamat</w>
+      <w>anjing</w>
       <w>barang</w>
       <w>buat</w>
       <w>cekstok</w>
@@ -10,8 +11,12 @@
       <w>detil</w>
       <w>dibeli</w>
       <w>diskon</w>
+      <w>doub</w>
       <w>galer</w>
       <w>gambar</w>
+      <w>getbyid</w>
+      <w>getcustomerbyid</w>
+      <w>geybyid</w>
       <w>harga</w>
       <w>hewan</w>
       <w>idcustomer</w>
@@ -32,12 +37,15 @@
       <w>jumlah</w>
       <w>kelola</w>
       <w>lahir</w>
+      <w>lastid</w>
       <w>layanan</w>
       <w>linearhewan</w>
       <w>lproduk</w>
       <w>masukan</w>
+      <w>maxid</w>
       <w>namalayanan</w>
       <w>notelp</w>
+      <w>ocall</w>
       <w>pasrsing</w>
       <w>pegawai</w>
       <w>pemesanan</w>
@@ -47,12 +55,14 @@
       <w>pesanan</w>
       <w>posisi</w>
       <w>produk</w>
+      <w>produkby</w>
       <w>saja</w>
       <w>stok</w>
       <w>stokmin</w>
       <w>stokminimum</w>
       <w>subtotaldisplay</w>
       <w>sumbit</w>
+      <w>tambah</w>
       <w>tampil</w>
       <w>telp</w>
       <w>tempsubtotal</w>

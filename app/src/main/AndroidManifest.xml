@@ -19,19 +19,29 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Fragment_CS.TransaksiProduk.adapterViewTransaksi"></activity>
-        <activity android:name=".Fragment_CS.Customer_RUDS.CreateCustomer" />
-        <activity android:name=".Fragment_CS.TransaksiProduk.ViewTransaksiProduk" />
-        <activity android:name=".Fragment_CS.Hewan_RUDS.EditHewan" />
-        <activity android:name=".Fragment_CS.Hewan_RUDS.CreateHewan" />
+        <activity android:name=".Fragment_CS.TransaksiLayanan.TampilAll.ViewTampilTransaksiLayanan"></activity>
+        <activity android:name=".Fragment_CS.TransaksiLayanan.TampilAll.adapterTampilAllTransaksiLayanan" />
         <activity
-            android:name=".Fragment_CS.Hewan_RUDS.ViewHewan"
+            android:name=".Fragment_CS.TransaksiLayanan.ViewPickLayanan"
             android:theme="@style/ActionBar" />
-        <activity android:name=".Fragment_CS.Hewan_RUDS.AdapterHewan" />
-        <activity android:name=".Fragment_CS.Customer_RUDS.EditCustomer" />
-        <activity android:name=".Fragment_CS.Customer_RUDS.AdapterCustomer" />
+        <activity android:name=".Fragment_CS.TransaksiLayanan.ViewTransaksiLayanan" />
+        <activity android:name=".Fragment_CS.TransaksiLayanan.adapterViewTransaksiLayanan" />
+        <activity android:name=".Fragment_CS.TransaksiLayanan.adapterPickLayanan" />
+        <activity android:name=".Fragment_CS.TransaksiProduk.TampilAll.ViewTampilTransaksiProduk" />
+        <activity android:name=".Fragment_CS.TransaksiProduk.TampilAll.adapterTampilAllTransaksiProduk" />
+        <activity android:name=".Fragment_CS.TransaksiProduk.adapterViewTransaksiProduk" />
+        <activity android:name=".Fragment_CS.Customer_CRUDS.CreateCustomer" />
+        <activity android:name=".Fragment_CS.TransaksiProduk.ViewTransaksiProduk" />
+        <activity android:name=".Fragment_CS.Hewan_CRUDS.EditHewan" />
+        <activity android:name=".Fragment_CS.Hewan_CRUDS.CreateHewan" />
         <activity
-            android:name=".Fragment_CS.Customer_RUDS.ViewCustomer"
+            android:name=".Fragment_CS.Hewan_CRUDS.ViewHewan"
+            android:theme="@style/ActionBar" />
+        <activity android:name=".Fragment_CS.Hewan_CRUDS.AdapterHewan" />
+        <activity android:name=".Fragment_CS.Customer_CRUDS.EditCustomer" />
+        <activity android:name=".Fragment_CS.Customer_CRUDS.AdapterCustomer" />
+        <activity
+            android:name=".Fragment_CS.Customer_CRUDS.ViewCustomer"
             android:theme="@style/ActionBar" />
         <activity android:name=".Fragment_CS.TransaksiProduk.adapterPickProduk" />
         <activity

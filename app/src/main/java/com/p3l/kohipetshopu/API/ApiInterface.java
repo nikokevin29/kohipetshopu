@@ -1,7 +1,9 @@
 package com.p3l.kohipetshopu.API;
 
-import com.p3l.kohipetshopu.Fragment_CS.Customer_RUDS.CustomerDAO;
-import com.p3l.kohipetshopu.Fragment_CS.Hewan_RUDS.HewanDAO;
+import com.p3l.kohipetshopu.Fragment_CS.Customer_CRUDS.CustomerDAO;
+import com.p3l.kohipetshopu.Fragment_CS.Hewan_CRUDS.HewanDAO;
+import com.p3l.kohipetshopu.Fragment_CS.TransaksiLayanan.DetilPelayananDAO;
+import com.p3l.kohipetshopu.Fragment_CS.TransaksiLayanan.TransaksiPelayananDAO;
 import com.p3l.kohipetshopu.Fragment_CS.TransaksiProduk.DetilPenjualanDAO;
 import com.p3l.kohipetshopu.Fragment_CS.TransaksiProduk.TransaksiPenjualanDAO;
 import com.p3l.kohipetshopu.Fragment_Owner.Pemesanan.DetilPemesananDAO;
@@ -77,6 +79,9 @@ public interface ApiInterface {
 
     @GET("/api/layanan/search/{nama}")
     Call<LayananDAO> searchNamaLayanan(@Path("nama") String nama);
+
+    @GET("/api/layanan/getbyid/{idlayanan}")
+    Call<LayananDAO> getLayananbyId(@Path("idlayanan")String idlayanan);
 
     @POST("/api/layanan")
     @FormUrlEncoded
@@ -155,6 +160,8 @@ public interface ApiInterface {
     Call<List<CustomerDAO>> getAllCustomer();
     @GET("/api/customer/search/{nama}")
     Call<CustomerDAO> searchNamaCustomer(@Path("nama") String nama);
+    @GET("/api/customer/getbyid/{idcustomer}")
+    Call<CustomerDAO> getcustomerbyid(@Path("idcustomer") String idcustomer);
     @POST("/api/customer")
     @FormUrlEncoded
     Call<CustomerDAO> createCustomer (@Field("nama")String nama,
@@ -179,6 +186,8 @@ public interface ApiInterface {
     Call<List<HewanDAO>> getAllHewan();
     @GET("/api/hewan/search/{nama}")
     Call<HewanDAO> searchNamaHewan(@Path("nama") String nama);
+    @GET("/api/hewan/getbyid/{idhewan}")
+    Call<HewanDAO> gethewanbyid(@Path("idhewan") String idhewan);
     @POST("/api/hewan")
     @FormUrlEncoded
     Call<HewanDAO> createHewan (@Field("nama")String nama,
@@ -216,7 +225,6 @@ public interface ApiInterface {
     Call<Void> deleteDetilPemesanan(@Path("iddetilpemesanan") String iddetilpemesanan);
     // Pemesanan Barang
     @GET("/api/pemesanan_barang")
-    @FormUrlEncoded
     Call<List<PemesananDAO>> getAllPemesanan();
     @POST("/api/pemesanan_barang")
     @FormUrlEncoded
@@ -234,7 +242,8 @@ public interface ApiInterface {
     //detil Penjualan Produk
     @GET("/api/detil_penjualan")
     Call<List<DetilPenjualanDAO>> getAllDetilPenjualan();
-
+    @GET("/api/detil_penjualan/getlastid/")
+    Call<TransaksiPenjualanDAO> getLastidPenjualan();
     @POST("/api/detil_penjualan")
     @FormUrlEncoded
     Call<DetilPenjualanDAO> createDetilPenjualan (@Field("idproduk")String idproduk,
@@ -249,8 +258,11 @@ public interface ApiInterface {
     Call<Void> deleteDetilPenjualan(@Path("iddetilpenjualan") String iddetilpenjualan);
 
     // Transaksi Penjualan Produk
+
+//    @GET("/api/transaksi_penjualan")//your api link
+//    Call<Object> getAllPenjualanObject();
+
     @GET("/api/transaksi_penjualan")
-    @FormUrlEncoded
     Call<List<TransaksiPenjualanDAO>> getAllPenjualan();
     @POST("/api/transaksi_penjualan")
     @FormUrlEncoded
@@ -267,5 +279,26 @@ public interface ApiInterface {
     @DELETE ("/api/transaksi_penjualan/{idtransaksipenjualan}")
     Call<Void> deletePenjualan(@Path("idtransaksipenjualan") String idtransaksipenjualan);
 
+    //Detil Pelayanan
+    @GET("/api/detil_pelayanan/getlastid/")
+    Call<TransaksiPelayananDAO> getLastidPelayanan();
+    @POST("/api/detil_pelayanan")
+    @FormUrlEncoded
+    Call<DetilPelayananDAO> createDetilPelayanan (@Field("idlayanan")String idproduk,
+                                                  @Field("jumlah")String jumlah,
+                                                  @Field("subtotal")String subtotal,
+                                                  @Field("idtransaksipelayanan")String idtransaksipelayanan);
 
+    // Transaksi Pelayanan Hewan dan Sejenisnya
+    @GET("/api/transaksi_pelayanan")
+    Call<List<TransaksiPelayananDAO>> getAllPelayanan();
+
+    @POST("/api/transaksi_pelayanan")
+    @FormUrlEncoded
+    Call<TransaksiPelayananDAO> createPelayanan (@Field("idpegawai")String idpegawai,
+                                                 @Field("idhewan")String idhewan,
+                                                 @Field("idcustomer")String idcustomer,
+                                                 @Field("status")String status,
+                                                 @Field("diskon")String diskon,
+                                                 @Field("total")String total);
 }

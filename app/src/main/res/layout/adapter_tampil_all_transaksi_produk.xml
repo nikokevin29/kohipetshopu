@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="6dp"
+    android:layout_margin="8dp"
+    android:id="@+id/ParentTransaksiProduk"
+    android:background="@color/WhiteSmoke"
+    tools:ignore="PrivateResource">
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="bottom"
+        android:padding="8dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No Transaksi"
+                android:textSize="12dp"
+                android:textColor="@color/Black"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nama Hewan"
+                android:textSize="12dp"
+                android:textColor="@color/Black"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tanggal Transaksi"
+                android:textSize="12dp"
+                android:textColor="@color/Black"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nama Customer"
+                android:textSize="10dp"
+                android:textColor="@color/Black"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Status"
+                android:textSize="10dp"
+                android:textColor="@color/Black"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" : "
+                android:textColor="@color/Black"
+                android:textSize="12dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" : "
+                android:textColor="@color/Black"
+                android:textSize="12dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" : "
+                android:textColor="@color/Black"
+                android:textSize="12dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" : "
+                android:textColor="@color/Black"
+                android:textSize="10dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" : "
+                android:textColor="@color/Black"
+                android:textSize="10dp"/>
+        </LinearLayout> <!--TITIK DUA-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/noTrans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PR-200417-1"
+                android:textColor="@color/Black"
+                android:textSize="12dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/tvShowhewan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Inu"
+                android:textSize="12dp"
+                android:textColor="@color/Black"/>
+            <TextView
+                android:id="@+id/tvTanggalTrans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tanggal"
+                android:textSize="12dp"
+                android:textColor="@color/Black"/>
+            <TextView
+                android:id="@+id/tvnamacust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nicholas Kevin"
+                android:textSize="10dp"
+                android:textColor="@color/Black"/>
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Belum Lunas"
+                android:textSize="10dp"
+                android:textColor="@color/Black"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

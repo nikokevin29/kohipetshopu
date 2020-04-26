@@ -1,4 +1,4 @@
-package com.p3l.kohipetshopu.Fragment_CS.TransaksiProduk;
+package com.p3l.kohipetshopu.Fragment_CS.TransaksiLayanan;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,7 +25,8 @@ import com.p3l.kohipetshopu.Fragment_CS.Customer_CRUDS.CreateCustomer;
 import com.p3l.kohipetshopu.Fragment_CS.Customer_CRUDS.CustomerDAO;
 import com.p3l.kohipetshopu.Fragment_CS.Hewan_CRUDS.CreateHewan;
 import com.p3l.kohipetshopu.Fragment_CS.Hewan_CRUDS.HewanDAO;
-import com.p3l.kohipetshopu.Fragment_CS.TransaksiProduk.TampilAll.ViewTampilTransaksiProduk;
+import com.p3l.kohipetshopu.Fragment_CS.TransaksiLayanan.TampilAll.ViewTampilTransaksiLayanan;
+import com.p3l.kohipetshopu.Fragment_CS.TransaksiLayanan.adapterPickLayanan;
 import com.p3l.kohipetshopu.R;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ViewTransaksiProduk extends AppCompatActivity {
+public class ViewTransaksiLayanan extends AppCompatActivity {
 
     TextView subtotalAll;
     Button createCustomer,createHewan,tambahProduk,prosesTransaksi,tampilAll;
@@ -43,7 +44,7 @@ public class ViewTransaksiProduk extends AppCompatActivity {
     String selectedHewan,selectedCustomer;
     List<HewanDAO> ListHewan;
     List<CustomerDAO> ListCustomer;
-    String default0 = "0";
+    String default0 = "0",status="Diproses";
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -60,7 +61,7 @@ public class ViewTransaksiProduk extends AppCompatActivity {
         tampilAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ViewTransaksiProduk.this, ViewTampilTransaksiProduk.class);
+                Intent i = new Intent(ViewTransaksiLayanan.this, ViewTampilTransaksiLayanan.class);
                 startActivity(i);
             }
         });
@@ -104,7 +105,7 @@ public class ViewTransaksiProduk extends AppCompatActivity {
         createCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i  = new Intent(ViewTransaksiProduk.this, CreateCustomer.class);
+                Intent i  = new Intent(ViewTransaksiLayanan.this, CreateCustomer.class);
                 startActivity(i);
             }
         });
@@ -112,7 +113,7 @@ public class ViewTransaksiProduk extends AppCompatActivity {
         createHewan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ViewTransaksiProduk.this, CreateHewan.class);
+                Intent i = new Intent(ViewTransaksiLayanan.this, CreateHewan.class);
                 startActivity(i);
             }
         });
@@ -120,7 +121,7 @@ public class ViewTransaksiProduk extends AppCompatActivity {
         tambahProduk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ViewTransaksiProduk.this, ViewPickProduk.class);
+                Intent i = new Intent(ViewTransaksiLayanan.this, ViewPickLayanan.class);
                 startActivity(i);
             }
         });
@@ -130,8 +131,8 @@ public class ViewTransaksiProduk extends AppCompatActivity {
         prosesTransaksi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(adapterPickProduk.tempProduk.isEmpty()){
-                    Toast.makeText(ViewTransaksiProduk.this, "Transaksi Masih Kosong !!!", Toast.LENGTH_SHORT).show();
+                if(adapterPickLayanan.tempLayanan.isEmpty()){
+                    Toast.makeText(ViewTransaksiLayanan.this, "Transaksi Masih Kosong !!!", Toast.LENGTH_SHORT).show();
                 }else{
                     progress.setMessage("Fetching data");
                     progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -145,7 +146,7 @@ public class ViewTransaksiProduk extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new adapterViewTransaksiProduk(ViewTransaksiProduk.this,adapterPickProduk.tempProduk);
+        mAdapter = new adapterViewTransaksiLayanan(ViewTransaksiLayanan.this,adapterPickLayanan.tempLayanan);
         recyclerView.setAdapter(mAdapter);
     }
 
@@ -154,52 +155,53 @@ public class ViewTransaksiProduk extends AppCompatActivity {
         String idpegawai = mSettings.getString("id","1");
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<TransaksiPenjualanDAO> callDAO = apiService.createPenjualan(
-                                                idpegawai,
-                                                selectedHewan,
-                                                selectedCustomer,
-                                                default0,//diskon
-                                                default0);//total
+        Call<TransaksiPelayananDAO> callDAO = apiService.createPelayanan(
+                idpegawai,
+                selectedHewan,
+                selectedCustomer,
+                status,
+                default0,//diskon
+                default0);//total
 
-        callDAO.enqueue(new Callback<TransaksiPenjualanDAO>() {
+        callDAO.enqueue(new Callback<TransaksiPelayananDAO>() {
             @Override
-            public void onResponse(Call<TransaksiPenjualanDAO> call, Response<TransaksiPenjualanDAO> response) {
-                Toast.makeText(ViewTransaksiProduk.this, "Gagal Transaksi", Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<TransaksiPelayananDAO> call, Response<TransaksiPelayananDAO> response) {
+                Toast.makeText(ViewTransaksiLayanan.this, "Gagal Transaksi", Toast.LENGTH_SHORT).show();
                 progress.dismiss();
             }
             @Override
-            public void onFailure(Call<TransaksiPenjualanDAO> call, Throwable t) {
+            public void onFailure(Call<TransaksiPelayananDAO> call, Throwable t) {
                 System.out.println("BNN"+t.getMessage());
 
                 //get max id transaksi
-                Call<TransaksiPenjualanDAO> SELAnjing = apiService.getLastidPenjualan();
-                SELAnjing.enqueue(new Callback<TransaksiPenjualanDAO>() {
+                Call<TransaksiPelayananDAO> SELAnjing = apiService.getLastidPelayanan();
+                SELAnjing.enqueue(new Callback<TransaksiPelayananDAO>() {
                     @Override
-                    public void onResponse(Call<TransaksiPenjualanDAO> call, Response<TransaksiPenjualanDAO> response) {
-                        maxid = response.body().getIdtransaksipenjualan();
-                        //Toast.makeText(ViewTransaksiProduk.this, "Max ID Transaksi "+maxid, Toast.LENGTH_SHORT).show();
+                    public void onResponse(Call<TransaksiPelayananDAO> call, Response<TransaksiPelayananDAO> response) {
+                        maxid = response.body().getIdtransaksipelayanan();
+
                         System.out.println("maxid "+maxid);
 
                         //detil
-                        for(int i = 0; i<adapterPickProduk.tempProduk.size(); i++){
-                            Call<DetilPenjualanDAO> callDAOdetil = apiService.createDetilPenjualan(
-                                    adapterPickProduk.tempProduk.get(i).idproduk,
-                                    adapterPickProduk.tempProduk.get(i).jumlah,
-                                    adapterPickProduk.tempProduk.get(i).subtotal,
+                        for(int i = 0; i<adapterPickLayanan.tempLayanan.size(); i++){
+                            Call<DetilPelayananDAO> callDAOdetil = apiService.createDetilPelayanan(
+                                    adapterPickLayanan.tempLayanan.get(i).idlayanan,
+                                    adapterPickLayanan.tempLayanan.get(i).jumlah,
+                                    adapterPickLayanan.tempLayanan.get(i).subtotal,
                                     maxid);
 
-                            callDAOdetil.enqueue(new Callback<DetilPenjualanDAO>() {
+                            callDAOdetil.enqueue(new Callback<DetilPelayananDAO>() {
                                 @Override
-                                public void onResponse(Call<DetilPenjualanDAO> call, Response<DetilPenjualanDAO> response) {
-                                    Log.d(response.toString(),"on Failurde");
+                                public void onResponse(Call<DetilPelayananDAO> call, Response<DetilPelayananDAO> response) {
+                                    Log.d(response.toString(),"on Failure");
 
                                 }
                                 @Override
-                                public void onFailure(Call<DetilPenjualanDAO> call, Throwable t) {
-                                    Log.d(t.toString(),"onRespone Akal : Success");
-                                    Toast.makeText(ViewTransaksiProduk.this, "Stored to Transaction : "+maxid, Toast.LENGTH_SHORT).show();
+                                public void onFailure(Call<DetilPelayananDAO> call, Throwable t) {
+                                    Log.d(t.toString(),"onResponse Akal : Success");
+                                    Toast.makeText(ViewTransaksiLayanan.this, "Stored to Transaction : "+maxid, Toast.LENGTH_SHORT).show();
 
-                                    adapterPickProduk.tempProduk.clear();//clear isi Array detil transaksi
+                                    adapterPickLayanan.tempLayanan.clear();//clear isi Array detil transaksi
                                     update_updated();//Update adapter
                                     subtotalFromRecycleTransaksi();//Update subtotal TextView
                                 }
@@ -207,23 +209,20 @@ public class ViewTransaksiProduk extends AppCompatActivity {
                         }//end of for
                     }
                     @Override
-                    public void onFailure(Call<TransaksiPenjualanDAO> call, Throwable t) {
-                        Toast.makeText(ViewTransaksiProduk.this, "get max id failed", Toast.LENGTH_SHORT).show();
+                    public void onFailure(Call<TransaksiPelayananDAO> call, Throwable t) {
+                        Toast.makeText(ViewTransaksiLayanan.this, "get max id failed", Toast.LENGTH_SHORT).show();
                         progress.dismiss();
                     }
                 });
-                Toast.makeText(ViewTransaksiProduk.this, "Transaksi Berhasil", Toast.LENGTH_LONG).show();
+                Toast.makeText(ViewTransaksiLayanan.this, "Transaksi Berhasil", Toast.LENGTH_LONG).show();
                 progress.dismiss();
             }
         });
 
 
-
-
-
     }
 
-    public void delete_updated(int position,List<DetilPenjualanDAO> tempProduk){
+    public void delete_updated(int position,List<DetilPelayananDAO> tempProduk){
         recyclerView.removeViewAt(position);
         mAdapter.notifyItemRemoved(position);
         mAdapter.notifyItemRangeChanged(position, tempProduk.size());
@@ -253,18 +252,18 @@ public class ViewTransaksiProduk extends AppCompatActivity {
                         listSpinner.add(ListCustomer.get(i).getNama());
                     }
                     //masukin hasil ke spinner
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(ViewTransaksiProduk.this, android.R.layout.simple_spinner_item,listSpinner);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(ViewTransaksiLayanan.this, android.R.layout.simple_spinner_item,listSpinner);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinCustomer.setAdapter(adapter);
                 }else{
                     progress.dismiss();
-                    Toast.makeText(ViewTransaksiProduk.this, "Gagal get Customer ke Spinner", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ViewTransaksiLayanan.this, "Gagal get Customer ke Spinner", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<List<CustomerDAO>> call, Throwable t) {
                 progress.dismiss();
-                Toast.makeText(ViewTransaksiProduk.this, "masalah koneksi", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewTransaksiLayanan.this, "masalah koneksi", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -289,18 +288,18 @@ public class ViewTransaksiProduk extends AppCompatActivity {
                         listSpinner.add(ListHewan.get(i).getNama());
                     }
                     //masukin hasil ke spinner
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(ViewTransaksiProduk.this, android.R.layout.simple_spinner_item,listSpinner);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(ViewTransaksiLayanan.this, android.R.layout.simple_spinner_item,listSpinner);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinHewan.setAdapter(adapter);
                 }else{
                     progress.dismiss();
-                    Toast.makeText(ViewTransaksiProduk.this, "Gagal get Hewan ke Spinner", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ViewTransaksiLayanan.this, "Gagal get Hewan ke Spinner", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<List<HewanDAO>> call, Throwable t) {
                 progress.dismiss();
-                Toast.makeText(ViewTransaksiProduk.this, "masalah koneksi", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewTransaksiLayanan.this, "Masalah koneksi", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -309,7 +308,7 @@ public class ViewTransaksiProduk extends AppCompatActivity {
     public void onBackPressed() { //2x Tap Untuk Keluar
         if (doubleTapParam) {
             super.onBackPressed();
-            adapterPickProduk.tempProduk.clear();//waktu tap 2x tempProduk dari picker akan dihapus Arraynya jadi Detillist akan kosong disini
+            adapterPickLayanan.tempLayanan.clear();//waktu tap 2x tempProduk dari picker akan dihapus Arraynya jadi Detillist akan kosong disini
             return ;
         }
         this.doubleTapParam = true;
@@ -330,8 +329,8 @@ public class ViewTransaksiProduk extends AppCompatActivity {
     }
     public void subtotalFromRecycleTransaksi(){
         double tempsubtotal = 0;
-        for(int i=0;i<adapterPickProduk.tempProduk.size();i++){
-            tempsubtotal =  tempsubtotal + Double.parseDouble(adapterPickProduk.tempProduk.get(i).getSubtotal());
+        for(int i=0;i<adapterPickLayanan.tempLayanan.size();i++){
+            tempsubtotal =  tempsubtotal + Double.parseDouble(adapterPickLayanan.tempLayanan.get(i).getSubtotal());
         }
         subtotalAll.setText(String.valueOf(tempsubtotal));
     }

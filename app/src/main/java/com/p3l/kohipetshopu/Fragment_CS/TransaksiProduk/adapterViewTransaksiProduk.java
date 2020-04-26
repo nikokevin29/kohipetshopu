@@ -1,14 +1,11 @@
 package com.p3l.kohipetshopu.Fragment_CS.TransaksiProduk;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Bundle;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,20 +29,20 @@ import retrofit2.Response;
 
 import static com.p3l.kohipetshopu.Fragment_CS.TransaksiProduk.adapterPickProduk.tempProduk;
 
-public class adapterViewTransaksi extends RecyclerView.Adapter<adapterViewTransaksi.MyViewHolder> {
-    private Context context;
+public class adapterViewTransaksiProduk extends RecyclerView.Adapter<adapterViewTransaksiProduk.MyViewHolder> {
+    private ViewTransaksiProduk context;
     private List<DetilPenjualanDAO> result;
     public String jumlah = "";
-    public adapterViewTransaksi(Context context, List<DetilPenjualanDAO> result){
+    public double doub;
+    public adapterViewTransaksiProduk(ViewTransaksiProduk context, List<DetilPenjualanDAO> result){
         this.context = context;
         this.result = result;
     }
     @NonNull
     @Override
-    public adapterViewTransaksi.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public adapterViewTransaksiProduk.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.adapter_view_transaksi,parent,false);
-        final adapterViewTransaksi.MyViewHolder holder = new adapterViewTransaksi.MyViewHolder(v);
-
+        final adapterViewTransaksiProduk.MyViewHolder holder = new MyViewHolder(v);
         return holder;
     }
 
@@ -55,10 +52,10 @@ public class adapterViewTransaksi extends RecyclerView.Adapter<adapterViewTransa
         apiService.getProdukbyId(result.get(position).idproduk).enqueue(new Callback<ProdukDAO>() {
             @Override
             public void onResponse(Call<ProdukDAO> call, Response<ProdukDAO> response) {
-
                 holder.nama.setText(response.body().getNama());
                 holder.harga.setText(response.body().getHarga());
                 holder.jumlah.setText(result.get(position).jumlah);
+                doub = Double.parseDouble(response.body().getHarga());//Memasukan Variabel Harga dalam adapter ke variabel tampung
                 Picasso.get().load(response.body().URLproduk()).fit().into(holder.gambar);
             }
             @Override
@@ -76,15 +73,19 @@ public class adapterViewTransaksi extends RecyclerView.Adapter<adapterViewTransa
                 input.setHint("Edit Jumlah");
                 builder.setView(input);
 
-                jumlah = input.getText().toString().trim();
+
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //edit jumlah disini
+                        jumlah = input.getText().toString().trim();//get input edit
                         if(jumlah.equals("")){
                             Toast.makeText(context, "Masih Kosong", Toast.LENGTH_SHORT).show();
                         }else {
-                            //tempProduk.set(position,jumlah);
+                            tempProduk.get(position).setJumlah(jumlah);//set update jumlah barang di adapter ViewTransaksi
+                            tempProduk.get(position).setSubtotal(Double.toString(doub * Double.parseDouble(jumlah))); //set subtotal
+                            context.update_updated();//notify set data changed
+                            context.subtotalFromRecycleTransaksi();//update subtotal sebelah update
+
                         }
                     }
                 });
@@ -96,6 +97,8 @@ public class adapterViewTransaksi extends RecyclerView.Adapter<adapterViewTransa
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         tempProduk.remove(position);
+                        context.delete_updated(position,tempProduk);//update posisi habis delete Arraylistnya
+                        context.subtotalFromRecycleTransaksi();//update subtotal setelah delete
                     }
                 });
                 builder.create().show();
@@ -108,7 +111,7 @@ public class adapterViewTransaksi extends RecyclerView.Adapter<adapterViewTransa
     public int getItemCount() {
         return result.size();
     }
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView nama,harga,jumlah;
         private CardView parent;
         private ImageView gambar;

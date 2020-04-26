@@ -1,4 +1,4 @@
-package com.p3l.kohipetshopu.Fragment_CS.Hewan_RUDS;
+package com.p3l.kohipetshopu.Fragment_CS.Hewan_CRUDS;
 
 import com.google.gson.annotations.SerializedName;
 
