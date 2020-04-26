@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,19 +26,20 @@ import com.p3l.kohipetshopu.R;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class adapterTampilAllTransaksiProduk extends RecyclerView.Adapter<adapterTampilAllTransaksiProduk.MyViewHolder>{
+public class adapterTampilAllTransaksiProduk extends RecyclerView.Adapter<adapterTampilAllTransaksiProduk.MyViewHolder> implements Filterable{
     private ViewTampilTransaksiProduk context;
-    private List<TransaksiPenjualanDAO> result;
+    private List<TransaksiPenjualanDAO> resultFiltered;
 
     public adapterTampilAllTransaksiProduk(ViewTampilTransaksiProduk context, List<TransaksiPenjualanDAO> result){
         this.context = context;
-        this.result = result;
+        this.resultFiltered = result;
     }
     @NonNull
     @Override
@@ -49,7 +51,7 @@ public class adapterTampilAllTransaksiProduk extends RecyclerView.Adapter<adapte
     }
     @Override
     public void onBindViewHolder(@NonNull adapterTampilAllTransaksiProduk.MyViewHolder holder, int position) {
-        final TransaksiPenjualanDAO dao = result.get(position);
+        final TransaksiPenjualanDAO dao = resultFiltered.get(position);
         holder.notrans.setText(dao.getNoPR());
         holder.tglTransaksi.setText(dao.getTanggalTransaksi());
 //        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
@@ -89,7 +91,7 @@ public class adapterTampilAllTransaksiProduk extends RecyclerView.Adapter<adapte
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 delete(dao.getIdtransaksipenjualan());
-                                result.remove(position);
+                                resultFiltered.remove(position);
                                 notifyItemRemoved(position);
                             }
                         })
@@ -121,7 +123,7 @@ public class adapterTampilAllTransaksiProduk extends RecyclerView.Adapter<adapte
     }
     @Override
     public int getItemCount() {
-        return result.size();
+        return resultFiltered.size();
     }
     private void delete(String id){
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
@@ -137,6 +139,36 @@ public class adapterTampilAllTransaksiProduk extends RecyclerView.Adapter<adapte
                 System.out.println("TRACE ERROR "+t.getMessage());
             }
         });
+    }
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                List<TransaksiPenjualanDAO> filteredList = new ArrayList<>();
+
+                if (constraint == null || constraint.length() == 0) {
+                    filteredList.addAll(resultFiltered);
+                } else {
+                    String fillPattern = constraint.toString().toLowerCase().trim();
+                    for (TransaksiPenjualanDAO row : resultFiltered) {
+                        if (row.getNoPR().toLowerCase().contains(fillPattern)) {
+                            filteredList.add(row);
+                        }
+                    }
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filteredList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                resultFiltered.clear();
+                resultFiltered.addAll((List) filterResults.values);
+                notifyDataSetChanged();
+            }
+        };
     }
 
 }

@@ -73,7 +73,6 @@ public class adapterViewTransaksiProduk extends RecyclerView.Adapter<adapterView
                 input.setHint("Edit Jumlah");
                 builder.setView(input);
 
-
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

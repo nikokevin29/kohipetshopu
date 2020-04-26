@@ -19,15 +19,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Fragment_CS.TransaksiLayanan.TampilAll.ViewTampilTransaksiLayanan"></activity>
+        <activity android:name=".Fragment_CS.TransaksiLayanan.TampilAll.ViewTampilTransaksiLayanan"
+                  android:theme="@style/ActionBar"></activity>
         <activity android:name=".Fragment_CS.TransaksiLayanan.TampilAll.adapterTampilAllTransaksiLayanan" />
-        <activity
-            android:name=".Fragment_CS.TransaksiLayanan.ViewPickLayanan"
-            android:theme="@style/ActionBar" />
+        <activity android:name=".Fragment_CS.TransaksiLayanan.ViewPickLayanan"
+                  android:theme="@style/ActionBar" />
         <activity android:name=".Fragment_CS.TransaksiLayanan.ViewTransaksiLayanan" />
         <activity android:name=".Fragment_CS.TransaksiLayanan.adapterViewTransaksiLayanan" />
         <activity android:name=".Fragment_CS.TransaksiLayanan.adapterPickLayanan" />
-        <activity android:name=".Fragment_CS.TransaksiProduk.TampilAll.ViewTampilTransaksiProduk" />
+        <activity android:name=".Fragment_CS.TransaksiProduk.TampilAll.ViewTampilTransaksiProduk"
+                  android:theme="@style/ActionBar"/>
         <activity android:name=".Fragment_CS.TransaksiProduk.TampilAll.adapterTampilAllTransaksiProduk" />
         <activity android:name=".Fragment_CS.TransaksiProduk.adapterViewTransaksiProduk" />
         <activity android:name=".Fragment_CS.Customer_CRUDS.CreateCustomer" />
@@ -35,8 +36,8 @@
         <activity android:name=".Fragment_CS.Hewan_CRUDS.EditHewan" />
         <activity android:name=".Fragment_CS.Hewan_CRUDS.CreateHewan" />
         <activity
-            android:name=".Fragment_CS.Hewan_CRUDS.ViewHewan"
-            android:theme="@style/ActionBar" />
+                    android:name=".Fragment_CS.Hewan_CRUDS.ViewHewan"
+                    android:theme="@style/ActionBar" />
         <activity android:name=".Fragment_CS.Hewan_CRUDS.AdapterHewan" />
         <activity android:name=".Fragment_CS.Customer_CRUDS.EditCustomer" />
         <activity android:name=".Fragment_CS.Customer_CRUDS.AdapterCustomer" />

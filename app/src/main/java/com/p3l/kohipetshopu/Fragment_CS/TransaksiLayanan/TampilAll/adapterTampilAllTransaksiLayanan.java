@@ -11,28 +11,32 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import com.p3l.kohipetshopu.API.ApiClient;
 import com.p3l.kohipetshopu.API.ApiInterface;
 import com.p3l.kohipetshopu.Fragment_CS.TransaksiLayanan.TransaksiPelayananDAO;
 import com.p3l.kohipetshopu.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class adapterTampilAllTransaksiLayanan extends RecyclerView.Adapter<adapterTampilAllTransaksiLayanan.MyViewHolder> {
+public class adapterTampilAllTransaksiLayanan extends RecyclerView.Adapter<adapterTampilAllTransaksiLayanan.MyViewHolder> implements Filterable {
 
     private ViewTampilTransaksiLayanan context;
-    private List<TransaksiPelayananDAO> result;
+    private List<TransaksiPelayananDAO> resultFiltered;
 
     public adapterTampilAllTransaksiLayanan(ViewTampilTransaksiLayanan context, List<TransaksiPelayananDAO> result){
         this.context = context;
-        this.result = result;
+        this.resultFiltered = result;
     }
     @NonNull
     @Override
@@ -44,7 +48,7 @@ public class adapterTampilAllTransaksiLayanan extends RecyclerView.Adapter<adapt
     }
     @Override
     public void onBindViewHolder(@NonNull adapterTampilAllTransaksiLayanan.MyViewHolder holder, int position) {
-        final TransaksiPelayananDAO dao = result.get(position);
+        final TransaksiPelayananDAO dao = resultFiltered.get(position);
         holder.notrans.setText(dao.getNoLY());
         holder.tglTransaksi.setText(dao.getTanggaltransaksi());
 //        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
@@ -85,7 +89,7 @@ public class adapterTampilAllTransaksiLayanan extends RecyclerView.Adapter<adapt
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 delete(dao.getIdtransaksipelayanan());
-                                result.remove(position);
+                                resultFiltered.remove(position);
                                 notifyItemRemoved(position);
                             }
                         })
@@ -118,7 +122,7 @@ public class adapterTampilAllTransaksiLayanan extends RecyclerView.Adapter<adapt
     }
     @Override
     public int getItemCount() {
-        return result.size();
+        return resultFiltered.size();
     }
     private void delete(String id){
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
@@ -134,5 +138,36 @@ public class adapterTampilAllTransaksiLayanan extends RecyclerView.Adapter<adapt
                 System.out.println("TRACE ERROR "+t.getMessage());
             }
         });
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                List<TransaksiPelayananDAO> filteredList = new ArrayList<>();
+
+                if (constraint == null || constraint.length() == 0) {
+                    filteredList.addAll(resultFiltered);
+                } else {
+                    String fillPattern = constraint.toString().toLowerCase().trim();
+                    for (TransaksiPelayananDAO row : resultFiltered) {
+                        if (row.getNoLY().toLowerCase().contains(fillPattern)) {
+                            filteredList.add(row);
+                        }
+                    }
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filteredList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                resultFiltered.clear();
+                resultFiltered.addAll((List) filterResults.values);
+                notifyDataSetChanged();
+            }
+        };
     }
 }

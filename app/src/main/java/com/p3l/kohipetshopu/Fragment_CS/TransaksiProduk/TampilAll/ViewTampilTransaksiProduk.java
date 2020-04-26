@@ -8,6 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.inputmethod.EditorInfo;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.p3l.kohipetshopu.API.ApiClient;
@@ -27,7 +32,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ViewTampilTransaksiProduk extends AppCompatActivity {
-    List<TransaksiPenjualanDAO> List,List2;
+    List<TransaksiPenjualanDAO> List,ListTemp;
     adapterTampilAllTransaksiProduk adapter;
     RecyclerView recycle;
 
@@ -37,6 +42,7 @@ public class ViewTampilTransaksiProduk extends AppCompatActivity {
         setContentView(R.layout.view_tampil_transaksi_produk);
         recycle = findViewById(R.id.recycle_view_penjualan_all);
         List = new ArrayList<>();
+        ListTemp = new ArrayList<>();
         adapter = new adapterTampilAllTransaksiProduk(this,List);
         RecyclerView.LayoutManager mLayoutmanager = new LinearLayoutManager(getApplicationContext());
         recycle.setLayoutManager(mLayoutmanager);
@@ -56,7 +62,6 @@ public class ViewTampilTransaksiProduk extends AppCompatActivity {
         callDAO.enqueue(new Callback<List<TransaksiPenjualanDAO>>() {
             @Override
             public void onResponse(Call<List<TransaksiPenjualanDAO>> call, Response<List<TransaksiPenjualanDAO>> response) {
-
 //                JSONObject object = new JSONObject((Map) response.body());
 //                for(int i=0;i<response.body().size();i++){
 //                    try {
@@ -72,6 +77,7 @@ public class ViewTampilTransaksiProduk extends AppCompatActivity {
 //                    }
 //                }
                 List.addAll(response.body());
+                ListTemp.addAll(response.body());
                 adapter.notifyDataSetChanged();
                 progress.dismiss();
             }
@@ -83,5 +89,37 @@ public class ViewTampilTransaksiProduk extends AppCompatActivity {
                 progress.dismiss();
             }
         });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_search, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                List.clear();
+                List.addAll(ListTemp);
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        return true;
+    }// end of  onCreateOptionsMenu(Menu menu) ;
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_search) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
