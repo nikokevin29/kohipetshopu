@@ -13,28 +13,32 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.PopupMenu;
 import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.p3l.kohipetshopu.API.ApiClient;
 import com.p3l.kohipetshopu.API.ApiInterface;
+import com.p3l.kohipetshopu.PriceList;
 import com.p3l.kohipetshopu.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ViewProduk extends AppCompatActivity implements AdapterProduk.ProdukAdapterListener {
+public class ViewProduk extends AppCompatActivity implements AdapterProduk.ProdukAdapterListener,PopupMenu.OnMenuItemClickListener {
 
     private List<ProdukDAO> ListProduk, ListProdukTemp;
     AdapterProduk adapterProduk;
     private RecyclerView recyclerProduk;
     private FloatingActionButton add_produk,sort_produk,refresh_data_produk;
-
+    boolean state = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +57,82 @@ public class ViewProduk extends AppCompatActivity implements AdapterProduk.Produ
         loadData();
 
     }//End Of On Create
+    public void popupmenu(View v){
+        PopupMenu pop = new PopupMenu(this,v);
+        pop.setOnMenuItemClickListener(this);
+        pop.inflate(R.menu.popup_menu);
+        pop.show();
+    }
+    public boolean onMenuItemClick(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.harga://Sort By Harga
+                if(state){
+                    Collections.sort(ListProduk, new Comparator<ProdukDAO>() {
+                        @Override
+                        public int compare(ProdukDAO o1, ProdukDAO o2) {
+                            return Integer.parseInt(o1.getHarga()) - Integer.parseInt(o2.getHarga());
+                        }
+                    });
+                    state=false;
+                }else{
+                    Collections.sort(ListProduk, new Comparator<ProdukDAO>() {
+                        @Override
+                        public int compare(ProdukDAO o1, ProdukDAO o2) {
 
+                            return Integer.parseInt(o2.getHarga()) - Integer.parseInt(o1.getHarga());
+                        }
+                    });
+                    state=true;
+                }
+                adapterProduk.notifyDataSetChanged();
+                Toast.makeText(ViewProduk.this, "Sortir Harga", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.stok://Sort By Stok
+                if(state){
+                    Collections.sort(ListProduk, new Comparator<ProdukDAO>() {
+                        @Override
+                        public int compare(ProdukDAO o1, ProdukDAO o2) {
+                            return Integer.parseInt(o1.getStok()) - Integer.parseInt(o2.getStok());
+                        }
+                    });
+                    state=false;
+                }else{
+                    Collections.sort(ListProduk, new Comparator<ProdukDAO>() {
+                        @Override
+                        public int compare(ProdukDAO o1, ProdukDAO o2) {
+                            return Integer.parseInt(o2.getStok()) - Integer.parseInt(o1.getStok());
+                        }
+                    });
+                    state=true;
+                }
+                adapterProduk.notifyDataSetChanged();
+                Toast.makeText(ViewProduk.this, "Sortir Stok", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.abjad://Sort By Alfabet
+                if(state){
+                    Collections.sort(ListProduk, new Comparator<ProdukDAO>() {
+                        @Override
+                        public int compare(ProdukDAO o1, ProdukDAO o2) {
+                            return o1.getNama().compareToIgnoreCase(o2.getNama());
+                        }
+                    });
+                    state=false;
+                }else{
+                    Collections.sort(ListProduk, new Comparator<ProdukDAO>() {
+                        @Override
+                        public int compare(ProdukDAO o1, ProdukDAO o2) {
+                            return o2.getNama().compareToIgnoreCase(o1.getNama());
+                        }
+                    });
+                    state=true;
+                }
+                adapterProduk.notifyDataSetChanged();
+                Toast.makeText(ViewProduk.this, "Sortir Alfabet", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return false;
+        }
+    }
     public void initFloatingButton(){
         add_produk = findViewById(R.id.add_produk);
         add_produk.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +147,7 @@ public class ViewProduk extends AppCompatActivity implements AdapterProduk.Produ
         sort_produk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ViewProduk.this, "Fungsi Belum dibuat", Toast.LENGTH_SHORT).show();
+                popupmenu(v);
             }
         });
         refresh_data_produk = findViewById(R.id.refresh_data_produk);

@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.PopupMenu;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -22,19 +23,21 @@ import com.p3l.kohipetshopu.API.ApiInterface;
 import com.p3l.kohipetshopu.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ViewLayanan extends AppCompatActivity implements AdapterLayanan.LayananAdapterListener {
+public class ViewLayanan extends AppCompatActivity implements AdapterLayanan.LayananAdapterListener,PopupMenu.OnMenuItemClickListener {
 
     private List<LayananDAO> ListLayanan, ListLayananTemp;
     AdapterLayanan adapterLayanan;
     private RecyclerView recyclerLayanan;
     private FloatingActionButton add_layanan,sort_layanan,refresh_data_layanan;
-
+    boolean state = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +56,60 @@ public class ViewLayanan extends AppCompatActivity implements AdapterLayanan.Lay
         loadData();
 
     }//End Of On Create
-
+    public void popupmenu(View v) {
+        PopupMenu pop = new PopupMenu(this, v);
+        pop.setOnMenuItemClickListener(this);
+        pop.inflate(R.menu.popup_menu2);
+        pop.show();
+    }
+    public boolean onMenuItemClick(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.harga://Sort By Harga
+                if(state){
+                    Collections.sort(ListLayanan, new Comparator<LayananDAO>() {
+                        @Override
+                        public int compare(LayananDAO o1, LayananDAO o2) {
+                            return Integer.parseInt(o1.getHarga()) - Integer.parseInt(o2.getHarga());
+                        }
+                    });
+                    state=false;
+                }else{
+                    Collections.sort(ListLayanan, new Comparator<LayananDAO>() {
+                        @Override
+                        public int compare(LayananDAO o1, LayananDAO o2) {
+                            return Integer.parseInt(o2.getHarga()) - Integer.parseInt(o1.getHarga());
+                        }
+                    });
+                    state=true;
+                }
+                adapterLayanan.notifyDataSetChanged();
+                Toast.makeText(ViewLayanan.this, "Sortir Stok", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.abjad:
+                if(state){
+                    Collections.sort(ListLayanan, new Comparator<LayananDAO>() {
+                        @Override
+                        public int compare(LayananDAO o1, LayananDAO o2) {
+                            return o1.getNama().compareToIgnoreCase(o2.getNama());
+                        }
+                    });
+                    state=false;
+                }else{
+                    Collections.sort(ListLayanan, new Comparator<LayananDAO>() {
+                        @Override
+                        public int compare(LayananDAO o1, LayananDAO o2) {
+                            return o2.getNama().compareToIgnoreCase(o1.getNama());
+                        }
+                    });
+                    state=true;
+                }
+                adapterLayanan.notifyDataSetChanged();
+                Toast.makeText(ViewLayanan.this, "Sortir Alfabet", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return false;
+        }
+    }
     public void initFloatingButton(){
         add_layanan = findViewById(R.id.add_layanan);
         add_layanan.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +124,7 @@ public class ViewLayanan extends AppCompatActivity implements AdapterLayanan.Lay
         sort_layanan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ViewLayanan.this, "Fungsi Belum dibuat", Toast.LENGTH_SHORT).show();
+                popupmenu(v);
             }
         });
         refresh_data_layanan = findViewById(R.id.refresh_data_layanan);
