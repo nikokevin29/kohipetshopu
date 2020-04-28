@@ -57,6 +57,8 @@ public class ViewCustomer extends AppCompatActivity implements AdapterCustomer.C
             @Override
             public void onClick(View v) {
                 loadData();
+                ListCustomer.clear();
+                ListCustomerTemp.clear();
             }
         });
     }// End of initFloatingButton

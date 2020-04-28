@@ -126,7 +126,7 @@ public class adapterTampilAllTransaksiLayanan extends RecyclerView.Adapter<adapt
     }
     private void delete(String id){
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<Void> DAOcall = apiService.deletePenjualan(id);
+        Call<Void> DAOcall = apiService.deletePelayanan(id);
         DAOcall.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {

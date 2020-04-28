@@ -155,6 +155,8 @@ public class ViewProduk extends AppCompatActivity implements AdapterProduk.Produ
             @Override
             public void onClick(View v) {
                 loadData();
+                ListProduk.clear();
+                ListProdukTemp.clear();
             }
         });
     }//End of  initFloatingButton()

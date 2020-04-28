@@ -88,6 +88,8 @@ public class ViewJenisHewan extends AppCompatActivity implements AdapterJenisHew
             @Override
             public void onClick(View v) {
                 loadData();
+                ListJenis.clear();
+                ListJenisTemp.clear();
             }
         });
     }// End of initFloatingButton

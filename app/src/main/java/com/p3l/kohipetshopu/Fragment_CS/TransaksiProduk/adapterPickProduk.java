@@ -70,7 +70,7 @@ public class adapterPickProduk extends RecyclerView.Adapter<adapterPickProduk.My
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         jumlah = input.getText().toString().trim();
-                        if(jumlah.equals("")){
+                        if(Integer.parseInt(jumlah) <= 0){
                             Toast.makeText(context, "Masih Kosong", Toast.LENGTH_SHORT).show();
                         }else {
                             subtotal = Double.parseDouble(produk.getHarga()) * Double.parseDouble(jumlah);

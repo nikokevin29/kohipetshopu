@@ -81,6 +81,8 @@ public class ViewUkuranHewan extends AppCompatActivity implements AdapterUkuranH
             @Override
             public void onClick(View v) {
                 loadData();
+                ListUkuran.clear();
+                ListUkuranTemp.clear();
             }
         });
     }//End of  initFloatingButton()

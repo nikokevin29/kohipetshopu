@@ -55,6 +55,8 @@ public class ViewHewan extends AppCompatActivity implements AdapterHewan.HewanAd
             @Override
             public void onClick(View v) {
                 loadData();
+                ListHewan.clear();
+                ListHewanTemp.clear();
             }
         });
     }// End of initFloatingButton

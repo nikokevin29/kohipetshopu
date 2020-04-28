@@ -136,12 +136,6 @@ public class PriceList extends AppCompatActivity  implements AdapterPriceList.Pr
         sort_produk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Collections.sort(ListProduk, new Comparator<ProdukDAO>() {
-//                    @Override
-//                    public int compare(ProdukDAO o1, ProdukDAO o2) {
-//                        return o1.getNama().compareToIgnoreCase(o2.getNama());
-//                    }
-//                });
                 popupmenu(v);
             }
         });
@@ -151,6 +145,8 @@ public class PriceList extends AppCompatActivity  implements AdapterPriceList.Pr
             @Override
             public void onClick(View v) {
                 loadData();
+                ListProduk.clear();
+                ListProdukTemp.clear();
             }
         });
     }//End of  initFloatingButton()

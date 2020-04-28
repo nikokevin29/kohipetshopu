@@ -132,6 +132,8 @@ public class ViewLayanan extends AppCompatActivity implements AdapterLayanan.Lay
             @Override
             public void onClick(View v) {
                 loadData();
+                ListLayanan.clear();
+                ListLayananTemp.clear();
             }
         });
     }//End of  initFloatingButton()

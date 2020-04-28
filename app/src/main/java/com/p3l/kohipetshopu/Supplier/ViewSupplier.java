@@ -76,6 +76,8 @@ public class ViewSupplier extends AppCompatActivity implements AdapterSupplier.S
             @Override
             public void onClick(View v) {
                 loadData();
+                ListSupplier.clear();
+                ListSupplierTemp.clear();
             }
         });
     }//End of  initFloatingButton()

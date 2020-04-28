@@ -301,4 +301,6 @@ public interface ApiInterface {
                                                  @Field("status")String status,
                                                  @Field("diskon")String diskon,
                                                  @Field("total")String total);
+    @DELETE ("/api/transaksi_pelayanan/{idtransaksipelayanan}")
+    Call<Void> deletePelayanan(@Path("idtransaksipelayanan") String idtransaksipelayanan);
 }
