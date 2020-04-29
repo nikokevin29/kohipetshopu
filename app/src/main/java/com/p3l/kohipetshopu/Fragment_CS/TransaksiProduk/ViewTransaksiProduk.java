@@ -209,6 +209,7 @@ public class ViewTransaksiProduk extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<TransaksiPenjualanDAO> call, Throwable t) {
                         Toast.makeText(ViewTransaksiProduk.this, "get max id failed", Toast.LENGTH_SHORT).show();
+                        System.out.println("BANANAS : "+t.getMessage());
                         progress.dismiss();
                     }
                 });

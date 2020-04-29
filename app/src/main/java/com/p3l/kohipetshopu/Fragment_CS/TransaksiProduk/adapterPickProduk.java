@@ -61,7 +61,7 @@ public class adapterPickProduk extends RecyclerView.Adapter<adapterPickProduk.My
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Transaksi Produk");
                 builder.setMessage("Masukan Jumlah Produk yang ingin dibeli :");
-                builder.setIcon(R.mipmap.ic_launcher);
+                builder.setIcon(R.drawable.icon_produk);
                 final EditText input = new EditText(context);
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setHint("jumlah");

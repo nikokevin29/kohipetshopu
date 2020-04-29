@@ -67,7 +67,7 @@ public class adapterViewTransaksiProduk extends RecyclerView.Adapter<adapterView
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Kelola Jumlah Produk");
                 builder.setMessage("Lakukan Aksi Edit / Delete:");
-                builder.setIcon(R.mipmap.ic_launcher);
+                builder.setIcon(R.drawable.icon_produk);
                 final EditText input = new EditText(context);
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setHint("Edit Jumlah");

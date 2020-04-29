@@ -57,7 +57,7 @@ public class adapterPickLayanan extends RecyclerView.Adapter<adapterPickLayanan.
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Transaksi Layanan");
                 builder.setMessage("Masukan Jumlah Layanan untuk Peliharaan anda :");
-                builder.setIcon(R.mipmap.ic_launcher);
+                builder.setIcon(R.drawable.icon_layanan);
                 final EditText input = new EditText(context);
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setHint("jumlah");

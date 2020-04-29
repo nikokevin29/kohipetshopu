@@ -66,7 +66,7 @@ public class adapterViewTransaksiLayanan extends RecyclerView.Adapter<adapterVie
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Kelola Jumlah Layanan");
                 builder.setMessage("Lakukan Aksi Edit / Delete:");
-                builder.setIcon(R.mipmap.ic_launcher);
+                builder.setIcon(R.drawable.icon_layanan);
                 final EditText input = new EditText(context);
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setHint("Edit Jumlah");

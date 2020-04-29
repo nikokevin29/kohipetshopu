@@ -85,7 +85,7 @@ public class adapterTampilAllTransaksiProduk extends RecyclerView.Adapter<adapte
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                 alertDialogBuilder.setTitle("Yakin ingin hapus Transaksi?");
                 alertDialogBuilder
-                        .setIcon(R.mipmap.ic_launcher)
+                        .setIcon(R.drawable.icon_produk)
                         .setCancelable(false)
                         .setPositiveButton("Hapus", new DialogInterface.OnClickListener() {
                             @Override
