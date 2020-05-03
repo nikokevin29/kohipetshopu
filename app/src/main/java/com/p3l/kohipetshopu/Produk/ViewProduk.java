@@ -18,10 +18,13 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.messaging.RemoteMessage;
 import com.p3l.kohipetshopu.API.ApiClient;
 import com.p3l.kohipetshopu.API.ApiInterface;
 import com.p3l.kohipetshopu.PriceList;
 import com.p3l.kohipetshopu.R;
+import com.pusher.pushnotifications.PushNotificationReceivedListener;
+import com.pusher.pushnotifications.PushNotifications;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -229,5 +232,17 @@ public class ViewProduk extends AppCompatActivity implements AdapterProduk.Produ
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        PushNotifications.setOnMessageReceivedListenerForVisibleActivity(this, new PushNotificationReceivedListener() {
+            @Override
+            public void onMessageReceived(RemoteMessage remoteMessage) {
+                // do something magical 🔮
+                Toast.makeText(ViewProduk.this, "Notif Masuk Harusnya", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

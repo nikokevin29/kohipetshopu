@@ -19,13 +19,26 @@ import com.p3l.kohipetshopu.API.ApiClient;
 import com.p3l.kohipetshopu.API.ApiInterface;
 import com.p3l.kohipetshopu.R;
 import com.p3l.kohipetshopu.Supplier.SupplierDAO;
+import com.pusher.client.Pusher;
+import com.pusher.client.PusherOptions;
+import com.pusher.client.channel.Channel;
+import com.pusher.client.channel.PusherEvent;
+import com.pusher.client.channel.SubscriptionEventListener;
+import com.pusher.client.connection.ConnectionEventListener;
+import com.pusher.client.connection.ConnectionState;
+import com.pusher.client.connection.ConnectionStateChange;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import com.pusher.pushnotifications.PushNotifications;
 
 public class EditProduk extends AppCompatActivity {
 
@@ -114,12 +127,18 @@ public class EditProduk extends AppCompatActivity {
                             System.out.println(t.getMessage());
                             progress.dismiss();
                             startIntent();
+
+                            //pushNotification();
                         }
                     });
                 }
 
             }
         });
+    }
+
+    public void pushNotification(){
+
     }
     public void setField(){
         nama.setText(getIntent().getStringExtra("nama"));

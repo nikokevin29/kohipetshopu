@@ -1,10 +1,15 @@
 package com.p3l.kohipetshopu;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -19,8 +24,10 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputLayout;
 import com.p3l.kohipetshopu.API.ApiClient;
 import com.p3l.kohipetshopu.API.ApiInterface;
+import com.p3l.kohipetshopu.Fragment_CS.TransaksiProduk.ViewTransaksiProduk;
 import com.p3l.kohipetshopu.Fragment_Owner.AkunFragment;
 import com.p3l.kohipetshopu.Fragment_Owner.KelolaFragment;
+import com.p3l.kohipetshopu.Produk.ProdukDAO;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,6 +35,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -37,11 +45,13 @@ import retrofit2.Response;
 public class Login extends AppCompatActivity {
     private TextInputLayout etUsername,etPassword;
     private Button btnLogin;
-
+    String CH_ID = "CH1";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        createNotificationChannel();
 
         etUsername = findViewById(R.id.username_text_input);
         etPassword = findViewById(R.id.password_text_input);
@@ -62,8 +72,8 @@ public class Login extends AppCompatActivity {
                 progress.setCancelable(false);
                 progress.show();
 
-                SharedPreferences mSettings = getApplication().getSharedPreferences("Login", Context.MODE_PRIVATE);
-                SharedPreferences mCS = getApplication().getSharedPreferences("LoginCS", Context.MODE_PRIVATE);
+                SharedPreferences mSettings = getApplication().getSharedPreferences("Login", Context.MODE_PRIVATE);//Simpan SharedPreferences Owner
+                SharedPreferences mCS = getApplication().getSharedPreferences("LoginCS", Context.MODE_PRIVATE);//Simpan SharedPreferences CS
                 loginRequest.enqueue(new Callback<PegawaiDAO>() {
                     @Override
                     public void onResponse(Call<PegawaiDAO> call, Response<PegawaiDAO> response) {
@@ -97,6 +107,7 @@ public class Login extends AppCompatActivity {
                                 editor.putString("tgllahir",tgllahir);
                                 editor.putString("noTelp",noTelp);
                                 editor.apply();
+                                push_notification();//push notification ketika login sebagai Owner
 
                                 startActivity(i);
                                 finish();
@@ -134,6 +145,41 @@ public class Login extends AppCompatActivity {
                 });
             }
         });
+    }
+    private void push_notification(){
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<List<ProdukDAO>> calls = apiService.getAllProduk();
+        calls.enqueue(new Callback<List<ProdukDAO>>() {
+            @Override
+            public void onResponse(Call<List<ProdukDAO>> call, Response<List<ProdukDAO>> response) {
+                for(int i=0;i<response.body().size();i++){
+                    if(Integer.parseInt(response.body().get(i).getStok()) <= Integer.parseInt(response.body().get(i).getStokminimum())){
+                        String namaProduk = response.body().get(i).getNama();
+                        String stok =  response.body().get(i).getStok();
+                        Notification builder = new NotificationCompat.Builder(Login.this,CH_ID)
+                                .setContentTitle("Notifikasi Barang Habis").setSmallIcon(R.drawable.icon_produk)
+                                .setContentText("Produk "+namaProduk+" Tinggal "+stok+"Ayo Isi Ulang")
+                                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                                .build();
+                        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(Login.this);
+                        notificationManager.notify(1,builder);
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<List<ProdukDAO>> call, Throwable t) {
+                System.out.println("PUSH NOTIF GAGAL");
+            }
+        });
+    }
+    private void createNotificationChannel(){
+        int impoten = NotificationManager.IMPORTANCE_HIGH;
+        NotificationChannel channel = new NotificationChannel(CH_ID,"Channel 1",impoten);
+        channel.setDescription("Ini Channel 1");
+
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+        notificationManager.createNotificationChannel(channel);
     }
 
 

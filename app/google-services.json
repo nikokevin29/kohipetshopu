@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "113261421209",
+    "firebase_url": "https://kouvee-shop.firebaseio.com",
+    "project_id": "kouvee-shop",
+    "storage_bucket": "kouvee-shop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:113261421209:android:5f4e63515c2152fe2cce08",
+        "android_client_info": {
+          "package_name": "com.p3l.kohipetshopu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "113261421209-7po0kp7nd0466hk7gvhpqkcl2f424ulh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2hRoo06R1YoDto-lLG6Nl3GhOoVHNiAs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "113261421209-7po0kp7nd0466hk7gvhpqkcl2f424ulh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

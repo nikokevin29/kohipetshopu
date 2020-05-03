@@ -1,9 +1,14 @@
 package com.p3l.kohipetshopu.Fragment_CS.TransaksiProduk;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -26,6 +31,8 @@ import com.p3l.kohipetshopu.Fragment_CS.Customer_CRUDS.CustomerDAO;
 import com.p3l.kohipetshopu.Fragment_CS.Hewan_CRUDS.CreateHewan;
 import com.p3l.kohipetshopu.Fragment_CS.Hewan_CRUDS.HewanDAO;
 import com.p3l.kohipetshopu.Fragment_CS.TransaksiProduk.TampilAll.ViewTampilTransaksiProduk;
+import com.p3l.kohipetshopu.Landing_About;
+import com.p3l.kohipetshopu.Produk.ProdukDAO;
 import com.p3l.kohipetshopu.R;
 
 import java.util.ArrayList;
@@ -202,6 +209,8 @@ public class ViewTransaksiProduk extends AppCompatActivity {
                                     adapterPickProduk.tempProduk.clear();//clear isi Array detil transaksi
                                     update_updated();//Update adapter
                                     subtotalFromRecycleTransaksi();//Update subtotal TextView
+
+
                                 }
                             });
                         }//end of for
@@ -336,4 +345,10 @@ public class ViewTransaksiProduk extends AppCompatActivity {
         }
         subtotalAll.setText(String.valueOf(tempsubtotal));
     }
+
+    private void pushNotification(String nama){
+
+
+    }
+
 }
