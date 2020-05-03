@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.p3l.kohipetshopu.Fragment_CS.Customer_CRUDS.ViewCustomer;
+import com.p3l.kohipetshopu.Fragment_CS.Hewan_CRUDS.ViewHewan;
 import com.p3l.kohipetshopu.JenisHewan.ViewJenisHewan;
 import com.p3l.kohipetshopu.Layanan.ViewLayanan;
 import com.p3l.kohipetshopu.Produk.ViewProduk;
@@ -22,6 +24,7 @@ import com.p3l.kohipetshopu.UkuranHewan.ViewUkuranHewan;
 
 public class KelolaFragment extends Fragment {
     ImageView jenis,ukuran,layanan,produk,supplier;
+    ImageView customer,hewan;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_kelola, container, false);
@@ -68,6 +71,22 @@ public class KelolaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), ViewSupplier.class);
+                startActivity(i);
+            }
+        });
+        hewan = view.findViewById(R.id.kelola_hewan);
+        hewan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i  =  new Intent(getActivity(), ViewHewan.class);
+                startActivity(i);
+            }
+        });
+        customer = view.findViewById(R.id.kelola_customer);
+        customer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), ViewCustomer.class);
                 startActivity(i);
             }
         });

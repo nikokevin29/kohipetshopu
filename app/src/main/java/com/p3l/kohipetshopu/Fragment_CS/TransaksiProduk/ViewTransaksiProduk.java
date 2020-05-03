@@ -346,9 +346,5 @@ public class ViewTransaksiProduk extends AppCompatActivity {
         subtotalAll.setText(String.valueOf(tempsubtotal));
     }
 
-    private void pushNotification(String nama){
-
-
-    }
 
 }
