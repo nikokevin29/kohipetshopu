@@ -83,7 +83,7 @@ public class CreateCustomer extends AppCompatActivity implements DatePickerDialo
                             Toast.makeText(CreateCustomer.this, "Tambah Sukses", Toast.LENGTH_SHORT).show();
                             System.out.println(t.getMessage());
                             Intent i =  new Intent(CreateCustomer.this, ViewTransaksiProduk.class);
-                            startActivity(i);
+                            //startActivity(i);
                             finish();
                             progress.dismiss();
                         }

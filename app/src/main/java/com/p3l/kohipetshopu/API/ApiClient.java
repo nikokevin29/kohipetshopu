@@ -14,7 +14,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-    public static final String BASE_URL ="http://kouveecadangan.xbanana.my.id"; //
+    public static final String BASE_URL ="http://kouvee.xbanana.my.id"; //
     public static Retrofit retrofit = null;
     public static Retrofit getClient(){
         if (retrofit == null){

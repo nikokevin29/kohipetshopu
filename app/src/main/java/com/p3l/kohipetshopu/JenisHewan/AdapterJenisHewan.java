@@ -58,9 +58,6 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.My
         holder.updated_at.setText(jenis.getUpdated_at());
         holder.aksi.setText(jenis.getAksi());
         holder.aktor.setText(jenis.getAktor());
-
-
-
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,7 +152,6 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.My
                     public void onClick(DialogInterface dialog,int idjenis) {
                         // update
                         startIntent(hasil);
-
                     }
                 })
                 .setNegativeButton("Hapus",new DialogInterface.OnClickListener() {

@@ -174,8 +174,8 @@ public class ViewTransaksiLayanan extends AppCompatActivity {
                 System.out.println("BNN"+t.getMessage());
 
                 //get max id transaksi
-                Call<TransaksiPelayananDAO> SELAnjing = apiService.getLastidPelayanan();
-                SELAnjing.enqueue(new Callback<TransaksiPelayananDAO>() {
+                Call<TransaksiPelayananDAO> callDAO = apiService.getLastidPelayanan();
+                callDAO.enqueue(new Callback<TransaksiPelayananDAO>() {
                     @Override
                     public void onResponse(Call<TransaksiPelayananDAO> call, Response<TransaksiPelayananDAO> response) {
                         maxid = response.body().getIdtransaksipelayanan();

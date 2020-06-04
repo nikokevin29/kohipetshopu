@@ -142,7 +142,7 @@ public class CreateHewan extends AppCompatActivity implements DatePickerDialog.O
                             Toast.makeText(CreateHewan.this, "Sukses", Toast.LENGTH_SHORT).show();
                             System.out.println(t.getMessage());
                             Intent i =  new Intent(CreateHewan.this, ViewTransaksiProduk.class);
-                            startActivity(i);
+                            //startActivity(i);
                             finish();
                             progress.dismiss();
                         }

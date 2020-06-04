@@ -179,8 +179,8 @@ public class ViewTransaksiProduk extends AppCompatActivity {
                 System.out.println("BNN"+t.getMessage());
 
                 //get max id transaksi
-                Call<TransaksiPenjualanDAO> SELAnjing = apiService.getLastidPenjualan();
-                SELAnjing.enqueue(new Callback<TransaksiPenjualanDAO>() {
+                Call<TransaksiPenjualanDAO> callDAO = apiService.getLastidPenjualan();
+                callDAO.enqueue(new Callback<TransaksiPenjualanDAO>() {
                     @Override
                     public void onResponse(Call<TransaksiPenjualanDAO> call, Response<TransaksiPenjualanDAO> response) {
                         maxid = response.body().getIdtransaksipenjualan();
@@ -209,8 +209,6 @@ public class ViewTransaksiProduk extends AppCompatActivity {
                                     adapterPickProduk.tempProduk.clear();//clear isi Array detil transaksi
                                     update_updated();//Update adapter
                                     subtotalFromRecycleTransaksi();//Update subtotal TextView
-
-
                                 }
                             });
                         }//end of for
@@ -226,11 +224,6 @@ public class ViewTransaksiProduk extends AppCompatActivity {
                 progress.dismiss();
             }
         });
-
-
-
-
-
     }
 
     public void delete_updated(int position,List<DetilPenjualanDAO> tempProduk){
@@ -334,7 +327,6 @@ public class ViewTransaksiProduk extends AppCompatActivity {
     @Override
     public void onResume() {  // After a pause OR at startup
         super.onResume();
-        //Refresh your stuff here
         mAdapter.notifyDataSetChanged();//Refresh habis pick barang
         subtotalFromRecycleTransaksi();
     }

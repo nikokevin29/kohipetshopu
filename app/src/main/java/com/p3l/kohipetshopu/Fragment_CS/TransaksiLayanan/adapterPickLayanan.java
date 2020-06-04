@@ -66,7 +66,7 @@ public class adapterPickLayanan extends RecyclerView.Adapter<adapterPickLayanan.
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         jumlah = input.getText().toString().trim();
-                        if(jumlah.equals("")){
+                        if(jumlah.equals("") || jumlah.equals("0")){
                             Toast.makeText(context, "Masih Kosong", Toast.LENGTH_SHORT).show();
                         }else {
                             subtotal = Double.parseDouble(item.getHarga()) * Double.parseDouble(jumlah);

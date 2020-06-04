@@ -77,7 +77,7 @@ public class adapterViewTransaksiLayanan extends RecyclerView.Adapter<adapterVie
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         jumlah = input.getText().toString().trim();//get input edit
-                        if(jumlah.equals("")){
+                        if(jumlah.equals("") || jumlah.equals("0")){
                             Toast.makeText(context, "Masih Kosong", Toast.LENGTH_SHORT).show();
                         }else {
                             tempLayanan.get(position).setJumlah(jumlah);//set update jumlah barang di adapter ViewTransaksi

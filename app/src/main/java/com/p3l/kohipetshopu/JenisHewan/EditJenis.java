@@ -48,14 +48,15 @@ public class EditJenis extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<JenisHewanDAO> call, Response<JenisHewanDAO> response) {
                             Toast.makeText(EditJenis.this, "Edit Success", Toast.LENGTH_SHORT).show();
-                            startIntent();
+
                             finish();
                         }
                         @Override
                         public void onFailure(Call<JenisHewanDAO> call, Throwable t) {
                             Toast.makeText(EditJenis.this, "Edit Success.", Toast.LENGTH_SHORT).show();
                             System.out.println(t.getMessage());
-                            startIntent();
+                            finish();
+
                         }
                     });
                 }else{
@@ -68,10 +69,5 @@ public class EditJenis extends AppCompatActivity {
     public void setField(){
         etNamaJenis_update.setText(getIntent().getStringExtra("nama"));
     }
-    public void startIntent(){
-        Intent acc = new Intent(EditJenis.this, ViewJenisHewan.class);
-        acc.putExtra("from", "jenis");
-        startActivity(acc);
-        finish();
-    }
+
 }
